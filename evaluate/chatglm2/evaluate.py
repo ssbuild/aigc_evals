@@ -2,12 +2,11 @@
 # @Author  : ssbuild
 # @Time    : 2023/7/10 17:24
 import torch
-from deep_training.data_helper import ModelArguments, TrainingArguments, DataArguments
+from deep_training.data_helper import ModelArguments,DataHelper
 from transformers import HfArgumentParser
 from aigc_zoo.model_zoo.chatglm2.chatglm_model import MyTransformer, ChatGLMTokenizer, LoraArguments, \
     setup_model_profile, ChatGLMConfig
 
-from deep_training.data_helper import DataHelper
 class NN_DataHelper(DataHelper):pass
 
 
@@ -19,7 +18,7 @@ train_info_args = {
     'config_name': '/data/nlp/pre_models/torch/chatglm2/chatglm2-6b-int4/config.json',
     'tokenizer_name': '/data/nlp/pre_models/torch/chatglm2/chatglm2-6b-int4',
     'use_fast_tokenizer': False,
-    'do_lower_case': False,
+    'do_lower_case': None,
 }
 
 if __name__ == '__main__':
@@ -27,15 +26,12 @@ if __name__ == '__main__':
     parser = HfArgumentParser((ModelArguments,))
     (model_args,)  = parser.parse_dict(train_info_args, allow_extra_keys=True)
     setup_model_profile()
-    dataHelper = NN_DataHelper(model_args, None, None)
+    dataHelper = NN_DataHelper(model_args)
     tokenizer: ChatGLMTokenizer
     tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(
         tokenizer_class_name=ChatGLMTokenizer, config_class_name=ChatGLMConfig)
 
-    config.initializer_weight = False
-
     pl_model = MyTransformer(config=config, model_args=model_args, torch_dtype=torch.float16, )
-
     model = pl_model.get_llm_model()
     if not model.quantized:
         # 按需修改，目前只支持 4/8 bit 量化 ， 可以保存量化模型

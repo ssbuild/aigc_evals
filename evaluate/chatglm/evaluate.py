@@ -2,15 +2,11 @@
 # @Author  : ssbuild
 # @Time    : 2023/7/10 16:42
 
-# -*- coding: utf-8 -*-
-# @Time    : 2023/3/9 15:29
 import torch
-from deep_training.data_helper import ModelArguments, TrainingArguments, DataArguments
+from deep_training.data_helper import ModelArguments,DataHelper
 from transformers import HfArgumentParser
 from aigc_zoo.model_zoo.chatglm.llm_model import MyTransformer, ChatGLMTokenizer, LoraArguments, setup_model_profile, \
     ChatGLMConfig
-
-from deep_training.data_helper import DataHelper
 class NN_DataHelper(DataHelper):pass
 
 train_info_args = {
@@ -21,7 +17,7 @@ train_info_args = {
     'config_name': '/data/nlp/pre_models/torch/chatglm/chatglm-6b-int4/config.json',
     'tokenizer_name': '/data/nlp/pre_models/torch/chatglm/chatglm-6b-int4',
     'use_fast_tokenizer': False,
-    'do_lower_case': False,
+    'do_lower_case': None,
 }
 
 if __name__ == '__main__':
@@ -31,7 +27,7 @@ if __name__ == '__main__':
 
     setup_model_profile()
 
-    dataHelper = NN_DataHelper(model_args, None, None)
+    dataHelper = NN_DataHelper(model_args)
     tokenizer: ChatGLMTokenizer
     tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(tokenizer_class_name=ChatGLMTokenizer,
                                                                    config_class_name=ChatGLMConfig)
