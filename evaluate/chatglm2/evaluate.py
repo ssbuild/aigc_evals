@@ -1,0 +1,57 @@
+# -*- coding: utf-8 -*-
+# @Author  : ssbuild
+# @Time    : 2023/7/10 17:24
+import torch
+from deep_training.data_helper import ModelArguments, TrainingArguments, DataArguments
+from transformers import HfArgumentParser
+from aigc_zoo.model_zoo.chatglm2.chatglm_model import MyTransformer, ChatGLMTokenizer, LoraArguments, \
+    setup_model_profile, ChatGLMConfig
+
+from deep_training.data_helper import DataHelper
+class NN_DataHelper(DataHelper):pass
+
+
+train_info_args = {
+    'data_backend': 'parquet',
+    # 预训练模型路径
+    'model_type': 'chatglm2',
+    'model_name_or_path': '/data/nlp/pre_models/torch/chatglm2/chatglm2-6b-int4',
+    'config_name': '/data/nlp/pre_models/torch/chatglm2/chatglm2-6b-int4/config.json',
+    'tokenizer_name': '/data/nlp/pre_models/torch/chatglm2/chatglm2-6b-int4',
+    'use_fast_tokenizer': False,
+    'do_lower_case': False,
+}
+
+if __name__ == '__main__':
+    train_info_args['seed'] = None
+    parser = HfArgumentParser((ModelArguments,))
+    (model_args,)  = parser.parse_dict(train_info_args, allow_extra_keys=True)
+    setup_model_profile()
+    dataHelper = NN_DataHelper(model_args, None, None)
+    tokenizer: ChatGLMTokenizer
+    tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(
+        tokenizer_class_name=ChatGLMTokenizer, config_class_name=ChatGLMConfig)
+
+    config.initializer_weight = False
+
+    pl_model = MyTransformer(config=config, model_args=model_args, torch_dtype=torch.float16, )
+
+    model = pl_model.get_llm_model()
+    if not model.quantized:
+        # 按需修改，目前只支持 4/8 bit 量化 ， 可以保存量化模型
+        model.half().quantize(4).cuda()
+    else:
+        # 已经量化
+        model.half().cuda()
+    model = model.eval()
+
+    text_list = [
+        "写一个诗歌，关于冬天",
+        "晚上睡不着应该怎么办",
+    ]
+    for input in text_list:
+        response, history = model.chat(tokenizer, input, history=[], max_length=2048,
+                                       eos_token_id=config.eos_token_id,
+                                       do_sample=True, top_p=0.7, temperature=0.95, )
+        print("input", input)
+        print("response", response)
