@@ -64,13 +64,13 @@ class Engine_API:
 
 
 if __name__ == '__main__':
-    api = Engine_API()
-    api.init()
+    api_client = Engine_API()
+    api_client.init()
     text_list = [
         "你是谁?",
         "你会干什么?",
     ]
     for input in text_list:
-        response = api.infer(input)
+        response = api_client.infer(input)
         print('input', input)
         print('output', response)
