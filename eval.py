@@ -126,6 +126,7 @@ if __name__ == '__main__':
     save_result_dir = os.path.join(log_dir, f"{args.model_name}_{run_date}")
     os.mkdir(save_result_dir)
 
+    f_out = open(os.path.join(save_result_dir,'summary.txt'),mode='w',encoding='utf-8')
     acc_all = []
     for task_name in task_list:
         if subject_name is not None:
@@ -144,5 +145,9 @@ if __name__ == '__main__':
                                                    save_result_dir=save_result_dir)
         print(task_name,"Acc:", correct_ratio)
         acc_all.append(correct_ratio)
+        f_out.write('{},"Acc:", {}\n'.format(task_name,correct_ratio))
+
 
     print('avg',np.average(acc_all))
+    f_out.write('avg,"Acc:", {}\n'.format(np.average(acc_all)))
+    f_out.close()
