@@ -109,8 +109,7 @@ if __name__ == '__main__':
         os.environ["CUDA_VISIBLE_DEVICES"] = args.cuda_device
     evaluator.init()
     subject_name = args.subject
-    if subject_name is None:
-        subject_name =task_list
+
 
     cur_path = os.path.dirname(__file__)
     log_dir = os.path.join(cur_path, "logs")
