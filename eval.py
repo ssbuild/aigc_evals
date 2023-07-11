@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 # @Author  : ssbuild
 # @Time    : 2023/7/11 10:16
+
 import sys
-
-import numpy as np
-
 sys.path.append('.')
+import numpy as np
+import json
 import argparse
 import os
-from enum import Enum
 import time
 from evaluate.constant_map import train_info_args
 
@@ -16,59 +15,8 @@ import pandas as pd
 
 choices = ["A", "B", "C", "D"]
 
-task_list=[
-"computer_network",
-"operating_system",
-"computer_architecture",
-"college_programming",
-"college_physics",
-"college_chemistry",
-"advanced_mathematics",
-"probability_and_statistics",
-"discrete_mathematics",
-"electrical_engineer",
-"metrology_engineer",
-"high_school_mathematics",
-"high_school_physics",
-"high_school_chemistry",
-"high_school_biology",
-"middle_school_mathematics",
-"middle_school_biology",
-"middle_school_physics",
-"middle_school_chemistry",
-"veterinary_medicine",
-"college_economics",
-"business_administration",
-"marxism",
-"mao_zedong_thought",
-"education_science",
-"teacher_qualification",
-"high_school_politics",
-"high_school_geography",
-"middle_school_politics",
-"middle_school_geography",
-"modern_chinese_history",
-"ideological_and_moral_cultivation",
-"logic",
-"law",
-"chinese_language_and_literature",
-"art_studies",
-"professional_tour_guide",
-"legal_professional",
-"high_school_chinese",
-"high_school_history",
-"middle_school_history",
-"civil_servant",
-"sports_science",
-"plant_protection",
-"basic_medicine",
-"clinical_medicine",
-"urban_and_rural_planner",
-"accountant",
-"fire_engineer",
-"environmental_impact_assessment_engineer",
-"tax_accountant",
-"physician",]
+with open(os.path.join(os.path.dirname(__file__),'subject_mapping.json'),mode='r',encoding='utf-8') as f:
+    tasks: dict = json.loads(f.read())
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -78,9 +26,11 @@ if __name__ == '__main__':
     parser.add_argument("--model_name", type=str)
     parser.add_argument("--cot", action="store_true")
     parser.add_argument("--subject", "-s", type=str, default=None)
-    parser.add_argument("--device", type=str)
+    parser.add_argument("--device", type=str, default=None)
     args = parser.parse_args()
-
+    if args.device is not None:
+        print("seting up device",args.device)
+        os.environ["CUDA_VISIBLE_DEVICES"] = args.device
 
     model_name = args.model_name.lower()
     if model_name.startswith("baichuan2"):
@@ -112,8 +62,7 @@ if __name__ == '__main__':
 
     assert args.model_name in train_info_args,ValueError("{} is not in ".format(args.model_name,str(train_info_args.keys())))
 
-    if args.device:
-        os.environ["CUDA_VISIBLE_DEVICES"] = args.device
+
     evaluator.init()
     subject_name = args.subject
 
@@ -127,11 +76,13 @@ if __name__ == '__main__':
     os.mkdir(save_result_dir)
 
     f_out = open(os.path.join(save_result_dir,'summary.txt'),mode='w',encoding='utf-8')
-    acc_all = []
-    for task_name in task_list:
+    acc_classify = set([task[-1] for task in tasks.values()])
+    acc_classify = {k: [] for k in acc_classify}
+    for task_name in tasks:
         if subject_name is not None:
             if subject_name.lower() != task_name.lower():
                 continue
+        task = tasks[task_name]
         val_file_path = os.path.join(cur_path,'data/val', f'{task_name}_val.csv')
         val_df = pd.read_csv(val_file_path)
 
@@ -143,11 +94,14 @@ if __name__ == '__main__':
         else:
             correct_ratio = evaluator.eval_subject(task_name, val_df, few_shot=args.few_shot,
                                                    save_result_dir=save_result_dir)
-        print(task_name,"Acc:", correct_ratio)
-        acc_all.append(correct_ratio)
-        f_out.write('{},"Acc:", {}\n'.format(task_name,correct_ratio))
 
 
-    print('avg',np.average(acc_all))
-    f_out.write('avg,"Acc:", {}\n'.format(np.average(acc_all)))
+        acc_classify[task[-1]].append(correct_ratio)
+        print(task_name,*task, "Acc:", correct_ratio)
+        f_out.write('{} {},"Acc:", {}\n'.format(task_name,str(*task),correct_ratio))
+
+
+    f_out.write('{}\n'.format(json.dumps(acc_classify,ensure_ascii=True,indent=2)))
+    acc_all = [np.average(v) for k,v in acc_classify.items()]
+    f_out.write('***avg acc {}***\n'.format(np.average(acc_all)))
     f_out.close()
