@@ -25,6 +25,9 @@ C-EVAL 与上述评估基准的区别： 覆盖更广泛的领域。
 努力减少数据泄漏--作者的问题大多来自模拟考试的PDF或Microsoft Word文件，这些文件由作者进一步处理，而AGIEval和MMCU收集的是中国过去国家考试的确切题目。
 
 
+## 数据
+
+[ceval-exam](https://huggingface.co/datasets/ceval/ceval-exam)
 
 ## 本仓库部分代码参考 C-Eval
     
