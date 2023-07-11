@@ -24,6 +24,15 @@ C-EVAL 与上述评估基准的区别： 覆盖更广泛的领域。
 具有四种不同的难度--特别是C-EVAL HARD基准是中国第一个提供复杂推理问题的基准。
 努力减少数据泄漏--作者的问题大多来自模拟考试的PDF或Microsoft Word文件，这些文件由作者进一步处理，而AGIEval和MMCU收集的是中国过去国家考试的确切题目。
 
+## 安装
+```text
+dev 通过一下方式安装 , 注意顺序
+pip uninstall aigc_zoo
+pip install -U git+https://github.com/ssbuild/aigc_zoo#egg=aigc_zoo
+pip uninstall deep_training
+pip install -U git+https://github.com/ssbuild/deep_training.git
+pip install -U transformers>=4.30 deepspeed transformers_stream_generator bitsandbytes>=0.39 accelerate>=0.20
+```
 
 ## 数据
 
