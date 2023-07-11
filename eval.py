@@ -85,32 +85,32 @@ if __name__ == '__main__':
     model_name = args.model_name.lower()
     if model_name.startswith("baichuan2"):
         from evaluate.baichuan2.prompt import EvaluateBuilder
-        evaluator = EvaluateBuilder(choices, model_name, args.k)
+        evaluator = EvaluateBuilder(choices, args.model_name, args.k)
     elif model_name.startswith("baichuan"):
         from evaluate.baichuan.prompt import EvaluateBuilder
-        evaluator = EvaluateBuilder(choices, model_name, args.k)
+        evaluator = EvaluateBuilder(choices, args.model_name, args.k)
     elif model_name.startswith("chatglm2"):
         from evaluate.chatglm2.prompt import EvaluateBuilder
-        evaluator = EvaluateBuilder(choices, model_name, args.k)
+        evaluator = EvaluateBuilder(choices, args.model_name, args.k)
     elif model_name.startswith("chatglm"):
         from evaluate.chatglm.prompt import EvaluateBuilder
-        evaluator = EvaluateBuilder(choices, model_name, args.k)
+        evaluator = EvaluateBuilder(choices, args.model_name, args.k)
     elif model_name.startswith("llama") or model_name.startswith("opt") or model_name.startswith("bloom"):
         from evaluate.llm.prompt import EvaluateBuilder
-        evaluator = EvaluateBuilder(choices, model_name, args.k)
+        evaluator = EvaluateBuilder(choices, args.model_name, args.k)
     elif model_name.startswith("moss"):
         from evaluate.moss.prompt import EvaluateBuilder
-        evaluator = EvaluateBuilder(choices, model_name, args.k)
+        evaluator = EvaluateBuilder(choices, args.model_name, args.k)
     elif model_name.startswith("rwkv"):
         from evaluate.rwkv.prompt import EvaluateBuilder
-        evaluator = EvaluateBuilder(choices, model_name, args.k)
+        evaluator = EvaluateBuilder(choices, args.model_name, args.k)
     elif model_name.startswith("chatgpt"):
         from evaluate.chatgpt.prompt import EvaluateBuilder
-        evaluator = EvaluateBuilder(choices, model_name, args.k,args.openai_key)
+        evaluator = EvaluateBuilder(choices, args.model_name, args.k,args.openai_key)
     else:
         raise ValueError('not support yet')
 
-    assert model_name in train_info_args,ValueError("{} is not in ".format(model_name,str(train_info_args.keys())))
+    assert args.model_name in train_info_args,ValueError("{} is not in ".format(args.model_name,str(train_info_args.keys())))
 
     if args.device:
         os.environ["CUDA_VISIBLE_DEVICES"] = args.device
