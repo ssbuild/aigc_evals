@@ -7,52 +7,15 @@ from deep_training.data_helper import ModelArguments, DataArguments, DataHelper
 from transformers import HfArgumentParser
 from aigc_zoo.model_zoo.llm.llm_model import MyTransformer
 from aigc_zoo.utils.llm_generate import Generate
+from evaluate.constant_map import train_info_args
 class NN_DataHelper(DataHelper):pass
 
 
-train_info_models = {
-    'bloom-560m': {
-        'model_type': 'bloom',
-        'model_name_or_path': '/data/nlp/pre_models/torch/bloom/bloom-560m',
-        'config_name': '/data/nlp/pre_models/torch/bloom/bloom-560m/config.json',
-        'tokenizer_name': '/data/nlp/pre_models/torch/bloom/bloom-560m',
-    },
-    'bloom-1b7': {
-        'model_type': 'bloom',
-        'model_name_or_path': '/data/nlp/pre_models/torch/bloom/bloom-1b7',
-        'config_name': '/data/nlp/pre_models/torch/bloom/bloom-1b7/config.json',
-        'tokenizer_name': '/data/nlp/pre_models/torch/bloom/bloom-1b7',
-    },
-    'opt-350m': {
-        'model_type': 'opt',
-        'model_name_or_path': '/data/nlp/pre_models/torch/opt/opt-350m',
-        'config_name': '/data/nlp/pre_models/torch/opt/opt-350m/config.json',
-        'tokenizer_name': '/data/nlp/pre_models/torch/opt/opt-350m',
-    },
-
-    'llama-7b-hf': {
-        'model_type': 'llama',
-        'model_name_or_path': '/data/nlp/pre_models/torch/llama/llama-7b-hf',
-        'config_name': '/data/nlp/pre_models/torch/llama/llama-7b-hf/config.json',
-        'tokenizer_name': '/data/nlp/pre_models/torch/llama/llama-7b-hf',
-    },
-
-
-}
-
-train_info_args = {
-    'data_backend': 'parquet',
-    # 预训练模型路径
-    **train_info_models['bloom-560m'],
-    'use_fast_tokenizer': False,
-    'do_lower_case': None,
-}
-
 
 class Engine_API:
-    def init(self):
+    def init(self,model_name):
         parser = HfArgumentParser((ModelArguments,))
-        (model_args,) = parser.parse_dict(train_info_args, allow_extra_keys=True)
+        (model_args,) = parser.parse_dict(train_info_args[model_name], allow_extra_keys=True)
 
         dataHelper = NN_DataHelper(model_args)
         tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config()
@@ -80,7 +43,7 @@ class Engine_API:
 
 if __name__ == '__main__':
     api_client = Engine_API()
-    api_client.init()
+    api_client.init("bloom-560m")
     text_list = ["写一个诗歌，关于冬天",
                  "晚上睡不着应该怎么办",
                  "从南京到上海的路线",

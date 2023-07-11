@@ -15,7 +15,7 @@ class EvaluateBuilder(EvaluateBuilderBase):
 
     def init(self):
         self.api_client = Engine_API()
-        self.api_client.init()
+        self.api_client.init(self.model_name)
         A = self.api_client.tokenizer.encode("A", bos=False, eos=False)[0]
         B = self.api_client.tokenizer.encode("B", bos=False, eos=False)[0]
         C = self.api_client.tokenizer.encode("C", bos=False, eos=False)[0]

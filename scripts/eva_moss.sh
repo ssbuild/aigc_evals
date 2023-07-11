@@ -1,2 +1,2 @@
-# 修改 对应 infer train_info_models 权重配置
-python ../eval.py --model_name=moss
+# 修改 constant_map.py 权重配置
+python ../eval.py  --device=0 --model_name="moss-moon-003-sft-int4"

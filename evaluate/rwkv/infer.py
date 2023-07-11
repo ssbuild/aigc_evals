@@ -7,31 +7,15 @@ from deep_training.data_helper import ModelArguments, DataArguments, DataHelper
 from transformers import HfArgumentParser
 from aigc_zoo.model_zoo.rwkv4.llm_model import MyTransformer, RwkvConfig, set_model_profile
 from aigc_zoo.utils.llm_generate import Generate
+from evaluate.constant_map import train_info_args
 class NN_DataHelper(DataHelper):pass
 
-train_info_models = {
-    # 中英日语
-    "rwkv-4-raven-3b-v12-Eng49%-Chn49%-Jpn1%-Other1%": {
-        'model_type': 'rwkv',
-        'model_name_or_path': '/data/nlp/pre_models/torch/rwkv_gf/rwkv-4-raven-3b-v12',
-        'config_name': '/data/nlp/pre_models/torch/rwkv_gf/rwkv-4-raven-3b-v12/config.json',
-        'tokenizer_name': '/data/nlp/pre_models/torch/rwkv_gf/rwkv-4-raven-3b-v12',
-    },
-}
-
-train_info_args = {
-    'data_backend': 'parquet',
-    # 预训练模型路径
-    **train_info_models['rwkv-4-raven-3b-v12-Eng49%-Chn49%-Jpn1%-Other1%'],
-    'use_fast_tokenizer': True,
-    'do_lower_case': None,
-}
 
 
 class Engine_API:
-    def init(self):
+    def init(self,model_name):
         parser = HfArgumentParser((ModelArguments,))
-        (model_args,) = parser.parse_dict(train_info_args, allow_extra_keys=True)
+        (model_args,) = parser.parse_dict(train_info_args[model_name], allow_extra_keys=True)
 
         # 可以自行修改 RWKV_T_MAX  推理最大长度
         set_model_profile(RWKV_T_MAX=2048, RWKV_FLOAT_MODE='')
@@ -65,7 +49,7 @@ class Engine_API:
 
 if __name__ == '__main__':
     api_client = Engine_API()
-    api_client.init()
+    api_client.init("rwkv-4-raven-3b-v12-Eng49%-Chn49%-Jpn1%-Other1%")
     text_list = [
         "你是谁?",
         "你会干什么?",

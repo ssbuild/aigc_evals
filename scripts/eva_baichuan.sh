@@ -1,2 +1,2 @@
-# 修改 对应 infer train_info_models 权重配置
-python ../eval.py --model_name=baichuan
+# 修改 constant_map.py 权重配置
+python ../eval.py  --device=0 --model_name="baichuan-7B"

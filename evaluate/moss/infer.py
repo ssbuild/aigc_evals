@@ -7,27 +7,17 @@ from deep_training.data_helper import ModelArguments, DataArguments, DataHelper
 from transformers import HfArgumentParser
 from aigc_zoo.model_zoo.moss.llm_model import MyTransformer,MossConfig,MossTokenizer
 from aigc_zoo.utils.moss_generate import Generate
+from evaluate.constant_map import train_info_args
 class NN_DataHelper(DataHelper):pass
-
-train_info_args = {
-    'data_backend': 'parquet',
-    # 预训练模型路径
-    'model_type': 'moss',
-    'model_name_or_path': '/data/nlp/pre_models/torch/moss/moss-moon-003-sft-int4',
-    'config_name': '/data/nlp/pre_models/torch/moss/moss-moon-003-sft-int4/config.json',
-    'tokenizer_name': '/data/nlp/pre_models/torch/moss/moss-moon-003-sft-int4',
-    'use_fast_tokenizer': False,
-    'do_lower_case': None,
-}
 
 
 class Engine_API:
-    def init(self):
+    def init(self,model_name):
         train_info_args['seed'] = None
-        parser = HfArgumentParser((ModelArguments, DataArguments,))
-        model_args, data_args = parser.parse_dict(train_info_args, allow_extra_keys=True)
+        parser = HfArgumentParser((ModelArguments,))
+        (model_args,) = parser.parse_dict(train_info_args[model_name], allow_extra_keys=True)
 
-        dataHelper = NN_DataHelper(model_args, None, data_args)
+        dataHelper = NN_DataHelper(model_args)
         tokenizer: MossTokenizer
         tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(tokenizer_class_name=MossTokenizer,
                                                                        config_class_name=MossConfig,
@@ -55,7 +45,7 @@ class Engine_API:
 
 if __name__ == '__main__':
     api_client = Engine_API()
-    api_client.init()
+    api_client.init("moss-moon-003-sft-int4")
     text_list = ["写一个诗歌，关于冬天",
                  "<|Human|>: 如果一个女性想要发展信息技术行业，她应该做些什么？<eoh>\n<|MOSS|>:",
                  ]

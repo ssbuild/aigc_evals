@@ -7,24 +7,14 @@ from deep_training.data_helper import ModelArguments, DataArguments,DataHelper
 from transformers import HfArgumentParser, BitsAndBytesConfig
 from aigc_zoo.model_zoo.baichuan.llm_model import MyTransformer,BaiChuanConfig,BaiChuanTokenizer
 from aigc_zoo.utils.llm_generate import Generate
+from evaluate.constant_map import train_info_args
 class NN_DataHelper(DataHelper):pass
-
-train_info_args = {
-    'data_backend': 'parquet',
-    # 预训练模型路径
-    'model_type': 'baichuan',
-    'model_name_or_path': '/data/nlp/pre_models/torch/baichuan/baichuan-7B',
-    'config_name': '/data/nlp/pre_models/torch/baichuan/baichuan-7B/config.json',
-    'tokenizer_name': '/data/nlp/pre_models/torch/baichuan/baichuan-7B',
-    'use_fast_tokenizer': False,
-    'do_lower_case': None,
-}
 
 
 class Engine_API:
-    def init(self):
+    def init(self,model_name):
         parser = HfArgumentParser((ModelArguments,))
-        (model_args,) = parser.parse_dict(train_info_args, allow_extra_keys=True)
+        (model_args,) = parser.parse_dict(train_info_args[model_name], allow_extra_keys=True)
 
         dataHelper = NN_DataHelper(model_args)
         tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(config_class_name=BaiChuanConfig,
@@ -59,7 +49,7 @@ class Engine_API:
 
 if __name__ == '__main__':
     api_client = Engine_API()
-    api_client.init()
+    api_client.init("baichuan-7B")
     text_list = ["写一个诗歌，关于冬天",
                  "晚上睡不着应该怎么办",
                  "从南京到上海的路线",

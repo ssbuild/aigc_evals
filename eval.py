@@ -7,6 +7,7 @@ import argparse
 import os
 from enum import Enum
 import time
+from evaluate.constant_map import train_info_args
 
 import pandas as pd
 
@@ -74,39 +75,42 @@ if __name__ == '__main__':
     parser.add_argument("--model_name", type=str)
     parser.add_argument("--cot", action="store_true")
     parser.add_argument("--subject", "-s", type=str, default=None)
-    parser.add_argument("--cuda_device", type=str)
+    parser.add_argument("--device", type=str)
     args = parser.parse_args()
 
+
     model_name = args.model_name.lower()
-    if model_name== "baichuan":
-        from evaluate.baichuan.prompt import EvaluateBuilder
-        evaluator = EvaluateBuilder(choices, model_name, args.k)
-    elif model_name == "baichuan2":
+    if model_name.startswith("baichuan2"):
         from evaluate.baichuan2.prompt import EvaluateBuilder
         evaluator = EvaluateBuilder(choices, model_name, args.k)
-    elif model_name == "chatglm":
-        from evaluate.chatglm.prompt import EvaluateBuilder
+    elif model_name.startswith("baichuan"):
+        from evaluate.baichuan.prompt import EvaluateBuilder
         evaluator = EvaluateBuilder(choices, model_name, args.k)
-    elif model_name == "chatglm2":
+    elif model_name.startswith("chatglm2"):
         from evaluate.chatglm2.prompt import EvaluateBuilder
         evaluator = EvaluateBuilder(choices, model_name, args.k)
-    elif model_name == "llm":
+    elif model_name.startswith("chatglm"):
+        from evaluate.chatglm.prompt import EvaluateBuilder
+        evaluator = EvaluateBuilder(choices, model_name, args.k)
+    elif model_name.startswith("llama") or model_name.startswith("opt") or model_name.startswith("bloom"):
         from evaluate.llm.prompt import EvaluateBuilder
         evaluator = EvaluateBuilder(choices, model_name, args.k)
-    elif model_name == "moss":
+    elif model_name.startswith("moss"):
         from evaluate.moss.prompt import EvaluateBuilder
         evaluator = EvaluateBuilder(choices, model_name, args.k)
-    elif model_name == "rwkv":
+    elif model_name.startswith("rwkv"):
         from evaluate.rwkv.prompt import EvaluateBuilder
         evaluator = EvaluateBuilder(choices, model_name, args.k)
-    elif model_name == "chatgpt":
+    elif model_name.startswith("chatgpt"):
         from evaluate.chatgpt.prompt import EvaluateBuilder
         evaluator = EvaluateBuilder(choices, model_name, args.k,args.openai_key)
     else:
         raise ValueError('not support yet')
 
-    if args.cuda_device:
-        os.environ["CUDA_VISIBLE_DEVICES"] = args.cuda_device
+    assert model_name in train_info_args,ValueError("{} is not in ".format(model_name,str(train_info_args.keys())))
+
+    if args.device:
+        os.environ["CUDA_VISIBLE_DEVICES"] = args.device
     evaluator.init()
     subject_name = args.subject
 
