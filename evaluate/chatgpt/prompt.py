@@ -9,12 +9,14 @@ from tqdm import tqdm
 from evaluate.prompt.prompt import EvaluateBuilderBase
 
 
-class PromptBuilder(EvaluateBuilderBase):
+class EvaluateBuilder(EvaluateBuilderBase):
     def __init__(self,choices, model_name, k,api_key):
         super().__init__(choices, model_name, k)
         assert api_key is not None
         openai.api_key = api_key
 
+    def init(self):
+        pass
 
     def format_example(self, line, include_answer=True, cot=False):
         example = line['question']
