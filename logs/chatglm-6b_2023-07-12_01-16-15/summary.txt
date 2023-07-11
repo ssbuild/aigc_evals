@@ -1,0 +1,121 @@
+computer_network Computer Network_计算机网络_STEM,"Acc:", 26.31578947368421
+operating_system Operating System_操作系统_STEM,"Acc:", 36.8421052631579
+computer_architecture Computer Architecture_计算机组成_STEM,"Acc:", 47.61904761904762
+college_programming College Programming_大学编程_STEM,"Acc:", 37.83783783783784
+college_physics College Physics_大学物理_STEM,"Acc:", 26.31578947368421
+college_chemistry College Chemistry_大学化学_STEM,"Acc:", 25.0
+advanced_mathematics Advanced Mathematics_高等数学_STEM,"Acc:", 21.05263157894737
+probability_and_statistics Probability and Statistics_概率统计_STEM,"Acc:", 27.77777777777778
+discrete_mathematics Discrete Mathematics_离散数学_STEM,"Acc:", 37.5
+electrical_engineer Electrical Engineer_注册电气工程师_STEM,"Acc:", 32.432432432432435
+metrology_engineer Metrology Engineer_注册计量师_STEM,"Acc:", 37.5
+high_school_mathematics High School Mathematics_高中数学_STEM,"Acc:", 16.666666666666668
+high_school_physics High School Physics_高中物理_STEM,"Acc:", 26.31578947368421
+high_school_chemistry High School Chemistry_高中化学_STEM,"Acc:", 15.789473684210526
+high_school_biology High School Biology_高中生物_STEM,"Acc:", 47.36842105263158
+middle_school_mathematics Middle School Mathematics_初中数学_STEM,"Acc:", 36.8421052631579
+middle_school_biology Middle School Biology_初中生物_STEM,"Acc:", 38.095238095238095
+middle_school_physics Middle School Physics_初中物理_STEM,"Acc:", 36.8421052631579
+middle_school_chemistry Middle School Chemistry_初中化学_STEM,"Acc:", 35.0
+veterinary_medicine Veterinary Medicine_兽医学_STEM,"Acc:", 47.82608695652174
+college_economics College Economics_大学经济学_Social Science,"Acc:", 38.18181818181818
+business_administration Business Administration_工商管理_Social Science,"Acc:", 24.242424242424242
+marxism Marxism_马克思主义基本原理_Social Science,"Acc:", 52.63157894736842
+mao_zedong_thought Mao Zedong Thought_毛泽东思想和中国特色社会主义理论体系概论_Social Science,"Acc:", 37.5
+education_science Education Science_教育学_Social Science,"Acc:", 41.37931034482759
+teacher_qualification Teacher Qualification_教师资格_Social Science,"Acc:", 45.45454545454545
+high_school_politics High School Politics_高中政治_Social Science,"Acc:", 68.42105263157895
+high_school_geography High School Geography_高中地理_Social Science,"Acc:", 42.10526315789474
+middle_school_politics Middle School Politics_初中政治_Social Science,"Acc:", 57.142857142857146
+middle_school_geography Middle School Geography_初中地理_Social Science,"Acc:", 25.0
+modern_chinese_history Modern Chinese History_近代史纲要_Humanities,"Acc:", 30.434782608695652
+ideological_and_moral_cultivation Ideological and Moral Cultivation_思想道德修养与法律基础_Humanities,"Acc:", 73.6842105263158
+logic Logic_逻辑学_Humanities,"Acc:", 45.45454545454545
+law Law_法学_Humanities,"Acc:", 29.166666666666668
+chinese_language_and_literature Chinese Language and Literature_中国语言文学_Humanities,"Acc:", 30.434782608695652
+art_studies Art Studies_艺术学_Humanities,"Acc:", 48.484848484848484
+professional_tour_guide Professional Tour Guide_导游资格_Humanities,"Acc:", 41.37931034482759
+legal_professional Legal Professional_法律职业资格_Humanities,"Acc:", 26.08695652173913
+high_school_chinese High School Chinese_高中语文_Humanities,"Acc:", 21.05263157894737
+high_school_history High School History_高中历史_Humanities,"Acc:", 50.0
+middle_school_history Middle School History_初中历史_Humanities,"Acc:", 40.90909090909091
+civil_servant Civil Servant_公务员_Other,"Acc:", 34.04255319148936
+sports_science Sports Science_体育学_Other,"Acc:", 42.10526315789474
+plant_protection Plant Protection_植物保护_Other,"Acc:", 59.09090909090909
+basic_medicine Basic Medicine_基础医学_Other,"Acc:", 26.31578947368421
+clinical_medicine Clinical Medicine_临床医学_Other,"Acc:", 22.727272727272727
+urban_and_rural_planner Urban and Rural Planner_注册城乡规划师_Other,"Acc:", 36.95652173913044
+accountant Accountant_注册会计师_Other,"Acc:", 30.612244897959183
+fire_engineer Fire Engineer_注册消防工程师_Other,"Acc:", 45.16129032258065
+environmental_impact_assessment_engineer Environmental Impact Assessment Engineer_环境影响评价工程师_Other,"Acc:", 38.70967741935484
+tax_accountant Tax Accountant_税务师_Other,"Acc:", 16.3265306122449
+physician Physician_医师资格_Other,"Acc:", 36.734693877551024
+{
+  "Social Science": [
+    38.18181818181818,
+    24.242424242424242,
+    52.63157894736842,
+    37.5,
+    41.37931034482759,
+    45.45454545454545,
+    68.42105263157895,
+    42.10526315789474,
+    57.142857142857146,
+    25.0
+  ],
+  "Other": [
+    34.04255319148936,
+    42.10526315789474,
+    59.09090909090909,
+    26.31578947368421,
+    22.727272727272727,
+    36.95652173913044,
+    30.612244897959183,
+    45.16129032258065,
+    38.70967741935484,
+    16.3265306122449,
+    36.734693877551024
+  ],
+  "STEM": [
+    26.31578947368421,
+    36.8421052631579,
+    47.61904761904762,
+    37.83783783783784,
+    26.31578947368421,
+    25.0,
+    21.05263157894737,
+    27.77777777777778,
+    37.5,
+    32.432432432432435,
+    37.5,
+    16.666666666666668,
+    26.31578947368421,
+    15.789473684210526,
+    47.36842105263158,
+    36.8421052631579,
+    38.095238095238095,
+    36.8421052631579,
+    35.0,
+    47.82608695652174
+  ],
+  "Humanities": [
+    30.434782608695652,
+    73.6842105263158,
+    45.45454545454545,
+    29.166666666666668,
+    30.434782608695652,
+    48.484848484848484,
+    41.37931034482759,
+    26.08695652173913,
+    21.05263157894737,
+    50.0,
+    40.90909090909091
+  ]
+}
+{
+  "Social Science": 43.20588501033147,
+  "Other": 35.3438860463701,
+  "STEM": 32.8469648955919,
+  "Humanities": 39.7352568822157
+}
+***avg acc 37.7829982086273***

@@ -98,10 +98,14 @@ if __name__ == '__main__':
 
         acc_classify[task[-1]].append(correct_ratio)
         print(task_name,*task, "Acc:", correct_ratio)
-        f_out.write('{} {},"Acc:", {}\n'.format(task_name,str(*task),correct_ratio))
+        f_out.write('{} {}_{}_{},"Acc:", {}\n'.format(task_name,task[0],task[1],task[2],correct_ratio))
 
-
+    acc_avg = {k: np.average(v) for k, v in acc_classify.items()}
+    acc_avg_all = np.average([np.average(v)  for k, v in acc_classify.items()])
     f_out.write('{}\n'.format(json.dumps(acc_classify,ensure_ascii=True,indent=2)))
-    acc_all = [np.average(v) for k,v in acc_classify.items()]
-    f_out.write('***avg acc {}***\n'.format(np.average(acc_all)))
+    f_out.write('{}\n'.format(json.dumps(acc_avg, ensure_ascii=True, indent=2)))
+    f_out.write('***avg acc {}***\n'.format(acc_avg_all))
+    print(acc_classify)
+    print(acc_avg)
+    print('***avg acc {}***\n'.format(acc_avg_all))
     f_out.close()

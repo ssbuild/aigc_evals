@@ -50,7 +50,7 @@ class EvaluateBuilder(EvaluateBuilderBase):
                 correct = 0
             if save_result_dir:
                 if few_shot:
-                    result.append(response)
+                    result.append(ans)
                 score.append(correct)
         correct_ratio = 100 * correct_num / len(answers)
 
@@ -75,19 +75,21 @@ class EvaluateBuilder(EvaluateBuilderBase):
             )
         return prompt
 
-    def format_example(self, line, include_answer=True, cot=False, add_prompt=''):
-        example = add_prompt + line['question']
-        # print(example)
+    def format_example(self, line, include_answer=True, cot=False):
+        example = line['question']
         for choice in self.choices:
             example += f'\n{choice}. {line[f"{choice}"]}'
-        example += '\n答案：'
         if include_answer:
             if cot:
-                ans = "让我们一步一步思考，\n" + line["explanation"] + f"\n所以答案是{line['answer']}。"
+                example += "\n答案：让我们一步一步思考，\n" + \
+                           line["explanation"] + f"\n所以答案是{line['answer']}。\n\n"
             else:
-                ans = line["answer"]
-            m = (example, ans)
-            return m
+                example += '\n答案：' + line["answer"] + '\n\n'
+        else:
+            if cot:
+                example += "\n答案：让我们一步一步思考，\n1."
+            else:
+                example += '\n答案：'
         return example
 
     def extract_cot_answer(self, line, gen_ans):

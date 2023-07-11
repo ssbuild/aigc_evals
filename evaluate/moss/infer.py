@@ -28,7 +28,7 @@ class Engine_API:
         model.eval().half().cuda()
 
         self.model = model
-        self.tokenizer = tokenizer
+        self.tokenizer: MossTokenizer = tokenizer
         self.gen_core = Generate(model,tokenizer)
 
     def infer(self,input,**kwargs):
@@ -40,6 +40,17 @@ class Engine_API:
         )
         default_kwargs.update(kwargs)
         response = self.gen_core.chat(input, **kwargs)
+        return response
+
+    def generate(self,input,**kwargs):
+        default_kwargs = dict(
+            max_length=512,
+            eos_token_id=self.model.config.eos_token_id,
+            pad_token_id=self.model.config.eos_token_id,
+            do_sample=False, top_p=0.7, temperature=0.95,
+        )
+        default_kwargs.update(kwargs)
+        response = self.model.generate(input, **kwargs)
         return response
 
 

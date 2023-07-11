@@ -18,7 +18,7 @@ class Engine_API:
         (model_args,) = parser.parse_dict(train_info_args[model_name], allow_extra_keys=True)
 
         # 可以自行修改 RWKV_T_MAX  推理最大长度
-        set_model_profile(RWKV_T_MAX=2048, RWKV_FLOAT_MODE='')
+        set_model_profile(RWKV_T_MAX=2048, RWKV_FLOAT_MODE='16')
 
         dataHelper = NN_DataHelper(model_args)
         tokenizer, config, _, _ = dataHelper.load_tokenizer_and_config(config_kwargs={"torch_dtype": torch.float16},
