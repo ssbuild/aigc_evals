@@ -30,20 +30,19 @@ class EvaluateBuilder(EvaluateBuilderBase):
             if few_shot:
                 result = []
             score = []
-        if few_shot:
-            history = self.generate_few_shot_prompt(subject_name, dev_df, cot=cot)
-        else:
-            history = []
+        few_shot_prompt = self.generate_few_shot_prompt(
+            subject_name, dev_df, cot=cot) if few_shot else ""
         answers = list(test_df['answer'])
         for row_index, row in tqdm(test_df.iterrows(), total=len(test_df)):
             question = self.format_example(row, include_answer=False, cot=cot)
-            if few_shot:
-                response = self.api_client.infer(question, do_sample=False, history=history)
+            full_prompt = few_shot_prompt + question
+            if cot:
+                response = self.api_client.infer(full_prompt, do_sample=False)
                 response = response.strip()
-                # For ChatGLM, we use answer extraction in answer-only mode too.
                 ans, direct_extract = self.extract_cot_answer(row, response)
             else:  # zero-shot by extracting answer from distribution
-                ans = self.generate_dist(question, do_sample=False, max_length=2048,history=history)
+                ans = self.generate_dist(full_prompt, do_sample=False, max_length=2048)
+
             if ans == answers[row_index]:
                 correct_num += 1
                 correct = 1
@@ -64,15 +63,17 @@ class EvaluateBuilder(EvaluateBuilderBase):
         return correct_ratio
 
     def generate_few_shot_prompt(self, subject, dev_df, cot=False):
-        message = []
+        prompt = f"以下是中国关于{subject}考试的单项选择题，请选出其中的正确答案。\n\n"
         k = self.k
         if self.k == -1:
             k = dev_df.shape[0]
-        message.append(self.format_example(dev_df.iloc[0, :], cot=cot,
-                                           add_prompt=f"以下是中国关于{subject}考试的单项选择题，请选出其中的正确答案。\n\n"))
-        for i in range(1, k):
-            message.append(self.format_example(dev_df.iloc[i, :], cot=cot))
-        return message
+        for i in range(k):
+            prompt += self.format_example(
+                dev_df.iloc[i, :],
+                include_answer=True,
+                cot=cot
+            )
+        return prompt
 
     def format_example(self, line, include_answer=True, cot=False, add_prompt=''):
         example = add_prompt + line['question']
@@ -124,15 +125,13 @@ class EvaluateBuilder(EvaluateBuilderBase):
             return answer, False
         return '-', False
 
-    def generate_dist(self, query, history, num_beams=1, max_length=2048,
+    def generate_dist(self, query, num_beams=1, max_length=2048,
                       do_sample=False, top_p=0.7, temperature=0.95, logits_processor=None, **kwargs):
-        if history is None:
-            history = []
 
         gen_kwargs = {"num_beams": num_beams, "do_sample": do_sample, "top_p": top_p, "max_length": max_length,
                       "temperature": temperature, "logits_processor": logits_processor, **kwargs}
 
-        scores = self.api_client.infer(query,return_dict_in_generate=True, output_scores=True,history=history, **gen_kwargs)
+        scores = self.api_client.infer(query, return_dict_in_generate=True, output_scores=True, **gen_kwargs)
         score = scores[0].tolist()
 
         choice_score = [score[self.choices_ids[0]], score[self.choices_ids[1]],
