@@ -7,7 +7,7 @@ import re
 import typing
 from tqdm import tqdm
 from evaluate.prompt.prompt import EvaluateBuilderBase
-from infer import Engine_API
+from evaluate.moss.infer import Engine_API
 
 class EvaluateBuilder(EvaluateBuilderBase):
     def __init__(self,choices, model_name, k):

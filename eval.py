@@ -10,41 +10,9 @@ import pandas as pd
 
 choices = ["A", "B", "C", "D"]
 
-class ModelType(Enum):
-    BAICHUAN = 0
-    BAICHUAN2 = 1
-    CHATGLM = 2
-    CHATGLM2 = 3
-    LLM = 4
-    MOSS = 5
-    RWKV = 6
-
-model_base = ModelType.CHATGLM
-
-if model_base == ModelType.BAICHUAN:
-    from evaluate.baichuan.prompt import EvaluateBuilder
-elif model_base == ModelType.BAICHUAN2:
-    from evaluate.baichuan2.prompt import EvaluateBuilder
-elif model_base == ModelType.CHATGLM:
-    from evaluate.chatglm.prompt import EvaluateBuilder
-elif model_base == ModelType.CHATGLM2:
-    from evaluate.chatglm2.prompt import EvaluateBuilder
-elif model_base == ModelType.LLM:
-    from evaluate.llm.prompt import EvaluateBuilder
-elif model_base == ModelType.MOSS:
-    from evaluate.moss.prompt import EvaluateBuilder
-elif model_base == ModelType.RWKV:
-    from evaluate.rwkv.prompt import EvaluateBuilder
-else:
-    raise ValueError('not support yet')
-
-
-
-
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--ntrain", "-k", type=int, default=5)
+    parser.add_argument("--k", type=int, default=5)
     parser.add_argument("--openai_key", type=str, default="xxx")
     parser.add_argument("--minimax_group_id", type=str, default="xxx")
     parser.add_argument("--minimax_key", type=str, default="xxx")
@@ -54,6 +22,31 @@ if __name__ == '__main__':
     parser.add_argument("--subject", "-s", type=str, default="operating_system")
     parser.add_argument("--cuda_device", type=str)
     args = parser.parse_args()
+
+    model_name = args.model_name.lower()
+    if model_name== "baichuan":
+        from evaluate.baichuan.prompt import EvaluateBuilder
+        evaluator = EvaluateBuilder(choices, model_name, args.k)
+    elif model_name == "baichuan2":
+        from evaluate.baichuan2.prompt import EvaluateBuilder
+        evaluator = EvaluateBuilder(choices, model_name, args.k)
+    elif model_name == "chatglm":
+        from evaluate.chatglm.prompt import EvaluateBuilder
+        evaluator = EvaluateBuilder(choices, model_name, args.k)
+    elif model_name == "chatglm2":
+        from evaluate.chatglm2.prompt import EvaluateBuilder
+        evaluator = EvaluateBuilder(choices, model_name, args.k)
+    elif model_name == "llm":
+        from evaluate.llm.prompt import EvaluateBuilder
+        evaluator = EvaluateBuilder(choices, model_name, args.k)
+    elif model_name == "moss":
+        from evaluate.moss.prompt import EvaluateBuilder
+        evaluator = EvaluateBuilder(choices, model_name, args.k)
+    elif model_name == "rwkv":
+        from evaluate.rwkv.prompt import EvaluateBuilder
+        evaluator = EvaluateBuilder(choices, model_name, args.k)
+    else:
+        raise ValueError('not support yet')
 
     if args.cuda_device:
         os.environ["CUDA_VISIBLE_DEVICES"] = args.cuda_device
@@ -67,6 +60,8 @@ if __name__ == '__main__':
     print(subject_name)
     val_file_path = os.path.join('data/val', f'{subject_name}_val.csv')
     val_df = pd.read_csv(val_file_path)
+
+    evaluator.init()
     if args.few_shot:
         dev_file_path = os.path.join('data/dev', f'{subject_name}_dev.csv')
         dev_df = pd.read_csv(dev_file_path)
