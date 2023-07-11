@@ -138,4 +138,4 @@ if __name__ == '__main__':
         else:
             correct_ratio = evaluator.eval_subject(task_name, val_df, few_shot=args.few_shot,
                                                    save_result_dir=save_result_dir)
-        print("Acc:", correct_ratio)
+        print(task_name,"Acc:", correct_ratio)
