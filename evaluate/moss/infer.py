@@ -38,7 +38,7 @@ class Engine_API:
             pad_token_id=self.model.config.eos_token_id,
             do_sample=False, top_p=0.7, temperature=0.95,
         )
-        kwargs.update(default_kwargs)
+        default_kwargs.update(kwargs)
         response = self.gen_core.chat(input, **kwargs)
         return response
 

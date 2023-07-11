@@ -46,7 +46,7 @@ class Engine_API:
             eos_token_id=self.model.config.eos_token_id,
             do_sample=True, top_p=0.7, temperature=0.95,
         )
-        kwargs.update(default_kwargs)
+        default_kwargs.update(kwargs)
         response, history = self.model.chat(self.tokenizer, query=input,  **kwargs)
         return response, history
 
@@ -56,10 +56,10 @@ class Engine_API:
             eos_token_id=self.model.config.eos_token_id,
             do_sample=True, top_p=0.7, temperature=0.95,
         )
-        kwargs.update(default_kwargs)
+        default_kwargs.update(kwargs)
         # response, history = self.model.chat(self.tokenizer, query=input,  **kwargs)
-        output = self.model.chat(self.tokenizer, query=input, **kwargs)
-        output_scores = kwargs.get('output_scores', False)
+        output = self.model.chat(self.tokenizer, query=input, **default_kwargs)
+        output_scores = default_kwargs.get('output_scores', False)
         if output_scores:
             return output
         response, history = output
