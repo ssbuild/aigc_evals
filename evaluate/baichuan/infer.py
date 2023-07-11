@@ -2,16 +2,9 @@
 # @Time:  18:49
 # @Author: tk
 # @File：evaluate
-
-# @Time    : 2023/4/2 22:49
-# @Author  : tk
-# @FileName: infer
-
 import torch
 from deep_training.data_helper import ModelArguments, DataArguments,DataHelper
 from transformers import HfArgumentParser, BitsAndBytesConfig
-
-
 from aigc_zoo.model_zoo.baichuan.llm_model import MyTransformer,BaiChuanConfig,BaiChuanTokenizer
 from aigc_zoo.utils.llm_generate import Generate
 class NN_DataHelper(DataHelper):pass

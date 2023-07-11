@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # @Author  : ssbuild
 # @Time    : 2023/7/10 16:42
-
 import torch
 from deep_training.data_helper import ModelArguments,DataHelper
 from transformers import HfArgumentParser
@@ -50,7 +49,7 @@ class Engine_API:
         self.model = model
         self.tokenizer = tokenizer
 
-    def infer(self,input,**kwargs):
+    def chat(self,input,**kwargs):
         default_kwargs = dict(
             history=[], max_length=2048,
             eos_token_id=self.model.config.eos_token_id,
@@ -58,6 +57,21 @@ class Engine_API:
         )
         kwargs.update(default_kwargs)
         response, history = self.model.chat(self.tokenizer, query=input,  **kwargs)
+        return response, history
+
+    def infer(self,input,**kwargs):
+        default_kwargs = dict(
+            history=[], max_length=2048,
+            eos_token_id=self.model.config.eos_token_id,
+            do_sample=True, top_p=0.7, temperature=0.95,
+        )
+        kwargs.update(default_kwargs)
+        # response, history = self.model.chat(self.tokenizer, query=input,  **kwargs)
+        output = self.model.chat(self.tokenizer, query=input, **kwargs)
+        output_scores = kwargs.get('output_scores', False)
+        if output_scores:
+            return output
+        response, history = output
         return response
 
 if __name__ == '__main__':
