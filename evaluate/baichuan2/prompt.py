@@ -38,7 +38,7 @@ class EvaluateBuilder(EvaluateBuilderBase):
         for row_index, row in tqdm(test_df.iterrows(), total=len(test_df)):
             question = self.format_example(row, include_answer=False, cot=cot)
             if few_shot:
-                response, _ = self.api_client.infer(question, do_sample=False, history=history)
+                response = self.api_client.infer(question, do_sample=False, history=history)
                 response = response.strip()
                 # For ChatGLM, we use answer extraction in answer-only mode too.
                 ans, direct_extract = self.extract_cot_answer(row, response)

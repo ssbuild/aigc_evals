@@ -131,7 +131,7 @@ class EvaluateBuilder(EvaluateBuilderBase):
         gen_kwargs = {"num_beams": num_beams, "do_sample": do_sample, "top_p": top_p, "max_length": max_length,
                       "temperature": temperature, "logits_processor": logits_processor, **kwargs}
 
-        scores = self.api_client.chat(query,return_dict_in_generate=True, output_scores=True,history=history, **gen_kwargs)
+        scores = self.api_client.infer(query,return_dict_in_generate=True, output_scores=True,history=history, **gen_kwargs)
         score = scores[0].tolist()
 
         choice_score = [score[self.choices_ids[0]], score[self.choices_ids[1]],
