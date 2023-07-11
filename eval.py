@@ -65,9 +65,8 @@ if __name__ == '__main__':
     if args.few_shot:
         dev_file_path = os.path.join('data/dev', f'{subject_name}_dev.csv')
         dev_df = pd.read_csv(dev_file_path)
-        correct_ratio = EvaluateBuilder.eval_subject(subject_name, val_df, dev_df, few_shot=args.few_shot,
+        correct_ratio = evaluator.eval_subject(subject_name, val_df, dev_df, few_shot=args.few_shot,
                                                save_result_dir=save_result_dir, cot=args.cot)
     else:
-        correct_ratio = EvaluateBuilder.eval_subject(subject_name, val_df, few_shot=args.few_shot,
-                                               save_result_dir=save_result_dir)
+        correct_ratio = evaluator.eval_subject(subject_name, val_df, few_shot=args.few_shot,save_result_dir=save_result_dir)
     print("Acc:", correct_ratio)
