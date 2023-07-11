@@ -73,7 +73,7 @@ if __name__ == '__main__':
     parser.add_argument("--few_shot", action="store_true")
     parser.add_argument("--model_name", type=str)
     parser.add_argument("--cot", action="store_true")
-    parser.add_argument("--subject", "-s", type=str, default="operating_system")
+    parser.add_argument("--subject", "-s", type=str, default=None)
     parser.add_argument("--cuda_device", type=str)
     args = parser.parse_args()
 
@@ -101,7 +101,7 @@ if __name__ == '__main__':
         evaluator = EvaluateBuilder(choices, model_name, args.k)
     elif model_name == "chatgpt":
         from evaluate.chatgpt.prompt import EvaluateBuilder
-        evaluator = EvaluateBuilder(choices, model_name, args.k)
+        evaluator = EvaluateBuilder(choices, model_name, args.k,args.openai_key)
     else:
         raise ValueError('not support yet')
 
