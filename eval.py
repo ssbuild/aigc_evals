@@ -55,6 +55,8 @@ if __name__ == '__main__':
     parser.add_argument("--cuda_device", type=str)
     args = parser.parse_args()
 
+    if args.cuda_device:
+        os.environ["CUDA_VISIBLE_DEVICES"] = args.cuda_device
 
     subject_name = args.subject
     if not os.path.exists(r"logs"):
