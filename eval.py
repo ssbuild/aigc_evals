@@ -2,6 +2,9 @@
 # @Author  : ssbuild
 # @Time    : 2023/7/11 10:16
 import sys
+
+import numpy as np
+
 sys.path.append('.')
 import argparse
 import os
@@ -123,6 +126,7 @@ if __name__ == '__main__':
     save_result_dir = os.path.join(log_dir, f"{args.model_name}_{run_date}")
     os.mkdir(save_result_dir)
 
+    acc_all = []
     for task_name in task_list:
         if subject_name is not None:
             if subject_name.lower() != task_name.lower():
@@ -139,3 +143,6 @@ if __name__ == '__main__':
             correct_ratio = evaluator.eval_subject(task_name, val_df, few_shot=args.few_shot,
                                                    save_result_dir=save_result_dir)
         print(task_name,"Acc:", correct_ratio)
+        acc_all.append(correct_ratio)
+
+    print('avg',np.average(acc_all))
