@@ -29,6 +29,9 @@ C-EVAL 与上述评估基准的区别： 覆盖更广泛的领域。
 
 [ceval-exam](https://huggingface.co/datasets/ceval/ceval-exam)
 
+wget https://huggingface.co/datasets/ceval/ceval-exam/resolve/main/ceval-exam.zip
+解压后 数据放置 aigc_eval/data 目录
+
 ## 本仓库部分代码参考 C-Eval
     
 
