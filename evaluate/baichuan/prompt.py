@@ -6,6 +6,8 @@
 import os
 import re
 import typing
+
+import transformers
 from tqdm import tqdm
 from evaluate.prompt.prompt import EvaluateBuilderBase
 from evaluate.baichuan.infer import Engine_API
@@ -18,10 +20,10 @@ class EvaluateBuilder(EvaluateBuilderBase):
     def init(self):
         self.api_client = Engine_API()
         self.api_client.init(self.model_name)
-        A = self.api_client.tokenizer.encode("A", bos=False, eos=False)[0]
-        B = self.api_client.tokenizer.encode("B", bos=False, eos=False)[0]
-        C = self.api_client.tokenizer.encode("C", bos=False, eos=False)[0]
-        D = self.api_client.tokenizer.encode("D", bos=False, eos=False)[0]
+        A = self.api_client.tokenizer.encode("A", add_special_tokens=False)[0]
+        B = self.api_client.tokenizer.encode("B", add_special_tokens=False)[0]
+        C = self.api_client.tokenizer.encode("C", add_special_tokens=False)[0]
+        D = self.api_client.tokenizer.encode("D", add_special_tokens=False)[0]
         self.choices_ids = [A,B,C,D]
 
     def eval_subject(self, subject_name, test_df, dev_df=None, few_shot=False, cot=False, save_result_dir=None):
