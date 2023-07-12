@@ -36,7 +36,7 @@ class Engine_API:
             max_length=2048,
             eos_token_id=self.model.config.eos_token_id,
             pad_token_id=self.model.config.eos_token_id,
-            do_sample=False, top_p=0.7, temperature=0.95,
+            do_sample=True, top_p=0.7, temperature=0.95,
         )
         default_kwargs.update(kwargs)
         response = self.gen_core.chat(input, **kwargs)
@@ -47,7 +47,7 @@ class Engine_API:
             max_length=2048,
             eos_token_id=self.model.config.eos_token_id,
             pad_token_id=self.model.config.eos_token_id,
-            do_sample=False, top_p=0.7, temperature=0.95,
+            do_sample=True, top_p=0.7, temperature=0.95,
         )
         default_kwargs.update(kwargs)
         response = self.model.generate(input, **kwargs)

@@ -38,7 +38,8 @@ class Engine_API:
             max_length=2048,
             eos_token_id=self.model.config.eos_token_id,
             pad_token_id=self.model.config.eos_token_id,
-            do_sample=False, top_p=0.7, temperature=0.95,
+            do_sample=True, top_k=5,top_p=0.85, temperature=0.3,
+            repetition_penalty=1.1,
         )
         default_kwargs.update(kwargs)
         response = Generate.generate(self.model,
