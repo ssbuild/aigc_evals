@@ -35,13 +35,13 @@ class EvaluateBuilder(EvaluateBuilderBase):
         answers = list(test_df['answer'])
         for row_index, row in tqdm(test_df.iterrows(), total=len(test_df)):
             question = self.format_example(row, include_answer=False, cot=cot)
-            full_prompt = few_shot_prompt + question
-            if cot:
+            if few_shot:
+                full_prompt = few_shot_prompt + question
                 response = self.api_client.infer(full_prompt, do_sample=False)
                 response = response.strip()
                 ans, direct_extract = self.extract_cot_answer(row, response)
             else:  # zero-shot by extracting answer from distribution
-                ans = self.generate_dist(full_prompt, do_sample=False, max_length=2048)
+                ans = self.generate_dist(question, do_sample=False, max_length=2048)
 
             if ans == answers[row_index]:
                 correct_num += 1
