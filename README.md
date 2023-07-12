@@ -47,10 +47,10 @@ wget https://huggingface.co/datasets/ceval/ceval-exam/resolve/main/ceval-exam.zi
 ## 排行榜
 #### Five-shot
 | Model       | STEM | Social Science | Humanities | Other | Average |
-|-------------|:----:| :------------: | :--------: |:-----:|:-------:|
+|-------------|:----:| :------------: |:----------:|:-----:|:-------:|
 | GPT-4       | 67.1 |      77.6      |    64.5    | 67.8  |  68.7   |
-| CHATGLM2-6B | 46.6 |      57.8      |    54.7    | 46.5  |  51.5   |
-| CHATGLM-6B  | 32.8 |      43.2      |    40.5    | 35.3  |  37.8   |
+| CHATGLM2-6B | 46.9 |      57.8      |    54.7    | 46.5  |  51.5   |
+| CHATGLM-6B  | 32.8 |      43.2      |    39.7    | 35.3  |  37.8   |
 
 
 ## 如何在llm-eval上测试
