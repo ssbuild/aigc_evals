@@ -76,10 +76,15 @@ def eval_cmmlu(evaluator,subject_name,save_result_dir):
         task = tasks[task_name]
         val_file_path = os.path.join(cur_path, 'cmmlu_data/test', f'{task_name}.csv')
         val_df = pd.read_csv(val_file_path)
-
+        val_df.columns = val_df.columns.str.replace('Question', 'question')
+        val_df.columns = val_df.columns.str.replace('Answer', 'answer')
+        val_df.loc[:, 'explanation'] = ''
         if args.few_shot:
             dev_file_path = os.path.join(cur_path, 'cmmlu_data/dev', f'{task_name}.csv')
             dev_df = pd.read_csv(dev_file_path)
+            dev_df.columns = dev_df.columns.str.replace('Question', 'question')
+            dev_df.columns = dev_df.columns.str.replace('Answer', 'answer')
+            dev_df.loc[:, 'explanation'] = ''
             correct_ratio = evaluator.eval_subject(task_name, val_df, dev_df, few_shot=args.few_shot,
                                                    save_result_dir=save_result_dir, cot=args.cot)
         else:
