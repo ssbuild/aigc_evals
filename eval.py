@@ -58,7 +58,7 @@ def eval_cmmlu(evaluator,subject_name,save_result_dir):
     from cmmlu_categories import name_en2zh,subcategories,categories
 
     categories_new = {}
-    for k,v in categories:
+    for k,v in categories.items():
         for sub_k in v:
             categories_new[sub_k] = k
     tasks = {}
@@ -68,8 +68,6 @@ def eval_cmmlu(evaluator,subject_name,save_result_dir):
         tasks[k] = (name_en2zh[k],parent_cate,root_cat)
 
     f_out = open(os.path.join(save_result_dir, 'summary.txt'), mode='w', encoding='utf-8')
-    #name,name_zh,[父分类] [根分类]
-
     acc_classify = {root: [] for root in categories.keys()}
     for task_name in tasks:
         if subject_name is not None:
