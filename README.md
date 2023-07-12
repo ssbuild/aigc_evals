@@ -65,12 +65,6 @@ wget https://huggingface.co/datasets/ceval/ceval-exam/resolve/main/ceval-exam.zi
 | Baichuan-7B       | 36.6 |      53.4      |    45.1    | 44.7  |  45.0   |
 
 
-  "Other": 44.66316014811236,
-  "Social Science": 53.68509243327755,
-  "Humanities": 45.103266657232496,
-  "STEM": 36.64120261974952
-
-{'Social Science': 50.8839653993919, 'Other': 41.988542194461054, 'STEM': 43.226431175372824, 'Humanities': 52.66257258495589}
 
 ## 如何在llm-eval上测试
 
