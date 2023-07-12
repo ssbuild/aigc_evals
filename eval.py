@@ -32,13 +32,14 @@ if __name__ == '__main__':
         print("seting up device",args.device)
         os.environ["CUDA_VISIBLE_DEVICES"] = args.device
 
-    model_name = args.model_name.lower()
-    if model_name.startswith("baichuan2"):
-        from evaluate.baichuan2.prompt import EvaluateBuilder
-        evaluator = EvaluateBuilder(choices, args.model_name, args.k)
-    elif model_name.startswith("baichuan"):
-        from evaluate.baichuan.prompt import EvaluateBuilder
-        evaluator = EvaluateBuilder(choices, args.model_name, args.k)
+    model_name: str = args.model_name.lower()
+    if model_name.startswith("baichuan"):
+        if model_name.find('13b') != -1:
+            from evaluate.baichuan2.prompt import EvaluateBuilder
+            evaluator = EvaluateBuilder(choices, args.model_name, args.k)
+        else:
+            from evaluate.baichuan.prompt import EvaluateBuilder
+            evaluator = EvaluateBuilder(choices, args.model_name, args.k)
     elif model_name.startswith("chatglm2"):
         from evaluate.chatglm2.prompt import EvaluateBuilder
         evaluator = EvaluateBuilder(choices, args.model_name, args.k)
