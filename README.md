@@ -45,24 +45,28 @@ wget https://huggingface.co/datasets/ceval/ceval-exam/resolve/main/ceval-exam.zi
     
 
 ## 排行榜
-#### Five-shot
-| Model             | STEM | Social Science | Humanities | Other | Average |
-|-------------------|:----:| :------------: |:----------:|:-----:|:-------:|
-| GPT-4             | 67.1 |      77.6      |    64.5    | 67.8  |  68.7   |
-| CHATGLM2-6B       | 46.9 |      57.8      |    54.7    | 46.5  |  51.5   |
-| CHATGLM-6B        | 32.8 |      43.2      |    39.7    | 35.3  |  37.8   |
-| Baichuan-13b-Chat | 30.2 |      45.3      |    47.1    | 32.9  |  38.9  |
-
-
-
-
 
 #### Zero-shot
 | Model             | STEM | Social Science | Humanities | Other | Average |
 |-------------------|:----:|:--------------:|:----------:|:-----:|:-------:|
+| GPT-4             | 65.2 |      74.7      |    62.5    | 64.7  |  66.4   |
+| ChatGPT           | 49.0 |      58.0      |    48.8    | 50.4  |  51.0   |
 | CHATGLM2-6B       | 42.7 |      60.6      |    58.1    | 49.9  |  52.8   |
 | Baichuan-13b-Chat | 43.2 |      50.9      |    52.7    | 42.0  |  47.2   |
 | Baichuan-7B       | 36.6 |      53.4      |    45.1    | 44.7  |  45.0   |
+
+
+#### Five-shot
+| Model             | STEM | Social Science | Humanities | Other | Average |
+|-------------------|:----:| :------------: |:----------:|:-----:|:-------:|
+| GPT-4             | 67.1 |      77.6      |    64.5    | 67.8  |  68.7   |
+| ChatGPT           | 52.9 |      61.8      |    50.9    | 53.6  |  54.4   |
+| CHATGLM2-6B       | 46.9 |      57.8      |    54.7    | 46.5  |  51.5   |
+| CHATGLM-6B        | 32.8 |      43.2      |    39.7    | 35.3  |  37.8   |
+| Baichuan-13b-Chat | 30.2 |      45.3      |    47.1    | 32.9  |  38.9   |
+
+
+
 
 
 
