@@ -42,6 +42,10 @@ class Engine_API:
             repetition_penalty=1.1,
         )
         default_kwargs.update(kwargs)
+        max_length = default_kwargs.pop('max_length',None)
+        if 'max_new_tokens' not in default_kwargs and max_length is not None:
+            default_kwargs['max_new_tokens'] = max_length
+        default_kwargs['max_length'] = None
         response = Generate.generate(self.model,
                                      tokenizer=self.tokenizer,
                                      query=input,**default_kwargs)
