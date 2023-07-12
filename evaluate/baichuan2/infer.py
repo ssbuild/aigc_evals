@@ -33,6 +33,28 @@ class Engine_API:
         self.model = model
         self.tokenizer = tokenizer
 
+
+    @torch.no_grad()
+    def _generate(self,  query: str, max_length: int = 2048, num_beams=1,
+                 do_sample=True, top_p=0.7, temperature=0.95, logits_processor=None, **kwargs):
+        gen_kwargs = {"max_length": max_length, "num_beams": num_beams, "do_sample": do_sample, "top_p": top_p,
+                      "temperature": temperature, "logits_processor": logits_processor, **kwargs}
+        output_scores = gen_kwargs.get('output_scores', False)
+        if output_scores:
+            gen_kwargs['return_dict_in_generate'] = True
+        # prompt = "Human：" + query + "\nAssistant："
+        # 自行加模板
+        prompt = query
+        inputs = self.tokenizer([prompt], return_tensors="pt")
+        inputs = inputs.to(self.model.device)
+        outputs = self.model.generate(**inputs, **gen_kwargs)
+        if output_scores:
+            score = outputs.scores[0]
+            return score
+        outputs = outputs.tolist()[0][len(inputs["input_ids"][0]):]
+        response = self.tokenizer.decode(outputs)
+        return response
+
     def infer(self,input,**kwargs):
         default_kwargs = dict(
             max_length=2048,
