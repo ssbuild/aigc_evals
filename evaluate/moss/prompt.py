@@ -47,9 +47,8 @@ class EvaluateBuilder(EvaluateBuilderBase):
                 for k in inputs:
                     inputs[k] = inputs[k].cuda()
                 max_tok = 2040 - inputs.input_ids.shape[1]
-                outputs = self.api_client.generate(**inputs, do_sample=True, temperature=0.2, top_p=0.8,
-                                              repetition_penalty=1.02,
-                                              max_new_tokens=max_tok)
+                outputs = self.api_client.generate(**inputs, do_sample=True, temperature=0.2, top_p=0.8,repetition_penalty=1.02,
+                                                   max_new_tokens=max_tok)
                 input_len = torch.max(torch.sum(inputs.attention_mask, axis=1))
                 response_list = [
                     self.api_client.tokenizer.decode(outputs[i][input_len:], skip_special_tokens=True)

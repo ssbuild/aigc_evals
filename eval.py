@@ -73,7 +73,7 @@ if __name__ == '__main__':
     if not os.path.exists(log_dir):
         os.mkdir(log_dir)
     run_date = time.strftime('%Y-%m-%d_%H-%M-%S', time.localtime(time.time()))
-    save_result_dir = os.path.join(log_dir, f"{args.model_name}_{run_date}")
+    save_result_dir = os.path.join(log_dir, f"{args.model_name}_{args.k if args.few_shot else ''}_{run_date}")
     os.mkdir(save_result_dir)
 
     f_out = open(os.path.join(save_result_dir,'summary.txt'),mode='w',encoding='utf-8')
