@@ -40,12 +40,12 @@ class EvaluateBuilder(EvaluateBuilderBase):
             question = self.format_example(row, include_answer=False, cot=cot)
             if few_shot:
                 full_prompt = few_shot_prompt + question
-                response = self.api_client.infer(full_prompt, repetition_penalty=1.1, do_sample=False)
+                response = self.api_client.infer(full_prompt, repetition_penalty=1.1, do_sample=False, max_length=2048)
                 response = response.strip()
                 response_list.append(response)
                 ans, direct_extract = self.extract_cot_answer(row, response)
             else:# zero-shot by extracting answer from distribution
-                ans = self.generate_dist(question, do_sample=False, repetition_penalty=1.1, max_length=2048)
+                ans = self.generate_dist(question, do_sample=False, repetition_penalty=1.1, max_length=16)
 
             if ans == answers[row_index]:
                 correct_num += 1
@@ -132,11 +132,10 @@ class EvaluateBuilder(EvaluateBuilderBase):
             return answer, False
         return '-', False
 
-    def generate_dist(self, query, num_beams=1, max_length=2048,
-                      do_sample=False, top_p=0.7, temperature=0.95, logits_processor=None, **kwargs):
+    def generate_dist(self, query, do_sample=False, top_p=0.7, temperature=0.95, logits_processor=None, **kwargs):
 
 
-        gen_kwargs = {"num_beams": num_beams, "do_sample": do_sample, "top_p": top_p, "max_length": max_length,
+        gen_kwargs = {"do_sample": do_sample, "top_p": top_p,
                       "temperature": temperature, "logits_processor": logits_processor, **kwargs}
 
         scores = self.api_client.infer(query,return_dict_in_generate=True, output_scores=True, **gen_kwargs)

@@ -38,12 +38,12 @@ class EvaluateBuilder(EvaluateBuilderBase):
             question = self.format_example(row, include_answer=False, cot=cot)
             if few_shot:
                 full_prompt = few_shot_prompt + question
-                response = self.api_client.infer(full_prompt,  repetition_penalty=1.1,do_sample=False)
+                response = self.api_client.infer(full_prompt,  repetition_penalty=1.1, max_length=2048,do_sample=False)
                 response = response.strip()
                 response_list.append(response)
                 ans, direct_extract = self.extract_cot_answer(row, response)
             else:  # zero-shot by extracting answer from distribution
-                ans = self.generate_dist(question, do_sample=False, repetition_penalty=1.1, max_length=2048)
+                ans = self.generate_dist(question, do_sample=False, repetition_penalty=1.1, max_length=16)
 
             if ans == answers[row_index]:
                 correct_num += 1
