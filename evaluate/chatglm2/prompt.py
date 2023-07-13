@@ -38,13 +38,13 @@ class EvaluateBuilder(EvaluateBuilderBase):
         for row_index, row in tqdm(test_df.iterrows(), total=len(test_df)):
             question = self.format_example(row, include_answer=False, cot=cot)
             if few_shot:
-                response, _ = self.api_client.chat(question, do_sample=False, repetition_penalty=1.1, max_length=2048, history=history)
+                response, _ = self.api_client.chat(question, do_sample=False, repetition_penalty=1.1,  history=history)
                 response = response.strip()
                 response_list.append(response)
                 # For ChatGLM, we use answer extraction in answer-only mode too.
                 ans, direct_extract = self.extract_cot_answer(row, response)
             else:  # zero-shot by extracting answer from distribution
-                ans = self.generate_dist(question, do_sample=False, max_length=2048, repetition_penalty=1.1,history=history)
+                ans = self.generate_dist(question, do_sample=False,  repetition_penalty=1.1,history=history)
             if ans == answers[row_index]:
                 correct_num += 1
                 correct = 1
@@ -126,12 +126,12 @@ class EvaluateBuilder(EvaluateBuilderBase):
             return answer, False
         return '-', False
 
-    def generate_dist(self, query, history, num_beams=1, max_length=2048,
+    def generate_dist(self, query, history, num_beams=1, 
                       do_sample=False, top_p=0.7, temperature=0.95, logits_processor=None, **kwargs):
         if history is None:
             history = []
 
-        gen_kwargs = {"num_beams": num_beams, "do_sample": do_sample, "top_p": top_p, "max_length": max_length,
+        gen_kwargs = {"num_beams": num_beams, "do_sample": do_sample, "top_p": top_p, 
                       "temperature": temperature, "logits_processor": logits_processor, **kwargs}
 
         scores = self.api_client.infer(query,return_dict_in_generate=True, output_scores=True,history=history, **gen_kwargs)

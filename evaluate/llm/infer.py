@@ -30,7 +30,7 @@ class Engine_API:
 
     def infer(self,input,**kwargs):
         default_kwargs = dict(
-            max_length=2048,
+            
             eos_token_id=self.model.config.eos_token_id,
             pad_token_id=self.model.config.eos_token_id,
             do_sample=True, top_p=0.7, temperature=0.95,

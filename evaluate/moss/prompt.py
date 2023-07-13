@@ -174,10 +174,10 @@ class EvaluateBuilder(EvaluateBuilderBase):
             return answer, False
         return '-', False
 
-    def generate_dist(self, query, num_beams=1, max_length=2048,
+    def generate_dist(self, query, num_beams=1, 
                       do_sample=False, top_p=0.7, temperature=0.95, logits_processor=None, **kwargs):
 
-        gen_kwargs = {"num_beams": num_beams, "do_sample": do_sample, "top_p": top_p, "max_length": max_length,
+        gen_kwargs = {"num_beams": num_beams, "do_sample": do_sample, "top_p": top_p, 
                       "temperature": temperature, "logits_processor": logits_processor, **kwargs}
 
         scores = self.api_client.infer(query, return_dict_in_generate=True, output_scores=True, **gen_kwargs)

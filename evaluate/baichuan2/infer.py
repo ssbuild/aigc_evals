@@ -35,9 +35,8 @@ class Engine_API:
 
 
     @torch.no_grad()
-    def _generate(self,  query: str, max_length: int = 2048, num_beams=1,
-                 do_sample=True, top_p=0.7, temperature=0.95, logits_processor=None, **kwargs):
-        gen_kwargs = {"max_length": max_length, "num_beams": num_beams, "do_sample": do_sample, "top_p": top_p,
+    def _generate(self,  query: str,do_sample=True, top_p=0.7, temperature=0.95, logits_processor=None, **kwargs):
+        gen_kwargs = {"do_sample": do_sample, "top_p": top_p,
                       "temperature": temperature, "logits_processor": logits_processor, **kwargs}
         output_scores = gen_kwargs.get('output_scores', False)
         if output_scores:
@@ -57,17 +56,12 @@ class Engine_API:
 
     def infer(self,input,**kwargs):
         default_kwargs = dict(
-            max_length=2048,
             eos_token_id=self.model.config.eos_token_id,
             pad_token_id=self.model.config.eos_token_id,
             do_sample=True, top_k=5,top_p=0.85, temperature=0.3,
             repetition_penalty=1.1,
         )
         default_kwargs.update(kwargs)
-        max_length = default_kwargs.pop('max_length',None)
-        if 'max_new_tokens' not in default_kwargs and max_length is not None:
-            default_kwargs['max_new_tokens'] = max_length
-
         response = Generate.generate(self.model,
                                      tokenizer=self.tokenizer,
                                      query=input,**default_kwargs)
