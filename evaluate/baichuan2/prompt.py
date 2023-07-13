@@ -43,7 +43,7 @@ class EvaluateBuilder(EvaluateBuilderBase):
                 response_list.append(response)
                 ans, direct_extract = self.extract_cot_answer(row, response)
             else:  # zero-shot by extracting answer from distribution
-                ans = self.generate_dist(question, do_sample=False, repetition_penalty=1.1, max_new_tokens=4)
+                ans = self.generate_dist(question, do_sample=False, repetition_penalty=1.1, max_new_tokens=1)
 
             if ans == answers[row_index]:
                 correct_num += 1
