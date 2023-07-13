@@ -34,7 +34,7 @@ wget https://huggingface.co/datasets/ceval/ceval-exam/resolve/main/ceval-exam.zi
 #### Five-shot
 | Model             | STEM | Social Science | Humanities | Other | Average |
 |-------------------|:----:| :------------: |:----------:|:-----:|:-------:|
-| CHATGLM2-6B       | 46.9 |      57.8      |    54.7    | 46.5  |  51.5   |
+| CHATGLM2-6B       | 46.9 |      57.8      |    54.7    | 46.5  |  51.6   |
 | Baichuan-13b-Chat | 30.2 |      45.3      |    47.1    | 32.9  |  38.9   |
 | CHATGLM-6B        | 32.8 |      43.2      |    39.7    | 35.3  |  37.8   |
 
@@ -55,7 +55,7 @@ wget https://huggingface.co/datasets/ceval/ceval-exam/resolve/main/ceval-exam.zi
 #### Five-shot
 | Model              | STEM | Social Science | Humanities | Other | China specific | Average |
 |--------------------|:----:|:--------------:|:----------:|:-----:|:--------------:|:-------:|
-| CHATGLM2-6B        | 41.8 |      50.0      |    50.5    | 50.2  |      47.8      |  48.0   |
+| CHATGLM2-6B        | 41.9 |      50.0      |    50.5    | 50.2  |      47.8      |  48.0   |
 | CHATGLM-6B         | 32.6 |      41.2      |    38.2    | 37.8  |      38.7      |  37.7   |
 | Baichuan-13b-Chat  | 29.1 |      40.0      |    38.6    | 41.8  |      35.2      |  37.0   |
 

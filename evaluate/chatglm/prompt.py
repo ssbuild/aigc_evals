@@ -52,13 +52,13 @@ class EvaluateBuilder(EvaluateBuilderBase):
                 correct = 0
             if save_result_dir:
                 if few_shot:
-                    test_df['model_response'] = response_list
-                    test_df['model_output'] = result
+                    result.append(ans)
                 score.append(correct)
         correct_ratio = 100 * correct_num / len(answers)
 
         if save_result_dir:
             if few_shot:
+                test_df['model_response'] = response_list
                 test_df['model_output'] = result
             test_df['correctness'] = score
             test_df.to_csv(os.path.join(save_result_dir, f'{subject_name}_test.csv'))
