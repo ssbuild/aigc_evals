@@ -49,8 +49,6 @@ wget https://huggingface.co/datasets/ceval/ceval-exam/resolve/main/ceval-exam.zi
 #### Zero-shot
 | Model              | STEM | Social Science | Humanities | Other | Average |
 |--------------------|:----:|:--------------:|:----------:|:-----:|:-------:|
-| GPT-4              | 65.2 |      74.7      |    62.5    | 64.7  |  66.4   |
-| ChatGPT            | 49.0 |      58.0      |    48.8    | 50.4  |  51.0   |
 | CHATGLM2-6B        | 42.7 |      60.6      |    58.1    | 49.9  |  52.8   |
 | Baichuan-13b-Chat  | 43.2 |      50.9      |    52.7    | 42.0  |  47.2   |
 | Baichuan-7B        | 36.6 |      53.4      |    45.1    | 44.7  |  45.0   |
@@ -61,8 +59,6 @@ wget https://huggingface.co/datasets/ceval/ceval-exam/resolve/main/ceval-exam.zi
 #### Five-shot
 | Model             | STEM | Social Science | Humanities | Other | Average |
 |-------------------|:----:| :------------: |:----------:|:-----:|:-------:|
-| GPT-4             | 67.1 |      77.6      |    64.5    | 67.8  |  68.7   |
-| ChatGPT           | 52.9 |      61.8      |    50.9    | 53.6  |  54.4   |
 | CHATGLM2-6B       | 46.9 |      57.8      |    54.7    | 46.5  |  51.5   |
 | Baichuan-13b-Chat | 30.2 |      45.3      |    47.1    | 32.9  |  38.9   |
 | CHATGLM-6B        | 32.8 |      43.2      |    39.7    | 35.3  |  37.8   |
@@ -71,10 +67,12 @@ wget https://huggingface.co/datasets/ceval/ceval-exam/resolve/main/ceval-exam.zi
 ## cmmlu排行榜
 
 #### Zero-shot
-| Model              | STEM | Social Science | Humanities | Other | China specific | Average |
-|--------------------|:----:|:--------------:|:----------:|:-----:|:--------------:|:-------:|
-| Baichuan-13b-Chat  | 35.0 |      50.4      |    50.2    | 50.1  |      48.7      |  46.82  |
-| CHATGLM-6B         | 30.7 |      42.7      |    40.4    | 39.8  |      39.4      |  38.6   |
+| Model             | STEM | Social Science | Humanities | Other | China specific | Average |
+|-------------------|:----:|:--------------:|:----------:|:-----:|:--------------:|:-------:|
+| CHATGLM2-6B       | 41.7 |      51.4      |    53.0    | 52.3  |      49.6      |  49.6   |
+| Baichuan-13b-Chat | 35.0 |      50.4      |    50.2    | 50.1  |      48.7      |  46.8   |
+| CHATGLM-6B        | 30.7 |      42.7      |    40.4    | 39.8  |      39.4      |  38.6   |
+
 
 
 

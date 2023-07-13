@@ -27,6 +27,7 @@ class EvaluateBuilder(EvaluateBuilderBase):
         correct_num = 0
         if save_result_dir:
             if few_shot:
+                response_list = []
                 result = []
             score = []
         if few_shot:
@@ -37,12 +38,13 @@ class EvaluateBuilder(EvaluateBuilderBase):
         for row_index, row in tqdm(test_df.iterrows(), total=len(test_df)):
             question = self.format_example(row, include_answer=False, cot=cot)
             if few_shot:
-                response, _ = self.api_client.chat(question, do_sample=False, history=history)
+                response, _ = self.api_client.chat(question, do_sample=False, repetition_penalty=1.1, history=history)
                 response = response.strip()
+                response_list.append(response)
                 # For ChatGLM, we use answer extraction in answer-only mode too.
                 ans, direct_extract = self.extract_cot_answer(row, response)
             else:  # zero-shot by extracting answer from distribution
-                ans = self.generate_dist(question, do_sample=False, max_length=2048,history=history)
+                ans = self.generate_dist(question, do_sample=False, max_length=2048, repetition_penalty=1.1,history=history)
             if ans == answers[row_index]:
                 correct_num += 1
                 correct = 1
@@ -56,6 +58,7 @@ class EvaluateBuilder(EvaluateBuilderBase):
 
         if save_result_dir:
             if few_shot:
+                test_df['model_response'] = response_list
                 test_df['model_output'] = result
             test_df['correctness'] = score
             test_df.to_csv(os.path.join(save_result_dir, f'{subject_name}_test.csv'))

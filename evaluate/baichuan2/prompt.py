@@ -28,6 +28,7 @@ class EvaluateBuilder(EvaluateBuilderBase):
         correct_num = 0
         if save_result_dir:
             if few_shot:
+                response_list = []
                 result = []
             score = []
         few_shot_prompt = self.generate_few_shot_prompt(
@@ -39,6 +40,7 @@ class EvaluateBuilder(EvaluateBuilderBase):
                 full_prompt = few_shot_prompt + question
                 response = self.api_client.infer(full_prompt, do_sample=False)
                 response = response.strip()
+                response_list.append(response)
                 ans, direct_extract = self.extract_cot_answer(row, response)
             else:  # zero-shot by extracting answer from distribution
                 ans = self.generate_dist(question, do_sample=False, max_length=2048)
@@ -56,6 +58,7 @@ class EvaluateBuilder(EvaluateBuilderBase):
 
         if save_result_dir:
             if few_shot:
+                test_df['model_response'] = response_list
                 test_df['model_output'] = result
             test_df['correctness'] = score
             test_df.to_csv(os.path.join(save_result_dir, f'{subject_name}_test.csv'))

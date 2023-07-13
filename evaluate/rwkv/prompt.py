@@ -28,6 +28,7 @@ class EvaluateBuilder(EvaluateBuilderBase):
         correct_num = 0
         if save_result_dir:
             if few_shot:
+                response_list = []
                 result = []
             score = []
         few_shot_prompt = self.generate_few_shot_prompt(
@@ -37,11 +38,12 @@ class EvaluateBuilder(EvaluateBuilderBase):
             question = self.format_example(row, include_answer=False, cot=cot)
             if few_shot:
                 full_prompt = few_shot_prompt + question
-                response = self.api_client.infer(full_prompt, do_sample=False)
+                response = self.api_client.infer(full_prompt,  repetition_penalty=1.1,do_sample=False)
                 response = response.strip()
+                response_list.append(response)
                 ans, direct_extract = self.extract_cot_answer(row, response)
             else:  # zero-shot by extracting answer from distribution
-                ans = self.generate_dist(question, do_sample=False, max_length=2048)
+                ans = self.generate_dist(question, do_sample=False, repetition_penalty=1.1, max_length=2048)
 
             if ans == answers[row_index]:
                 correct_num += 1
@@ -50,7 +52,8 @@ class EvaluateBuilder(EvaluateBuilderBase):
                 correct = 0
             if save_result_dir:
                 if few_shot:
-                    result.append(ans)
+                    test_df['model_response'] = response_list
+                    test_df['model_output'] = result
                 score.append(correct)
         correct_ratio = 100 * correct_num / len(answers)
 
