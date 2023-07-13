@@ -40,7 +40,7 @@ class EvaluateBuilder(EvaluateBuilderBase):
             question = self.format_example(row, include_answer=False, cot=cot)
             if few_shot:
                 full_prompt = few_shot_prompt + question
-                response = self.api_client.infer(full_prompt, repetition_penalty=1.1, do_sample=False, max_new_tokens=2048)
+                response = self.api_client.infer(full_prompt, repetition_penalty=1.1, do_sample=False, max_length=2048)
                 response = response.strip()
                 response_list.append(response)
                 ans, direct_extract = self.extract_cot_answer(row, response)

@@ -38,13 +38,13 @@ class EvaluateBuilder(EvaluateBuilderBase):
         for row_index, row in tqdm(test_df.iterrows(), total=len(test_df)):
             question = self.format_example(row, include_answer=False, cot=cot)
             if few_shot:
-                response, _ = self.api_client.chat(question, do_sample=False, repetition_penalty=1.1,  history=history)
+                response, _ = self.api_client.chat(question, do_sample=False, repetition_penalty=1.01, max_length=2048, history=history)
                 response = response.strip()
                 response_list.append(response)
                 # For ChatGLM, we use answer extraction in answer-only mode too.
                 ans, direct_extract = self.extract_cot_answer(row, response)
             else:  # zero-shot by extracting answer from distribution
-                ans = self.generate_dist(question, do_sample=False,  repetition_penalty=1.1,history=history)
+                ans = self.generate_dist(question, do_sample=False,  repetition_penalty=1.01, max_new_tokens=4, history=history)
             if ans == answers[row_index]:
                 correct_num += 1
                 correct = 1
