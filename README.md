@@ -71,10 +71,10 @@ wget https://huggingface.co/datasets/ceval/ceval-exam/resolve/main/ceval-exam.zi
 ## cmmlu排行榜
 
 #### Zero-shot
-| Model              | STEM | Social Science | Humanities | Other  | China specific | Average |
-|--------------------|:----:|:--------------:|:----------:|:------:|:--------------:|:-------:|
-| Baichuan-13b-Chat  | 35.0 |      50.4      |  50.2      | 50.1   |      48.7      | 46.82   |
-
+| Model              | STEM | Social Science | Humanities | Other | China specific | Average |
+|--------------------|:----:|:--------------:|:----------:|:-----:|:--------------:|:-------:|
+| Baichuan-13b-Chat  | 35.0 |      50.4      |    50.2    | 50.1  |      48.7      |  46.82  |
+| CHATGLM-6B         | 30.7 |      42.7      |    40.4    | 39.8  |      39.4      |  38.6   |
 
 
 
@@ -83,7 +83,7 @@ wget https://huggingface.co/datasets/ceval/ceval-exam/resolve/main/ceval-exam.zi
 |--------------------|:----:|:--------------:|:----------:|:-----:|:--------------:|:-------:|
 | CHATGLM2-6B        | 41.8 |      50.0      |    50.5    | 50.2  |      47.8      |  48.0   |
 | CHATGLM-6B         | 32.6 |      41.2      |    38.2    | 37.8  |      38.7      |  37.7   |
-| Baichuan-13b-Chat  | 29.1 |      40.0      |    38.62   | 41.8  |      35.2      |  37.0   |
+| Baichuan-13b-Chat  | 29.1 |      40.0      |    38.6    | 41.8  |      35.2      |  37.0   |
 
 
 
