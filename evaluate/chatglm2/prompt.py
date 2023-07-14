@@ -28,7 +28,7 @@ class EvaluateBuilder(EvaluateBuilderBase):
         if save_result_dir:
             if few_shot:
                 response_list = []
-                result = []
+            result = []
             score = []
         if few_shot:
             history = self.generate_few_shot_prompt(subject_name, dev_df, cot=cot)
@@ -40,7 +40,6 @@ class EvaluateBuilder(EvaluateBuilderBase):
             if few_shot:
                 response, _ = self.api_client.chat(question, do_sample=False, repetition_penalty=1.01, max_length=2048, history=history)
                 response = response.strip()
-                response_list.append(response)
                 # For ChatGLM, we use answer extraction in answer-only mode too.
                 ans, direct_extract = self.extract_cot_answer(row, response)
             else:  # zero-shot by extracting answer from distribution
@@ -52,14 +51,15 @@ class EvaluateBuilder(EvaluateBuilderBase):
                 correct = 0
             if save_result_dir:
                 if few_shot:
-                    result.append(response)
+                    response_list.append(response)
+                result.append(response)
                 score.append(correct)
         correct_ratio = 100 * correct_num / len(answers)
 
         if save_result_dir:
             if few_shot:
                 test_df['model_response'] = response_list
-                test_df['model_output'] = result
+            test_df['model_output'] = result
             test_df['correctness'] = score
             test_df.to_csv(os.path.join(save_result_dir, f'{subject_name}_test.csv'))
 
