@@ -35,9 +35,10 @@ wget https://huggingface.co/datasets/ceval/ceval-exam/resolve/main/ceval-exam.zi
 | Model             | STEM | Social Science | Humanities | Other | Average |
 |-------------------|:----:|:--------------:|:----------:|:-----:|:-------:|
 | CHATGLM2-6B       | 46.9 |      57.8      |    54.7    | 46.5  |  51.6   |
-| Baichuan-7B       | 36.6 |      53.7      |    45.1    | 44.7  |  45.0   |
 | Baichuan-13b-Chat | 30.2 |      45.3      |    47.1    | 32.9  |  38.9   |
 | CHATGLM-6B        | 33.3 |      43.2      |    39.7    | 35.5  |  38.0   |
+| Baichuan-7B       | 22.3 |      24.3      |    24.2    | 28.1  |  25.0   |
+
 
 
 
