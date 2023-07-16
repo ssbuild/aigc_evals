@@ -6,7 +6,7 @@ import torch
 from deep_training.data_helper import ModelArguments, DataArguments, DataHelper
 from transformers import HfArgumentParser
 from aigc_zoo.model_zoo.rwkv4.llm_model import MyTransformer, RwkvConfig, set_model_profile
-from aigc_zoo.utils.llm_generate import Generate
+from aigc_zoo.utils.rwkv4_generate import Generate
 from evaluate.constant_map import train_info_args
 class NN_DataHelper(DataHelper):pass
 
