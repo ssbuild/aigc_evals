@@ -139,6 +139,9 @@ if __name__ == '__main__':
     elif model_name.startswith("llama") or model_name.startswith("opt") or model_name.startswith("bloom"):
         from evaluate.llm.prompt import EvaluateBuilder
         evaluator = EvaluateBuilder(choices, args.model_name, args.k)
+    elif model_name.startswith("internlm"):
+        from evaluate.internlm.prompt import EvaluateBuilder
+        evaluator = EvaluateBuilder(choices, args.model_name, args.k)
     elif model_name.startswith("moss"):
         from evaluate.moss.prompt import EvaluateBuilder
         evaluator = EvaluateBuilder(choices, args.model_name, args.k)

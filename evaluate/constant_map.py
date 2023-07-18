@@ -116,4 +116,12 @@ train_info_args = {
         'do_lower_case': None,
     },
 
+    'internlm-chat-7b': {
+        'model_type': 'internlm',
+        'model_name_or_path': '/data/nlp/pre_models/torch/internlm/internlm-chat-7b',
+        'config_name': '/data/nlp/pre_models/torch/internlm/internlm-chat-7b/config.json',
+        'tokenizer_name': '/data/nlp/pre_models/torch/internlm/internlm-chat-7b',
+        'use_fast_tokenizer': False,
+        'do_lower_case': None,
+    },
 }
