@@ -1,67 +1,11 @@
+## 状态
+```text
+项目构建中...
+```
 ## 安装
 ```text
-dev 通过一下方式安装 , 注意顺序
-pip uninstall aigc_zoo
-pip install -U git+https://github.com/ssbuild/aigc_zoo#egg=aigc_zoo
-pip uninstall deep_training
-pip install -U git+https://github.com/ssbuild/deep_training.git
-pip install -U transformers>=4.30 deepspeed transformers_stream_generator bitsandbytes>=0.39 accelerate>=0.20
+pip install -r requirements.txt
 ```
-
-## 数据
-
-[ceval-exam](https://huggingface.co/datasets/ceval/ceval-exam)
-
-wget https://huggingface.co/datasets/ceval/ceval-exam/resolve/main/ceval-exam.zip
-解压后 数据放置 aigc_eval/data 目录
-
-## 本仓库部分代码参考 C-Eval
-    
-
-## ceval排行榜
-
-#### Zero-shot
-| Model              | STEM | Social Science | Humanities | Other | Average |
-|--------------------|:----:|:--------------:|:----------:|:-----:|:-------:|
-| CHATGLM2-6B        | 42.7 |      60.6      |    58.1    | 49.9  |  52.8   |
-| Baichuan-13b-Chat  | 43.2 |      50.9      |    52.7    | 42.0  |  47.2   |
-| Baichuan-7B        | 31.2 |      50.8      |    41.1    | 42.4  |  41.4   |
-| CHATGLM-6B         | 33.4 |      43.9      |    36.4    | 32.2  |  36.4   |
-
-
-
-
-#### Five-shot
-| Model             | STEM | Social Science | Humanities | Other | Average |
-|-------------------|:----:|:--------------:|:----------:|:-----:|:-------:|
-| CHATGLM2-6B       | 46.9 |      57.8      |    54.7    | 46.5  |  51.6   |
-| Baichuan-13b-Chat | 30.2 |      45.3      |    47.1    | 32.9  |  38.9   |
-| CHATGLM-6B        | 33.3 |      43.2      |    39.7    | 35.5  |  38.0   |
-| Baichuan-7B       | 22.3 |      24.3      |    24.2    | 28.1  |  25.0   |
-
-
-
-
-## cmmlu排行榜
-
-#### Zero-shot
-| Model             | STEM | Social Science | Humanities | Other | China specific | Average |
-|-------------------|:----:|:--------------:|:----------:|:-----:|:--------------:|:-------:|
-| CHATGLM2-6B       | 41.7 |      51.4      |    53.0    | 52.3  |      49.6      |  49.6   |
-| Baichuan-13b-Chat | 34.7 |      50.4      |    50.2    | 50.1  |      48.7      |  46.8   |
-| Baichuan-7B       | 40.0 |      45.9      |    43.6    | 43.9  |      42.4      |  41.6   |
-| CHATGLM-6B        | 30.8 |      42.7      |    40.4    | 39.8  |      39.4      |  38.6   |
-
-
-
-
-#### Five-shot
-| Model              | STEM | Social Science | Humanities | Other | China specific | Average |
-|--------------------|:----:|:--------------:|:----------:|:-----:|:--------------:|:-------:|
-| CHATGLM2-6B        | 41.9 |      50.0      |    50.5    | 50.2  |      47.8      |  48.0   |
-| CHATGLM-6B         | 32.8 |      41.2      |    38.2    | 37.8  |      38.7      |  37.8   |
-| Baichuan-13b-Chat  | 29.1 |      40.0      |    38.6    | 41.8  |      35.2      |  37.0   |
-
 
 
 ## 前言
