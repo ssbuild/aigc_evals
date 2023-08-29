@@ -9,24 +9,45 @@ from setuptools import setup, find_packages
 
 def parse_deps():
     install_requires = [
+        "mypy",
+        "openai >= 0.27.2",
+        "tiktoken",
+        "blobfile",
+        "backoff",
+        "numpy",
+        "snowflake-connector-python[pandas]",
+        "pandas",
+        "datasets",
+        "fire",
+        "pydantic",
+        "tqdm",
+        "nltk",
+        "filelock",
+        "mock",
+        "langdetect",
+        'termcolor',
+        "lz4",
+        "pyzstd",
+        "pyyaml",
+        "sacrebleu",
+        "matplotlib",
+        "pytest",
+        "setuptools_scm",
+        "langchain",
+        "types-PyYAML",
     ]
-    path = os.path.abspath(os.path.dirname(__file__))
-    with open(os.path.join(path, 'requirements.txt'), mode='r', encoding='utf-8') as f:
-        lines = f.readlines()
 
-    for line in lines:
-        line = line.strip().replace('\r\n', '').replace('\n', '')
-        if not line:
-            continue
-        install_requires.append(line)
     return install_requires
 
 if __name__ == '__main__':
     install_requires = parse_deps()
 
+    oaieval = "evals.cli.oaieval:main"
+    oaievalset = "evals.cli.oaievalset:main"
+
     setup(
         name='aigc_evals',
-        version='0.2.0',
+        version='0.0.1',
         description='aigc_evals',
         long_description='torch_training: https://github.com/ssbuild/aigc_evals.git',
         license='Apache License 2.0',
@@ -38,4 +59,11 @@ if __name__ == '__main__':
         packages=find_packages("src"),
         include_package_data=True,
         package_data={"": ["**/*.yaml","**/*.jsonp"]},
+        entry_points={
+            'console_scripts': [
+                'sh_aigc_evals = aigc_evals.cli.sh_aigc_eval:main',
+
+            ],
+        }
+
     )

@@ -1,8 +1,0 @@
-isosceles-right-triangle:
-  id: isosceles-right-triangle.dev.v0
-  metrics: [accuracy]
-
-isosceles-right-triangle.dev.v0:
-  class: aigc_evals.elsuite.basic.includes:Includes
-  args:
-    samples_jsonl: isosceles-right-triangle/samples.jsonl

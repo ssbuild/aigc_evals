@@ -1,5 +1,6 @@
 import importlib
-from typing import Optional
+from abc import ABC, abstractmethod
+from typing import Any, Callable, Optional, Protocol, Union, runtime_checkable, List
 
 from langchain.chat_models.base import BaseChatModel
 from langchain.llms import BaseLLM
@@ -12,16 +13,42 @@ from langchain.schema.messages import (
     SystemMessage,
 )
 
-from evals.api import CompletionFn, CompletionResult
-from evals.prompt.base import CompletionPrompt, is_chat_prompt
-from evals.record import record_sampling
+
+from aigc_evals.prompt.base import CompletionPrompt, is_chat_prompt, OpenAICreateChatPrompt
+from aigc_evals.record import record_sampling
+
+
+class CompletionResult(ABC):
+    @abstractmethod
+    def get_completions(self) -> List[str]:
+        pass
+
+@runtime_checkable
+class CompletionFn(Protocol):
+    def __call__(
+        self,
+        prompt: Union[str, OpenAICreateChatPrompt],
+        **kwargs,
+    ) -> CompletionResult:
+        """
+        ARGS
+        ====
+        `prompt`: Either a `Prompt` object or a raw prompt that will get wrapped in
+            the appropriate `Prompt` class.
+        `kwargs`: Other arguments passed to the API.
+
+        RETURNS
+        =======
+        The result of the API call.
+        The prompt that was fed into the API call as a str.
+        """
 
 
 class LangChainLLMCompletionResult(CompletionResult):
     def __init__(self, response) -> None:
         self.response = response
 
-    def get_completions(self) -> list[str]:
+    def get_completions(self) -> List[str]:
         return [self.response.strip()]
 
 

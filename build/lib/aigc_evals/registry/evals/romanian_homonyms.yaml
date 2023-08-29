@@ -1,9 +1,0 @@
-romanian_homonyms:
-  id: romanian_homonyms.dev.v0
-  description: Check GPT's ability to recognize Romanian homonyms.
-  metrics: [accuracy]
-
-romanian_homonyms.dev.v0:
-  class: aigc_evals.elsuite.basic.match:Match
-  args:
-    samples_jsonl: romanian_homonyms/samples.jsonl

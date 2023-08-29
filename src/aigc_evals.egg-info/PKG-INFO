@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: aigc-evals
+Version: 0.0.1
+Summary: aigc_evals
+Home-page: https://github.com/ssbuild/aigc_evals
+Author: ssbuild
+Author-email: 9727464@qq.com
+License: Apache License 2.0
+License-File: LICENSE
+
+torch_training: https://github.com/ssbuild/aigc_evals.git

@@ -1,2 +1,0 @@
-langchain/chains/llm_math:
-  class: aigc_evals.completion_fns.langchain_math:LangChainMathChainCompletionFn

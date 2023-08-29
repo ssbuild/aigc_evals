@@ -1,8 +1,0 @@
-match_banking77:
-  id: match_banking77.test.v1
-  metrics:
-  - accuracy
-match_banking77.test.v1:
-  args:
-    samples_jsonl: banking77/samples.jsonl
-  class: aigc_evals.elsuite.basic.match:Match

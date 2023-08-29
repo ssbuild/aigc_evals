@@ -1,5 +1,0 @@
-logiqa-logical-reasoning-plus:
-  evals:
-    - logiqa-logical-reasoning-plus
-    - logiqav2-logical-reasoning-plus
-    - reclor-logical-reasoning-plus

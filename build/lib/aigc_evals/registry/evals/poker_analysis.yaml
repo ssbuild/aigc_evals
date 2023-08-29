@@ -1,9 +1,0 @@
-poker_analysis:
-  id: poker_analysis.test.v1
-  description: Examine the model's capacity to strategize & make probabilistic reasoning within the framework of poker.
-  metrics: [accuracy]
-
-poker_analysis.test.v1:
-  class: aigc_evals.elsuite.basic.match:Match
-  args:
-    samples_jsonl: poker_analysis/samples.jsonl

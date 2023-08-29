@@ -1,27 +1,38 @@
-langchain/llm/gpt-3.5-turbo:
-  class: aigc_evals.completion_fns.langchain_llm:LangChainLLMCompletionFn
-  args:
-    llm: OpenAI
-    llm_kwargs:
-      model_name: gpt-3.5-turbo
-
-langchain/llm/text-davinci-003:
-  class: aigc_evals.completion_fns.langchain_llm:LangChainLLMCompletionFn
-  args:
-    llm: OpenAI
-    llm_kwargs:
-      model_name: text-davinci-003
-
-langchain/llm/flan-t5-xl:
-  class: aigc_evals.completion_fns.langchain_llm:LangChainLLMCompletionFn
-  args:
-    llm: HuggingFaceHub
-    llm_kwargs:
-      repo_id: google/flan-t5-xl
-
-langchain/chat_model/gpt-3.5-turbo:
+langchain/chat_model/baichuan-13b-chat-int4:
   class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
   args:
     llm: ChatOpenAI
     chat_model_kwargs:
-      model_name: gpt-3.5-turbo
+      model_name: baichuan-13b-chat-int4
+      adapter_model: default
+      top_p: 0.7
+      max_tokens: 2000
+      openai_api_key: EMPTY
+      openai_api_base: http://192.168.2.180:8081/v1
+
+
+langchain/chat_model/qwen-7b-chat-int4:
+  class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
+  args:
+    llm: ChatOpenAI
+    chat_model_kwargs:
+      model_name: baichuan-13b-chat-int4
+      adapter_model: default
+      top_p: 0.7
+      max_tokens: 2000
+      openai_api_key: EMPTY
+      openai_api_base: http://192.168.2.180:8081/v1
+
+
+langchain/chat_model/chatglm2-6b-int4:
+  class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
+  args:
+    llm: ChatOpenAI
+    chat_model_kwargs:
+      model_name: baichuan-13b-chat-int4
+      adapter_model: default
+      top_p: 0.7
+      max_tokens: 2000
+      openai_api_key: EMPTY
+      openai_api_base: http://192.168.2.180:8081/v1
+

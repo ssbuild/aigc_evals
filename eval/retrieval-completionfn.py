@@ -43,14 +43,14 @@ We create a registry entry here in code. Notice we set number of retrieved docum
 
 registry_yaml = f"""
 retrieval/presidents/gpt-3.5-turbo:
-  class: evals.completion_fns.retrieval:RetrievalCompletionFn
+  class: aigc_evals.completion_fns.retrieval:RetrievalCompletionFn
   args:
     completion_fn: gpt-3.5-turbo
     embeddings_and_text_path: {os.path.abspath('presidents_embeddings.csv')}
     k: 2
 
 retrieval/presidents/cot/gpt-3.5-turbo:
-  class: evals.completion_fns.retrieval:RetrievalCompletionFn
+  class: aigc_evals.completion_fns.retrieval:RetrievalCompletionFn
   args:
     completion_fn: cot/gpt-3.5-turbo
     embeddings_and_text_path: {os.path.abspath('presidents_embeddings.csv')}

@@ -36,7 +36,7 @@ lambada:
   id: lambada.test.v1
   metrics: [accuracy]
 lambada.test.v1:
-  class: evals.elsuite.basic.match:Match
+  class: aigc_evals.elsuite.basic.match:Match
   args:
     samples_jsonl: lambada/samples.jsonl
 """.strip()

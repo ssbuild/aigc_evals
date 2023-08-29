@@ -1,8 +1,0 @@
-medmcqa:
-  id: medmcqa.dev.v0
-  metrics: [accuracy]
-
-medmcqa.dev.v0:
-  class: aigc_evals.elsuite.basic.match:Match
-  args:
-    samples_jsonl: medmcqa/samples.jsonl

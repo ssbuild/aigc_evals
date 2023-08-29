@@ -73,7 +73,7 @@ def register_data(data_dir,register_data_dir):
             "metrics": ["accuracy"]
         }
         registry_yaml[f"{eval_id}.test.v1"] = {
-            "class": "evals.elsuite.basic.match:Match",
+            "class": "aigc_evals.elsuite.basic.match:Match",
             "args": {
                 "samples_jsonl": samples_path,
                 "few_shot_jsonl": few_shot_path,

@@ -1,9 +1,0 @@
-mandaliof-table:
-  id: mandaliof-table.dev.v0
-  description: Test the model's ability to determine which atom has the largest atomic number.
-  metrics: [accuracy]
-
-mandaliof-table.dev.v0:
-  class: aigc_evals.elsuite.basic.match:Match
-  args:
-    samples_jsonl: mandaliof-table/samples.jsonl

@@ -1,8 +1,0 @@
-human-safety:
-  id: human-safety.test.v0
-  description: An evaluation of logical reasoning about (almost) real-life situation where humans might be in danger.
-  metrics: [accuracy]
-human-safety.test.v0:
-  class: aigc_evals.elsuite.basic.fuzzy_match:FuzzyMatch
-  args:
-    samples_jsonl: human-safety/human-safety.jsonl

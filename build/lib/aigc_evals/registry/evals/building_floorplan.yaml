@@ -1,8 +1,0 @@
-building_floorplan:
-  id: building_floorplan.test.v1
-  metrics:
-  - accuracy
-building_floorplan.test.v1:
-  args:
-    samples_jsonl: building_floorplan/samples.jsonl
-  class: aigc_evals.elsuite.basic.match:Match

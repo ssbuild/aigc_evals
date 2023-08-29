@@ -1,8 +1,0 @@
-hebrew-homophones:
-  id: hebrew-homophones.dev.v0
-  description: Evaluating the number of Hebrew homophone errors in a sentence.
-  metrics: [accuracy]
-hebrew-homophones.dev.v0:
-  args:
-    samples_jsonl: hebrew_homophones/samples.jsonl
-  class: aigc_evals.elsuite.basic.includes:Includes
