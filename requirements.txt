@@ -1,1 +1,1 @@
-aigc_evals
+aigc_evals>=0.0.2

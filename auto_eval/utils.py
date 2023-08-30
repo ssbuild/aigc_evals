@@ -69,7 +69,7 @@ def build_ceval_data(data_path,registry_path,few_shot=5):
         }
 
         d = {
-            "class": "aigc_evals.elsuite.basic.match:Match",
+            "class": "my_match.match:MyMatch",
             "args": {
                 "samples_jsonl": samples_path,
                 # "few_shot_jsonl": few_shot_path,
@@ -141,7 +141,7 @@ def build_cmmlu_data(data_path,registry_path,few_shot=True):
             "metrics": ["accuracy"]
         }
         d = {
-            "class": "aigc_evals.elsuite.basic.match:Match",
+            "class": "my_match.match:MyMatch",
             "args": {
                 "samples_jsonl": samples_path,
                 # "few_shot_jsonl": few_shot_path,
@@ -213,7 +213,7 @@ def build_mmlu_data(data_path,registry_path,few_shot=True):
             "metrics": ["accuracy"]
         }
         d = {
-            "class": "aigc_evals.elsuite.basic.match:Match",
+            "class": "my_match.match:MyMatch",
             "args": {
                 "samples_jsonl": samples_path,
                 # "few_shot_jsonl": few_shot_path,

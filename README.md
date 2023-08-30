@@ -11,7 +11,7 @@
 ## 安装
 
 ```commandline
-pip install aigc_evals
+pip install aigc_evals>=0.0.2
 
 # 源码安装
 git clone -b dev https://github.com/ssbuild/aigc_evals.git

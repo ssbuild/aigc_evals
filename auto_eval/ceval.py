@@ -13,6 +13,7 @@ data_path = r'../assets/ceval_data'
 # 构建数据
 subjects = build_ceval_data(data_path,registry_path,few_shot=5)
 
+
 model = "langchain/chat_model/chatglm2-6b-int4"
 data_type = "ceval"
 
