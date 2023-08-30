@@ -3,14 +3,13 @@
 
 import pandas as pd
 import os
-from utils import build_cmmlu_data, seting_env, get_registry_path
-
-seting_env()
+from utils import build_cmmlu_data, env_setting, get_registry_path
+env_setting()
 
 registry_path = get_registry_path()
 data_path = r'../assets/cmmlu_data'
 # 构建数据
-subjects = build_cmmlu_data(data_path,registry_path)
+subjects = build_cmmlu_data(data_path,registry_path,few_shot=5)
 model = "langchain/chat_model/chatglm2-6b-int4"
 data_type = "cmmlu"
 

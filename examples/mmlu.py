@@ -7,14 +7,13 @@
 
 import pandas as pd
 import os
-from utils import build_mmlu_data, seting_env, get_registry_path
-
-seting_env()
+from utils import build_mmlu_data, env_setting, get_registry_path
+env_setting()
 
 registry_path = get_registry_path()
 data_path = r'F:\nlpdata_2023\openai\evals\data'
 # 构建数据
-subjects = build_mmlu_data(data_path,registry_path)
+subjects = build_mmlu_data(data_path,registry_path,few_shot=5)
 model = "langchain/chat_model/chatglm2-6b-int4"
 data_type = "mmlu"
 
