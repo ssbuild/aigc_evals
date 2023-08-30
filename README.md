@@ -1,11 +1,11 @@
 ## aigc_evals
 
- aigc_evals 是在openai/evals基础上修改，评估基于 aigc_serving 等仿openai 接口开源模型服务的脚本。
-部署开源模型[aigc_serving](https://github.com/ssbuild/aigc_serving) 
+ aigc_evals 是在openai/evals基础上修改，评估基于 aigc_serving 等仿openai 接口开源模型服务的脚本。<br />
+部署开源模型移步至[aigc_serving](https://github.com/ssbuild/aigc_serving) 
 
 
 ## 当前支持评估数据集
-目前支持 cmmlu , ceval, mmlu 数据集评估
+目前支持 cmmlu , ceval,  mmlu 数据集评估
 
 
 ## 安装
@@ -52,6 +52,8 @@ python cmmlu
 ```
 
 ```commandline
+wget https://people.eecs.berkeley.edu/~hendrycks/data.tar
+下载mmlu数据集
 cd examples
 python mmlu
 ```
