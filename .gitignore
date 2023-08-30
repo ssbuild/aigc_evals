@@ -7,3 +7,4 @@
 /registry/evals
 /src/aigc_evals.egg-info
 /auto_eval/__pycache__
+/outputs
