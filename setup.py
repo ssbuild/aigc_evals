@@ -39,7 +39,7 @@ if __name__ == '__main__':
     install_requires = parse_deps()
     setup(
         name='aigc_evals',
-        version='0.0.1',
+        version='0.0.2',
         description='aigc_evals',
         long_description='torch_training: https://github.com/ssbuild/aigc_evals.git',
         license='Apache License 2.0',
