@@ -4,9 +4,9 @@ match_mmlu_abstract_algebra:
   - accuracy
 match_mmlu_abstract_algebra.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\abstract_algebra\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\abstract_algebra\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\abstract_algebra\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\abstract_algebra\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_anatomy:
   id: match_mmlu_anatomy.test.v1
@@ -14,9 +14,9 @@ match_mmlu_anatomy:
   - accuracy
 match_mmlu_anatomy.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\anatomy\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\anatomy\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\anatomy\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\anatomy\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_astronomy:
   id: match_mmlu_astronomy.test.v1
@@ -24,9 +24,9 @@ match_mmlu_astronomy:
   - accuracy
 match_mmlu_astronomy.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\astronomy\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\astronomy\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\astronomy\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\astronomy\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_business_ethics:
   id: match_mmlu_business_ethics.test.v1
@@ -34,9 +34,9 @@ match_mmlu_business_ethics:
   - accuracy
 match_mmlu_business_ethics.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\business_ethics\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\business_ethics\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\business_ethics\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\business_ethics\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_clinical_knowledge:
   id: match_mmlu_clinical_knowledge.test.v1
@@ -44,9 +44,9 @@ match_mmlu_clinical_knowledge:
   - accuracy
 match_mmlu_clinical_knowledge.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\clinical_knowledge\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\clinical_knowledge\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\clinical_knowledge\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\clinical_knowledge\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_college_biology:
   id: match_mmlu_college_biology.test.v1
@@ -54,9 +54,9 @@ match_mmlu_college_biology:
   - accuracy
 match_mmlu_college_biology.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_biology\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_biology\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_biology\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_biology\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_college_chemistry:
   id: match_mmlu_college_chemistry.test.v1
@@ -64,9 +64,9 @@ match_mmlu_college_chemistry:
   - accuracy
 match_mmlu_college_chemistry.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_chemistry\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_chemistry\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_chemistry\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_chemistry\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_college_computer_science:
   id: match_mmlu_college_computer_science.test.v1
@@ -74,9 +74,9 @@ match_mmlu_college_computer_science:
   - accuracy
 match_mmlu_college_computer_science.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_computer_science\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_computer_science\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_computer_science\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_computer_science\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_college_mathematics:
   id: match_mmlu_college_mathematics.test.v1
@@ -84,9 +84,9 @@ match_mmlu_college_mathematics:
   - accuracy
 match_mmlu_college_mathematics.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_mathematics\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_mathematics\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_mathematics\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_mathematics\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_college_medicine:
   id: match_mmlu_college_medicine.test.v1
@@ -94,9 +94,9 @@ match_mmlu_college_medicine:
   - accuracy
 match_mmlu_college_medicine.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_medicine\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_medicine\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_medicine\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_medicine\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_college_physics:
   id: match_mmlu_college_physics.test.v1
@@ -104,9 +104,9 @@ match_mmlu_college_physics:
   - accuracy
 match_mmlu_college_physics.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_physics\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_physics\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_physics\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\college_physics\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_computer_security:
   id: match_mmlu_computer_security.test.v1
@@ -114,9 +114,9 @@ match_mmlu_computer_security:
   - accuracy
 match_mmlu_computer_security.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\computer_security\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\computer_security\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\computer_security\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\computer_security\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_conceptual_physics:
   id: match_mmlu_conceptual_physics.test.v1
@@ -124,9 +124,9 @@ match_mmlu_conceptual_physics:
   - accuracy
 match_mmlu_conceptual_physics.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\conceptual_physics\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\conceptual_physics\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\conceptual_physics\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\conceptual_physics\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_econometrics:
   id: match_mmlu_econometrics.test.v1
@@ -134,9 +134,9 @@ match_mmlu_econometrics:
   - accuracy
 match_mmlu_econometrics.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\econometrics\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\econometrics\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\econometrics\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\econometrics\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_electrical_engineering:
   id: match_mmlu_electrical_engineering.test.v1
@@ -144,9 +144,9 @@ match_mmlu_electrical_engineering:
   - accuracy
 match_mmlu_electrical_engineering.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\electrical_engineering\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\electrical_engineering\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\electrical_engineering\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\electrical_engineering\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_elementary_mathematics:
   id: match_mmlu_elementary_mathematics.test.v1
@@ -154,9 +154,9 @@ match_mmlu_elementary_mathematics:
   - accuracy
 match_mmlu_elementary_mathematics.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\elementary_mathematics\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\elementary_mathematics\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\elementary_mathematics\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\elementary_mathematics\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_formal_logic:
   id: match_mmlu_formal_logic.test.v1
@@ -164,9 +164,9 @@ match_mmlu_formal_logic:
   - accuracy
 match_mmlu_formal_logic.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\formal_logic\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\formal_logic\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\formal_logic\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\formal_logic\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_global_facts:
   id: match_mmlu_global_facts.test.v1
@@ -174,9 +174,9 @@ match_mmlu_global_facts:
   - accuracy
 match_mmlu_global_facts.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\global_facts\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\global_facts\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\global_facts\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\global_facts\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_high_school_biology:
   id: match_mmlu_high_school_biology.test.v1
@@ -184,9 +184,9 @@ match_mmlu_high_school_biology:
   - accuracy
 match_mmlu_high_school_biology.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_biology\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_biology\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_biology\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_biology\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_high_school_chemistry:
   id: match_mmlu_high_school_chemistry.test.v1
@@ -194,9 +194,9 @@ match_mmlu_high_school_chemistry:
   - accuracy
 match_mmlu_high_school_chemistry.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_chemistry\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_chemistry\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_chemistry\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_chemistry\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_high_school_computer_science:
   id: match_mmlu_high_school_computer_science.test.v1
@@ -204,9 +204,9 @@ match_mmlu_high_school_computer_science:
   - accuracy
 match_mmlu_high_school_computer_science.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_computer_science\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_computer_science\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_computer_science\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_computer_science\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_high_school_european_history:
   id: match_mmlu_high_school_european_history.test.v1
@@ -214,9 +214,9 @@ match_mmlu_high_school_european_history:
   - accuracy
 match_mmlu_high_school_european_history.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_european_history\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_european_history\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_european_history\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_european_history\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_high_school_geography:
   id: match_mmlu_high_school_geography.test.v1
@@ -224,9 +224,9 @@ match_mmlu_high_school_geography:
   - accuracy
 match_mmlu_high_school_geography.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_geography\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_geography\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_geography\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_geography\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_high_school_government_and_politics:
   id: match_mmlu_high_school_government_and_politics.test.v1
@@ -234,9 +234,9 @@ match_mmlu_high_school_government_and_politics:
   - accuracy
 match_mmlu_high_school_government_and_politics.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_government_and_politics\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_government_and_politics\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_government_and_politics\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_government_and_politics\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_high_school_macroeconomics:
   id: match_mmlu_high_school_macroeconomics.test.v1
@@ -244,9 +244,9 @@ match_mmlu_high_school_macroeconomics:
   - accuracy
 match_mmlu_high_school_macroeconomics.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_macroeconomics\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_macroeconomics\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_macroeconomics\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_macroeconomics\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_high_school_mathematics:
   id: match_mmlu_high_school_mathematics.test.v1
@@ -254,9 +254,9 @@ match_mmlu_high_school_mathematics:
   - accuracy
 match_mmlu_high_school_mathematics.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_mathematics\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_mathematics\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_mathematics\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_mathematics\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_high_school_microeconomics:
   id: match_mmlu_high_school_microeconomics.test.v1
@@ -264,9 +264,9 @@ match_mmlu_high_school_microeconomics:
   - accuracy
 match_mmlu_high_school_microeconomics.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_microeconomics\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_microeconomics\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_microeconomics\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_microeconomics\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_high_school_physics:
   id: match_mmlu_high_school_physics.test.v1
@@ -274,9 +274,9 @@ match_mmlu_high_school_physics:
   - accuracy
 match_mmlu_high_school_physics.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_physics\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_physics\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_physics\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_physics\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_high_school_psychology:
   id: match_mmlu_high_school_psychology.test.v1
@@ -284,9 +284,9 @@ match_mmlu_high_school_psychology:
   - accuracy
 match_mmlu_high_school_psychology.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_psychology\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_psychology\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_psychology\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_psychology\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_high_school_statistics:
   id: match_mmlu_high_school_statistics.test.v1
@@ -294,9 +294,9 @@ match_mmlu_high_school_statistics:
   - accuracy
 match_mmlu_high_school_statistics.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_statistics\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_statistics\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_statistics\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_statistics\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_high_school_us_history:
   id: match_mmlu_high_school_us_history.test.v1
@@ -304,9 +304,9 @@ match_mmlu_high_school_us_history:
   - accuracy
 match_mmlu_high_school_us_history.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_us_history\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_us_history\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_us_history\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_us_history\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_high_school_world_history:
   id: match_mmlu_high_school_world_history.test.v1
@@ -314,9 +314,9 @@ match_mmlu_high_school_world_history:
   - accuracy
 match_mmlu_high_school_world_history.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_world_history\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_world_history\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_world_history\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\high_school_world_history\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_human_aging:
   id: match_mmlu_human_aging.test.v1
@@ -324,9 +324,9 @@ match_mmlu_human_aging:
   - accuracy
 match_mmlu_human_aging.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\human_aging\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\human_aging\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\human_aging\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\human_aging\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_human_sexuality:
   id: match_mmlu_human_sexuality.test.v1
@@ -334,9 +334,9 @@ match_mmlu_human_sexuality:
   - accuracy
 match_mmlu_human_sexuality.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\human_sexuality\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\human_sexuality\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\human_sexuality\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\human_sexuality\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_international_law:
   id: match_mmlu_international_law.test.v1
@@ -344,9 +344,9 @@ match_mmlu_international_law:
   - accuracy
 match_mmlu_international_law.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\international_law\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\international_law\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\international_law\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\international_law\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_jurisprudence:
   id: match_mmlu_jurisprudence.test.v1
@@ -354,9 +354,9 @@ match_mmlu_jurisprudence:
   - accuracy
 match_mmlu_jurisprudence.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\jurisprudence\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\jurisprudence\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\jurisprudence\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\jurisprudence\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_logical_fallacies:
   id: match_mmlu_logical_fallacies.test.v1
@@ -364,9 +364,9 @@ match_mmlu_logical_fallacies:
   - accuracy
 match_mmlu_logical_fallacies.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\logical_fallacies\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\logical_fallacies\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\logical_fallacies\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\logical_fallacies\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_machine_learning:
   id: match_mmlu_machine_learning.test.v1
@@ -374,9 +374,9 @@ match_mmlu_machine_learning:
   - accuracy
 match_mmlu_machine_learning.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\machine_learning\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\machine_learning\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\machine_learning\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\machine_learning\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_management:
   id: match_mmlu_management.test.v1
@@ -384,9 +384,9 @@ match_mmlu_management:
   - accuracy
 match_mmlu_management.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\management\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\management\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\management\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\management\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_marketing:
   id: match_mmlu_marketing.test.v1
@@ -394,9 +394,9 @@ match_mmlu_marketing:
   - accuracy
 match_mmlu_marketing.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\marketing\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\marketing\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\marketing\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\marketing\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_medical_genetics:
   id: match_mmlu_medical_genetics.test.v1
@@ -404,9 +404,9 @@ match_mmlu_medical_genetics:
   - accuracy
 match_mmlu_medical_genetics.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\medical_genetics\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\medical_genetics\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\medical_genetics\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\medical_genetics\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_miscellaneous:
   id: match_mmlu_miscellaneous.test.v1
@@ -414,9 +414,9 @@ match_mmlu_miscellaneous:
   - accuracy
 match_mmlu_miscellaneous.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\miscellaneous\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\miscellaneous\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\miscellaneous\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\miscellaneous\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_moral_disputes:
   id: match_mmlu_moral_disputes.test.v1
@@ -424,9 +424,9 @@ match_mmlu_moral_disputes:
   - accuracy
 match_mmlu_moral_disputes.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\moral_disputes\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\moral_disputes\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\moral_disputes\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\moral_disputes\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_moral_scenarios:
   id: match_mmlu_moral_scenarios.test.v1
@@ -434,9 +434,9 @@ match_mmlu_moral_scenarios:
   - accuracy
 match_mmlu_moral_scenarios.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\moral_scenarios\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\moral_scenarios\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\moral_scenarios\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\moral_scenarios\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_nutrition:
   id: match_mmlu_nutrition.test.v1
@@ -444,9 +444,9 @@ match_mmlu_nutrition:
   - accuracy
 match_mmlu_nutrition.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\nutrition\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\nutrition\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\nutrition\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\nutrition\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_philosophy:
   id: match_mmlu_philosophy.test.v1
@@ -454,9 +454,9 @@ match_mmlu_philosophy:
   - accuracy
 match_mmlu_philosophy.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\philosophy\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\philosophy\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\philosophy\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\philosophy\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_prehistory:
   id: match_mmlu_prehistory.test.v1
@@ -464,9 +464,9 @@ match_mmlu_prehistory:
   - accuracy
 match_mmlu_prehistory.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\prehistory\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\prehistory\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\prehistory\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\prehistory\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_professional_accounting:
   id: match_mmlu_professional_accounting.test.v1
@@ -474,9 +474,9 @@ match_mmlu_professional_accounting:
   - accuracy
 match_mmlu_professional_accounting.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_accounting\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_accounting\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_accounting\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_accounting\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_professional_law:
   id: match_mmlu_professional_law.test.v1
@@ -484,9 +484,9 @@ match_mmlu_professional_law:
   - accuracy
 match_mmlu_professional_law.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_law\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_law\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_law\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_law\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_professional_medicine:
   id: match_mmlu_professional_medicine.test.v1
@@ -494,9 +494,9 @@ match_mmlu_professional_medicine:
   - accuracy
 match_mmlu_professional_medicine.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_medicine\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_medicine\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_medicine\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_medicine\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_professional_psychology:
   id: match_mmlu_professional_psychology.test.v1
@@ -504,9 +504,9 @@ match_mmlu_professional_psychology:
   - accuracy
 match_mmlu_professional_psychology.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_psychology\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_psychology\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_psychology\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\professional_psychology\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_public_relations:
   id: match_mmlu_public_relations.test.v1
@@ -514,9 +514,9 @@ match_mmlu_public_relations:
   - accuracy
 match_mmlu_public_relations.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\public_relations\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\public_relations\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\public_relations\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\public_relations\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_security_studies:
   id: match_mmlu_security_studies.test.v1
@@ -524,9 +524,9 @@ match_mmlu_security_studies:
   - accuracy
 match_mmlu_security_studies.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\security_studies\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\security_studies\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\security_studies\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\security_studies\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_sociology:
   id: match_mmlu_sociology.test.v1
@@ -534,9 +534,9 @@ match_mmlu_sociology:
   - accuracy
 match_mmlu_sociology.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\sociology\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\sociology\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\sociology\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\sociology\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_us_foreign_policy:
   id: match_mmlu_us_foreign_policy.test.v1
@@ -544,9 +544,9 @@ match_mmlu_us_foreign_policy:
   - accuracy
 match_mmlu_us_foreign_policy.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\us_foreign_policy\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\us_foreign_policy\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\us_foreign_policy\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\us_foreign_policy\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_virology:
   id: match_mmlu_virology.test.v1
@@ -554,9 +554,9 @@ match_mmlu_virology:
   - accuracy
 match_mmlu_virology.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\virology\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\virology\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\virology\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\virology\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match
 match_mmlu_world_religions:
   id: match_mmlu_world_religions.test.v1
@@ -564,7 +564,7 @@ match_mmlu_world_religions:
   - accuracy
 match_mmlu_world_religions.test.v1:
   args:
-    few_shot_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\world_religions\few_shot.jsonl
+    few_shot_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\world_religions\few_shot.jsonl
     num_few_shot: 4
-    samples_jsonl: D:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\world_religions\samples.jsonl
+    samples_jsonl: E:\algo_project_2023\aigc_evals\examples\../registry\data\mmlu\world_religions\samples.jsonl
   class: aigc_evals.elsuite.basic.match:Match

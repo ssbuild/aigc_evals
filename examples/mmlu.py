@@ -21,15 +21,10 @@
 import pandas as pd
 import os
 
-data_path = r'D:\nlpdata_2023\openai\data'
+data_path = r'F:\nlpdata_2023\openai\evals\data'
 # Assuming this notebook is in examples/
 registry_path = os.path.join(os.path.dirname(__file__), "../registry")
 
-
-# In[ ]:
-
-
-# Build the prompts using Chat format. We support converting Chat conversations to text for non-Chat models
 
 # choices = ["A", "B", "C", "D"]
 # sys_msg = "The following are multiple choice questions (with answers) about {}."
@@ -46,7 +41,10 @@ registry_path = os.path.join(os.path.dirname(__file__), "../registry")
 #     """
 #     user_prompt = f"{question}\n" + "\n".join([f"{choice}. {answer}" for choice, answer in zip(choices, answers)]) + "\nAnswer:"
 #     return [
-#         {"role": "system", "content": user_prompt, "name": "example_user"},
+#         # {"role": "system", "content": user_prompt, "name": "example_user"},
+#         # {"role": "system", "content": correct_answer, "name": "example_assistant"},
+#
+#         {"role": "user", "content": user_prompt, "name": "example_user"},
 #         {"role": "system", "content": correct_answer, "name": "example_assistant"},
 #     ]
 #
@@ -93,14 +91,16 @@ registry_path = os.path.join(os.path.dirname(__file__), "../registry")
 #
 # with open(os.path.join(registry_path, "evals", "mmlu.yaml"), "w") as f:
 #     yaml.dump(registry_yaml, f)
-
-
+#
+#
+#
+# exit(0)
 # In[ ]:
 #
 #
 # # This will generate a JSONL which will record samples and logs and store it in /tmp/evallogs
 # get_ipython().system('sh_aigc_evals langchain/chat_model/qwen-7b-chat-int4 match_mmlu_anatomy')
-os.system('sh_aigc_evals langchain/chat_model/qwen-7b-chat-int4 match_mmlu_anatomy')
+os.system('sh_aigc_evals langchain/chat_model/chatglm2-6b-int4 match_mmlu_anatomy --registry_path="E:\\algo_project_2023\\aigc_evals\\registry"')
 #
 # # In[ ]:
 #

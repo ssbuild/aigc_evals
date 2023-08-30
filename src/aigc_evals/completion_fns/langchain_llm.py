@@ -12,6 +12,7 @@ from langchain.schema.messages import (
     HumanMessage,
     SystemMessage,
 )
+from langchain.chat_models import ChatOpenAI
 
 
 from aigc_evals.prompt.base import CompletionPrompt, is_chat_prompt, OpenAICreateChatPrompt
@@ -53,16 +54,15 @@ class LangChainLLMCompletionResult(CompletionResult):
 
 
 class LangChainLLMCompletionFn(CompletionFn):
-    def __init__(self, llm: str, llm_kwargs: Optional[dict] = None, **kwargs) -> None:
+    def __init__(self, llm: str,  **kwargs) -> None:
         # Import and resolve self.llm to an instance of llm argument here,
         # assuming it's always a subclass of BaseLLM
-        if llm_kwargs is None:
-            llm_kwargs = {}
+        model_kwargs = kwargs.get('chat_model_kwargs',None) or kwargs.get('llm_kwargs',None) or {}
         module = importlib.import_module("langchain.llms")
         LLMClass = getattr(module, llm)
 
         if issubclass(LLMClass, BaseLLM):
-            self.llm = LLMClass(**llm_kwargs)
+            self.llm = LLMClass(**kwargs)
         else:
             raise ValueError(f"{llm} is not a subclass of BaseLLM")
 
@@ -93,16 +93,15 @@ def _convert_dict_to_langchain_message(_dict) -> BaseMessage:
 
 
 class LangChainChatModelCompletionFn(CompletionFn):
-    def __init__(self, llm: str, llm_kwargs: Optional[dict] = None, **kwargs) -> None:
+    def __init__(self, llm: str,  **kwargs) -> None:
         # Import and resolve self.llm to an instance of llm argument here,
         # assuming it's always a subclass of BaseLLM
-        if llm_kwargs is None:
-            llm_kwargs = {}
+        model_kwargs = kwargs.get('chat_model_kwargs',None) or kwargs.get('llm_kwargs',None) or {}
         module = importlib.import_module("langchain.chat_models")
         LLMClass = getattr(module, llm)
 
         if issubclass(LLMClass, BaseChatModel):
-            self.llm = LLMClass(**llm_kwargs)
+            self.llm = LLMClass(**model_kwargs)
         else:
             raise ValueError(f"{llm} is not a subclass of BaseChatModel")
 

@@ -38,8 +38,10 @@ def get_parser() -> argparse.ArgumentParser:
     parser.add_argument("eval", type=str, help="Name of an eval. See registry.")
     parser.add_argument("--extra_eval_params", type=str, default="")
     parser.add_argument("--max_samples", type=int, default=None)
-    parser.add_argument("--cache", action=argparse.BooleanOptionalAction, default=True)
-    parser.add_argument("--visible", action=argparse.BooleanOptionalAction, default=None)
+    # parser.add_argument("--cache", action=argparse.BooleanOptionalAction, default=True)
+    # parser.add_argument("--visible", action=argparse.BooleanOptionalAction, default=None)
+    parser.add_argument("--cache",  default=True)
+    parser.add_argument("--visible", default=None)
     parser.add_argument("--seed", type=int, default=20220722)
     parser.add_argument("--user", type=str, default="")
     parser.add_argument("--record_path", type=str, default=None)
@@ -53,17 +55,19 @@ def get_parser() -> argparse.ArgumentParser:
         action="append",
         help="Path to the registry",
     )
-    parser.add_argument("--debug", action=argparse.BooleanOptionalAction, default=False)
+    parser.add_argument("--debug",
+                        # action=argparse.BooleanOptionalAction,
+                        default=False)
     parser.add_argument(
         "--local-run",
-        action=argparse.BooleanOptionalAction,
+        # action=argparse.BooleanOptionalAction,
         default=True,
         help="Enable local mode for running evaluations. In this mode, the evaluation results are stored locally in a JSON file. This mode is enabled by default.",
     )
 
     parser.add_argument(
         "--http-run",
-        action=argparse.BooleanOptionalAction,
+        # action=argparse.BooleanOptionalAction,
         default=False,
         help="Enable HTTP mode for running evaluations. In this mode, the evaluation results are sent to a specified URL rather than being stored locally or in Snowflake. This mode should be used in conjunction with the '--http-run-url' and '--http-batch-size' arguments.",
     )
@@ -88,8 +92,12 @@ def get_parser() -> argparse.ArgumentParser:
         help="The acceptable percentage threshold of HTTP requests that can fail. Default is 5, meaning 5% of total HTTP requests can fail without causing any issues. If the failure rate goes beyond this threshold, suitable action should be taken or the process will be deemed as failing, but still stored locally.",
     )
 
-    parser.add_argument("--dry-run", action=argparse.BooleanOptionalAction, default=False)
-    parser.add_argument("--dry-run-logging", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--dry-run",
+                        # action=argparse.BooleanOptionalAction,
+                        default=False)
+    parser.add_argument("--dry-run-logging",
+                        # action=argparse.BooleanOptionalAction,
+                        default=True)
     return parser
 
 

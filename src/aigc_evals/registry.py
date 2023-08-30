@@ -127,7 +127,7 @@ class Registry:
             spec.args = {}
 
         spec.args["registry"] = self
-        instance = make_object(spec.cls)(**spec.args or {})
+        instance = make_object(spec.cls,**spec.args)()
         assert isinstance(instance, CompletionFn), f"{name} must be a CompletionFn"
         return instance
 
