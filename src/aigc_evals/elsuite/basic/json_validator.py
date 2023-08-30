@@ -1,5 +1,5 @@
 import json
-from typing import Any
+from typing import Any, List
 
 import aigc_evals
 import aigc_evals.metrics
@@ -34,7 +34,6 @@ class JsonValidator(aigc_evals.Eval):
         prompt = sample["input"]
         result = self.completion_fn(
             prompt=prompt,
-            temperature=0.0,
         )
         sampled = result.get_completions()[0]
         return aigc_evals.record.record_match(is_valid_json(sampled), expected=None, picked=sampled)

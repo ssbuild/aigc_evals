@@ -1,5 +1,4 @@
-from typing import Any
-
+from typing import Any, List
 import aigc_evals
 import aigc_evals.metrics
 from aigc_evals.api import CompletionFn

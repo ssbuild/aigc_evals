@@ -1,13 +1,11 @@
 ## aigc_evals
 
-
-aigc_evals 是一个基于 openai/evals 项目 用于评估 开源LLM（大型语言模型）或使用 LLM 作为组件构建的系统的框架。它还包括一个具有挑战性的评估的开源注册表。
-
-我们现在支持通过完成功能协议评估任何系统的行为，包括提示链或使用工具的代理。
-
-通过 aigc_evals，我们的目标是使构建 eval 的过程尽可能简单，同时编写尽可能少的代码。“评估”是用于评估系统行为质量的任务。
+ aigc_evals 是在openai/evals基础上修改而来，用于评估基于 aigc_serving 等仿openai 接口开源模型服务的脚本。<br />
+部署开源模型移步至[aigc_serving](https://github.com/ssbuild/aigc_serving) 
 
 
+## 当前支持评估数据集
+目前支持 cmmlu , ceval,  mmlu 数据集评估
 
 
 ## 安装
@@ -19,8 +17,60 @@ pip install aigc_evals
 git clone -b dev https://github.com/ssbuild/aigc_evals.git
 pip install -e .
 ```
+## 修改环境变量
 
-## 使用帮助
+```commandline
+auto_eval/utils.py
+设置openai url等参数
+def env_setting():
+    # 限制并发数目
+    os.environ['EVALS_THREADS'] = "2"
+    os.environ['OPENAI_API_KEY'] = "EMPTY"
+    os.environ['OPENAI_API_BASE'] = "http://192.168.2.180:8081/v1"
+    
+```
+
+## 修改自定义评估模型
+
+修改 registry/completion_fns/langchain_aigc_serving
+
+```text
+langchain/chat_model/chatglm2-6b-int4:
+  class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
+  args:
+    llm: ChatOpenAI
+    chat_model_kwargs:
+      model_name: chatglm2-6b-int4
+      model_kwargs: # langchain 未明确实现的参数
+        adapter_model: default
+      max_retries: 10
+      top_p: 0.7
+      temperature: 0.95
+      max_tokens: 2000
+```
+
+修改替换 chatglm2-6b-int4 成自己的开放模型，chat_model_kwargs 为 langchain ChatOpenAI 参数
+
+
+## 一键评估
+```commandline
+cd examples
+python ceval
+```
+
+```commandline
+cd examples
+python cmmlu
+```
+
+```commandline
+wget https://people.eecs.berkeley.edu/~hendrycks/data.tar
+下载mmlu数据集
+cd examples
+python mmlu
+```
+
+## exec_aigc_evals 使用帮助
 
 ```text
 exec_aigc_evals --help

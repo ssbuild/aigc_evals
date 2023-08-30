@@ -17,13 +17,14 @@ class Translate(aigc_evals.Eval):
         max_tokens: int = 500,
         num_few_shot: int = 0,
         few_shot_jsonl: str = None,
+        threshold=30,
         **kwargs,
     ):
         super().__init__(completion_fns, *args, **kwargs)
         assert len(completion_fns) == 1, "Translate only supports one completion fn"
         self.max_tokens = max_tokens
         self.samples_jsonl = samples_jsonl
-
+        self.threshold = threshold
         self.num_few_shot = num_few_shot
         if self.num_few_shot > 0:
             assert few_shot_jsonl is not None, "few shot requires few shot sample dataset"
@@ -58,7 +59,7 @@ class Translate(aigc_evals.Eval):
             score = self.bleu.sentence_score(sampled, expected).score
             aigc_evals.record.record_metrics(sacrebleu_sentence_score=score)
 
-            match = score > 30
+            match = score > self.threshold
 
             if score is not None:
                 aigc_evals.record.record_match(

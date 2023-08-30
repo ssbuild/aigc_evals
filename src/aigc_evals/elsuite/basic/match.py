@@ -45,7 +45,6 @@ class Match(aigc_evals.Eval):
 
         result = self.completion_fn(
             prompt=prompt,
-            temperature=0.0,
         )
         sampled = result.get_completions()[0]
 
