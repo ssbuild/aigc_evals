@@ -1,1 +1,7 @@
 /.idea
+/dist
+/build
+/registry/modelgraded
+/registry/data
+/registry/eval_sets
+/registry/evals

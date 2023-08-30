@@ -107,7 +107,7 @@ for input_path in translation_paths:
         "metrics": ["accuracy"]
     }
     registry_yaml[f"{eval_id}.test.v1"] = {
-        "class": "evals.elsuite.translate:Translate",
+        "class": "aigc_evals.elsuite.translate:Translate",
         "args": {
             "samples_jsonl": samples_path,
             "few_shot_jsonl": few_shot_path,
