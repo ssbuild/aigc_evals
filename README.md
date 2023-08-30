@@ -17,6 +17,18 @@ pip install aigc_evals
 git clone -b dev https://github.com/ssbuild/aigc_evals.git
 pip install -e .
 ```
+## 修改环境变量
+
+```commandline
+auto_eval/utils.py
+设置openai url等参数
+def env_setting():
+    # 限制并发数目
+    os.environ['EVALS_THREADS'] = "2"
+    os.environ['OPENAI_API_KEY'] = "EMPTY"
+    os.environ['OPENAI_API_BASE'] = "http://192.168.2.180:8081/v1"
+    
+```
 
 ## 修改自定义评估模型
 
