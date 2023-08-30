@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, List
 
 from sacrebleu.metrics.bleu import BLEU
 

@@ -55,6 +55,14 @@ def get_parser() -> argparse.ArgumentParser:
         action="append",
         help="Path to the registry",
     )
+    parser.add_argument(
+        "--registry_path",
+        type=str,
+        default=None,
+        action="append",
+        help="Path to the registry",
+    )
+
     parser.add_argument("--debug",
                         # action=argparse.BooleanOptionalAction,
                         default=False)

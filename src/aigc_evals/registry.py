@@ -88,9 +88,18 @@ RawRegistry = Dict[str, Any]
 class Registry:
     def __init__(self, registry_paths: Sequence[Union[str, Path]] = DEFAULT_PATHS):
         self._registry_paths = [Path(p) if isinstance(p, str) else p for p in registry_paths]
+        self._custom_files = {
+            "completion_fns": [],
+            "eval_sets": [],
+            "evals": [],
+            "modelgraded": [],
+        }
 
     def add_registry_paths(self, paths: List[Union[str, Path]]) -> None:
         self._registry_paths.extend([Path(p) if isinstance(p, str) else p for p in paths])
+
+    def add_registry_file(self,files: List[Union[str, Path]],mode="completion_fns")-> None:
+        self._custom_files[mode].extend([Path(p) if isinstance(p, str) else p for p in files])
 
     @cached_property
     def api_model_ids(self) -> List[str]:
@@ -114,10 +123,13 @@ class Registry:
 
         n_ctx = n_ctx_from_model_name(name)
 
-        if is_chat_model(name):
-            return OpenAIChatCompletionFn(model=name, n_ctx=n_ctx)
-        elif name in self.api_model_ids:
-            return OpenAICompletionFn(model=name, n_ctx=n_ctx)
+        try:
+            if is_chat_model(name):
+                return OpenAIChatCompletionFn(model=name, n_ctx=n_ctx)
+            elif name in self.api_model_ids:
+                return OpenAICompletionFn(model=name, n_ctx=n_ctx)
+        except Exception as e:
+            print(e)
 
         # No match, so try to find a completion-fn-id in the registry
         spec = self.get_completion_fn(name)
@@ -277,19 +289,19 @@ class Registry:
 
     @functools.cached_property
     def _completion_fns(self) -> RawRegistry:
-        return self._load_registry([p / "completion_fns" for p in self._registry_paths])
+        return self._load_registry([p / "completion_fns" for p in self._registry_paths] + self._custom_files["completion_fns"])
 
     @functools.cached_property
     def _eval_sets(self) -> RawRegistry:
-        return self._load_registry([p / "eval_sets" for p in self._registry_paths])
+        return self._load_registry([p / "eval_sets" for p in self._registry_paths] + self._custom_files["eval_sets"])
 
     @functools.cached_property
     def _evals(self) -> RawRegistry:
-        return self._load_registry([p / "evals" for p in self._registry_paths])
+        return self._load_registry([p / "evals" for p in self._registry_paths] + self._custom_files["evals"])
 
     @functools.cached_property
     def _modelgraded_specs(self) -> RawRegistry:
-        return self._load_registry([p / "modelgraded" for p in self._registry_paths])
+        return self._load_registry([p / "modelgraded" for p in self._registry_paths] + self._custom_files["modelgraded"])
 
 
 registry = Registry()

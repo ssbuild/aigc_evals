@@ -10,7 +10,7 @@ langchain/chat_model/baichuan-13b-chat-int4:
       max_tokens: 2000
       openai_api_key: EMPTY
       #      openai_api_base: http://192.168.2.180:8081/v1
-      openai_api_base: http://106.12.147.243:8088/v1
+      openai_api_base: http://192.168.2.180:8081/v1
 
 
 langchain/chat_model/qwen-7b-chat-int4:
@@ -25,7 +25,7 @@ langchain/chat_model/qwen-7b-chat-int4:
       max_tokens: 2000
       openai_api_key: EMPTY
       #      openai_api_base: http://192.168.2.180:8081/v1
-      openai_api_base: http://106.12.147.243:8088/v1
+      openai_api_base: http://192.168.2.180:8081/v1
 
 
 langchain/chat_model/chatglm2-6b-int4:
@@ -40,6 +40,6 @@ langchain/chat_model/chatglm2-6b-int4:
       max_tokens: 2000
       openai_api_key: EMPTY
 #      openai_api_base: http://192.168.2.180:8081/v1
-      openai_api_base: http://106.12.147.243:8088/v1
+      openai_api_base: http://192.168.2.180:8081/v1
 
 
