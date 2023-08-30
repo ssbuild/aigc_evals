@@ -5,7 +5,7 @@ import os
 import pandas as pd
 import yaml
 
-def build_env():
+def seting_env():
     # 限制并发数目
     os.environ['EVALS_THREADS'] = "2"
     os.environ['OPENAI_API_KEY'] = "EMPTY"
@@ -35,9 +35,6 @@ def build_ceval_data(data_path,registry_path):
             {"role": "user", "content": user_prompt},
             {"role": "system", "content": correct_answer},
         ]
-
-
-
 
     subjects = sorted([f.split("_test.csv")[0] for f in os.listdir(os.path.join(data_path, "test")) if "_test.csv" in f])
     print(subjects)
@@ -81,6 +78,7 @@ def build_ceval_data(data_path,registry_path):
     with open(os.path.join(registry_path, "evals", "ceval.yaml"), "w") as f:
         yaml.dump(registry_yaml, f)
 
+    return subjects
 
 
 def build_cmmlu_data(data_path,registry_path):
@@ -110,7 +108,6 @@ def build_cmmlu_data(data_path,registry_path):
 
 
     subjects = sorted([f.split(".csv")[0] for f in os.listdir(os.path.join(data_path, "test")) if ".csv" in f])
-
     print(subjects)
     registry_yaml = {}
 
@@ -149,6 +146,7 @@ def build_cmmlu_data(data_path,registry_path):
     with open(os.path.join(registry_path, "evals", "cmmlu.yaml"), "w") as f:
         yaml.dump(registry_yaml, f)
 
+    return subjects
 
 
 
@@ -176,9 +174,8 @@ def build_mmlu_data(data_path,registry_path):
         ]
 
 
-
-
     subjects = sorted([f.split("_test.csv")[0] for f in os.listdir(os.path.join(data_path, "test")) if "_test.csv" in f])
+    print(subjects)
 
     registry_yaml = {}
 
@@ -216,3 +213,5 @@ def build_mmlu_data(data_path,registry_path):
 
     with open(os.path.join(registry_path, "evals", "mmlu.yaml"), "w") as f:
         yaml.dump(registry_yaml, f)
+
+    return subjects
