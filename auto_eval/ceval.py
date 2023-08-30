@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
-
+import sys
+sys.path.append('.')
 import pandas as pd
 import os
 from utils import build_ceval_data, env_setting, get_registry_path

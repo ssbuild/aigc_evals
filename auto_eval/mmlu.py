@@ -4,7 +4,8 @@
 # get_ipython().system('curl -O https://people.eecs.berkeley.edu/~hendrycks/data.tar')
 # get_ipython().system('tar -xf data.tar')
 # data_path = "data"
-
+import sys
+sys.path.append('.')
 import pandas as pd
 import os
 from utils import build_mmlu_data, env_setting, get_registry_path
