@@ -1,6 +1,6 @@
 ## aigc_evals
 
- aigc_evals 是在openai/evals基础上修改，评估基于 aigc_serving 等仿openai 接口开源模型服务的脚本。<br />
+ aigc_evals 是在openai/evals基础上修改而来，用于评估基于 aigc_serving 等仿openai 接口开源模型服务的脚本。<br />
 部署开源模型移步至[aigc_serving](https://github.com/ssbuild/aigc_serving) 
 
 
