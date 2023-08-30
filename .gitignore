@@ -6,4 +6,4 @@
 /registry/eval_sets
 /registry/evals
 /src/aigc_evals.egg-info
-/examples/__pycache__
+/auto_eval/__pycache__
