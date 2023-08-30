@@ -8,3 +8,4 @@
 /src/aigc_evals.egg-info
 /auto_eval/__pycache__
 /outputs
+/auto_eval/custom_match/__pycache__
