@@ -8,9 +8,11 @@ langchain/chat_model/baichuan-13b-chat-int4:
         adapter_model: default
         top_k: 1
       max_retries: 10
+      request_timeout: 120
       top_p: 1.0
       temperature: 1.0
       max_tokens: 2000
+
 
 
 langchain/chat_model/qwen-7b-chat-int4:
@@ -23,6 +25,7 @@ langchain/chat_model/qwen-7b-chat-int4:
         adapter_model: default
         top_k: 1
       max_retries: 10
+      request_timeout: 120
       top_p: 1.0
       temperature: 1.0
       max_tokens: 2000
@@ -39,6 +42,7 @@ langchain/chat_model/chatglm2-6b-int4:
         adapter_model: default
         top_k: 1
       max_retries: 10
+      request_timeout: 120
       top_p: 1.0
       temperature: 1.0
       max_tokens: 2000
