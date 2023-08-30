@@ -1,30 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## Building an MMLU Eval
-# 
-# This notebook shows how to:
-# - Build and run an eval
-# - Load the results and into a Pandas Dataframe
-# 
-# We use the `aigc_evals.elsuite.basic.match:Match` Eval class here to check whether new completions match the correct answer. Under the hood, it will generate a completion with the choice of model for each prompt, check if the completion matches the true answer, then logs a result.
-
-
 # get_ipython().system('curl -O https://people.eecs.berkeley.edu/~hendrycks/data.tar')
 # get_ipython().system('tar -xf data.tar')
 # data_path = "data"
 
-
-# In[ ]:
-
-
 import pandas as pd
 import os
-from utils import build_mmlu_data
-# 限制并发数目
-os.environ['EVALS_THREADS'] = "2"
-# 注册路径，不建议更改
-registry_path = os.path.join(os.path.dirname(__file__), "../registry")
+from utils import build_mmlu_data, build_env, get_registry_path
+
+build_env()
+
+registry_path = get_registry_path()
 
 data_path = r'F:\nlpdata_2023\openai\evals\data'
 

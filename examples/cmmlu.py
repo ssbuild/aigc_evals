@@ -3,12 +3,11 @@
 
 import pandas as pd
 import os
-from utils import build_cmmlu_data
-# 限制并发数目
-os.environ['EVALS_THREADS'] = "2"
+from utils import build_cmmlu_data, build_env, get_registry_path
 
-# 注册路径，不建议更改
-registry_path = os.path.join(os.path.dirname(__file__), "../registry")
+build_env()
+
+registry_path = get_registry_path()
 
 data_path = r'E:\algo_project_2023\aigc_evals\assets\cmmlu_data'
 

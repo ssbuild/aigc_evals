@@ -5,6 +5,15 @@ import os
 import pandas as pd
 import yaml
 
+def build_env():
+    # 限制并发数目
+    os.environ['EVALS_THREADS'] = "2"
+    os.environ['OPENAI_API_KEY'] = "EMPTY"
+    os.environ['OPENAI_API_BASE'] = "http://192.168.2.180:8081/v1"
+
+def get_registry_path():
+    # 注册路径，不建议更改
+    return os.path.join(os.path.dirname(__file__), "../registry")
 
 def build_ceval_data(data_path,registry_path):
     choices = ["A", "B", "C", "D"]

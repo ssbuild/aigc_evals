@@ -4,13 +4,12 @@ langchain/chat_model/baichuan-13b-chat-int4:
     llm: ChatOpenAI
     chat_model_kwargs:
       model_name: baichuan-13b-chat-int4
-      adapter_model: default
+      model_kwargs: # langchain 未明确实现参数
+        adapter_model: default
+      max_retries: 10
       top_p: 0.7
       temperature: 1.0
       max_tokens: 2000
-      openai_api_key: EMPTY
-      #      openai_api_base: http://192.168.2.180:8081/v1
-      openai_api_base: http://192.168.2.180:8081/v1
 
 
 langchain/chat_model/qwen-7b-chat-int4:
@@ -19,13 +18,13 @@ langchain/chat_model/qwen-7b-chat-int4:
     llm: ChatOpenAI
     chat_model_kwargs:
       model_name: qwen-7b-chat-int4
-      adapter_model: default
+      model_kwargs: # langchain 未明确实现的参数
+        adapter_model: default
+      max_retries: 10
       top_p: 0.7
       temperature: 1.0
       max_tokens: 2000
-      openai_api_key: EMPTY
-      #      openai_api_base: http://192.168.2.180:8081/v1
-      openai_api_base: http://192.168.2.180:8081/v1
+
 
 
 langchain/chat_model/chatglm2-6b-int4:
@@ -34,12 +33,10 @@ langchain/chat_model/chatglm2-6b-int4:
     llm: ChatOpenAI
     chat_model_kwargs:
       model_name: chatglm2-6b-int4
-      adapter_model: default
+      model_kwargs: # langchain 未明确实现的参数
+        adapter_model: default
+      max_retries: 10
       top_p: 0.7
       temperature: 0.95
       max_tokens: 2000
-      openai_api_key: EMPTY
-#      openai_api_base: http://192.168.2.180:8081/v1
-      openai_api_base: http://192.168.2.180:8081/v1
-
 
