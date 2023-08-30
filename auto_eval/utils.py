@@ -17,9 +17,9 @@ def get_registry_path():
 
 def build_ceval_data(data_path,registry_path,few_shot=5):
     choices = ["A", "B", "C", "D"]
-    sys_msg = "以下是中国关于{}考试的单项选择题，请选出其中的正确答案。"
+    sys_msg = "以下是中国关于{}考试的单项选择题，请选出其中的正确答案。\n\n"
     def create_chat_prompt(sys_msg, question, answers, subject):
-        user_prompt = f"{question}\n" + "\n".join([f"{choice}. {answer}" for choice, answer in zip(choices, answers)]) + "\nanswer:"
+        user_prompt = f"{question}\n" + "\n".join([f"{choice}. {answer}" for choice, answer in zip(choices, answers)]) + "\n答案："
         return [
             {"role": "system", "content": sys_msg.format(subject)},
             {"role": "user", "content": user_prompt}
@@ -88,9 +88,9 @@ def build_ceval_data(data_path,registry_path,few_shot=5):
 
 def build_cmmlu_data(data_path,registry_path,few_shot=True):
     choices = ["A", "B", "C", "D"]
-    sys_msg = "以下是中国关于{}考试的单项选择题，请选出其中的正确答案。"
+    sys_msg = "以下是中国关于{}考试的单项选择题，请选出其中的正确答案。\n\n"
     def create_chat_prompt(sys_msg, question, answers, subject):
-        user_prompt = f"{question}\n" + "\n".join([f"{choice}. {answer}" for choice, answer in zip(choices, answers)]) + "\nAnswer:"
+        user_prompt = f"{question}\n" + "\n".join([f"{choice}. {answer}" for choice, answer in zip(choices, answers)]) + "\n答案："
         return [
             {"role": "system", "content": sys_msg.format(subject)},
             {"role": "user", "content": user_prompt}
