@@ -38,22 +38,18 @@ def get_parser() -> argparse.ArgumentParser:
     parser.add_argument("eval", type=str, help="Name of an eval. See registry.")
     parser.add_argument("--extra_eval_params", type=str, default="")
     parser.add_argument("--max_samples", type=int, default=None)
-    # parser.add_argument("--cache", action=argparse.BooleanOptionalAction, default=True)
-    # parser.add_argument("--visible", action=argparse.BooleanOptionalAction, default=None)
-    parser.add_argument("--cache",  default=True)
-    parser.add_argument("--visible", default=None)
+    parser.add_argument("--cache",
+                        # action=argparse.BooleanOptionalAction,
+                        default=True)
+    parser.add_argument("--visible",
+                        # action=argparse.BooleanOptionalAction,
+                        default=None)
+
     parser.add_argument("--seed", type=int, default=20220722)
     parser.add_argument("--user", type=str, default="")
     parser.add_argument("--record_path", type=str, default=None)
     parser.add_argument(
         "--log_to_file", type=str, default=None, help="Log to a file instead of stdout"
-    )
-    parser.add_argument(
-        "--registry_path",
-        type=str,
-        default=None,
-        action="append",
-        help="Path to the registry",
     )
     parser.add_argument(
         "--registry_path",
@@ -97,7 +93,7 @@ def get_parser() -> argparse.ArgumentParser:
         "--http-fail-percent-threshold",
         type=int,
         default=5,
-        help="The acceptable percentage threshold of HTTP requests that can fail. Default is 5, meaning 5% of total HTTP requests can fail without causing any issues. If the failure rate goes beyond this threshold, suitable action should be taken or the process will be deemed as failing, but still stored locally.",
+        help="The acceptable percentage threshold of HTTP requests that can fail. Default is 5, meaning 5%% of total HTTP requests can fail without causing any issues. If the failure rate goes beyond this threshold, suitable action should be taken or the process will be deemed as failing, but still stored locally.",
     )
 
     parser.add_argument("--dry-run",

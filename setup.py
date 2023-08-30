@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Author  : ssbuild
 # @Time    : 2023/8/29 10:17
-import os.path
-
 from setuptools import setup, find_packages
-
-
 
 def parse_deps():
     install_requires = [
@@ -41,10 +37,6 @@ def parse_deps():
 
 if __name__ == '__main__':
     install_requires = parse_deps()
-
-    oaieval = "evals.cli.oaieval:main"
-    oaievalset = "evals.cli.oaievalset:main"
-
     setup(
         name='aigc_evals',
         version='0.0.1',
@@ -61,8 +53,7 @@ if __name__ == '__main__':
         package_data={"": ["**/*.yaml","**/*.jsonp"]},
         entry_points={
             'console_scripts': [
-                'sh_aigc_evals = aigc_evals.cli.sh_aigc_eval:main',
-
+                'exec_aigc_evals = aigc_evals.cli.exec_aigc_evals:main',
             ],
         }
 
