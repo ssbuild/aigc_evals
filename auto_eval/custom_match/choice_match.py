@@ -35,7 +35,7 @@ def extract_answer(gen_ans):
         return answer
     return None
 
-def my_record_and_match(
+def choice_record_and_match(
     prompt: Any,
     sampled: str,
     expected: Union[str, List[str], Tuple[str]],
@@ -89,7 +89,7 @@ def my_record_and_match(
     return picked
 
 
-class MyMatch(Match):
+class ChoiceMatch(Match):
     def eval_sample(self, sample: Any, *_):
         assert isinstance(sample, dict), "sample must be a dict"
         assert "input" in sample, "sample must have an 'input' key"
@@ -111,7 +111,7 @@ class MyMatch(Match):
         )
         sampled = result.get_completions()[0]
 
-        return my_record_and_match(
+        return choice_record_and_match(
             prompt=prompt,
             sampled=sampled,
             expected=sample["ideal"],
