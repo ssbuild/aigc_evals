@@ -5,7 +5,7 @@
 
 
 ## 当前支持评估数据集
-目前支持 cmmlu , ceval,  mmlu 数据集评估
+目前支持 cmmlu , ceval,  mmlu 和 翻译数据集评估
 
 
 ## 安装
@@ -50,19 +50,24 @@ langchain/chat_model/chatglm2-6b-int4:
 ## 一键评估
 ```commandline
 cd examples
-python ceval
+python ceval.py
 ```
 
 ```commandline
 cd examples
-python cmmlu
+python cmmlu.py
 ```
 
 ```commandline
 wget https://people.eecs.berkeley.edu/~hendrycks/data.tar
 下载mmlu数据集
 cd examples
-python mmlu
+python mmlu.py
+```
+
+```commandline
+cd examples
+python translate_zh_en.py
 ```
 
 ## exec_aigc_evals 使用帮助

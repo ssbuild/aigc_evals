@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Author  : ssbuild
 # @Time    : 2023/8/30 12:39
+import json
 import os
 import pandas as pd
 import yaml
@@ -173,6 +174,7 @@ def build_cmmlu_data(data_path,registry_path,few_shot=True):
 
 
 def build_mmlu_data(data_path,registry_path,few_shot=True):
+    data_type = "mmlu"
     choices = ["A", "B", "C", "D"]
     sys_msg = "The following are multiple choice questions (with answers) about {}."
     def create_chat_prompt(sys_msg, question, answers, subject):
@@ -202,7 +204,7 @@ def build_mmlu_data(data_path,registry_path,few_shot=True):
     registry_yaml = {}
 
     for subject in subjects:
-        subject_path = os.path.join(registry_path, "data", "mmlu", subject)
+        subject_path = os.path.join(registry_path, "data", data_type, subject)
         os.makedirs(subject_path, exist_ok=True)
 
         if few_shot >0:
@@ -219,7 +221,7 @@ def build_mmlu_data(data_path,registry_path,few_shot=True):
         samples_path = os.path.join(subject_path, "samples.jsonl")
         test_df[["input", "ideal"]].to_json(samples_path, lines=True, orient="records")
 
-        eval_id = f"match_mmlu_{subject}"
+        eval_id = f"translate_{subject}"
 
         registry_yaml[eval_id] = {
             "id": f"{eval_id}.test.v1",
@@ -229,15 +231,78 @@ def build_mmlu_data(data_path,registry_path,few_shot=True):
             "class": "custom_match.choice_match:ChoiceMatch",
             "args": {
                 "samples_jsonl": samples_path,
-                # "few_shot_jsonl": few_shot_path,
-                "num_few_shot": 4,
             }
         }
-        if few_shot > 0:
-            d["args"]["few_shot_jsonl"] = few_shot_path
         registry_yaml[f"{eval_id}.test.v1"] = d
 
-    with open(os.path.join(registry_path, "evals", "mmlu.yaml"), "w") as f:
+    with open(os.path.join(registry_path, "evals", data_type + ".yaml"), "w") as f:
+        yaml.dump(registry_yaml, f)
+
+    return subjects
+
+
+
+
+
+
+
+
+
+
+def build_translate_data(data_path,registry_path):
+    data_type = "zh-en"
+    sys_msg = "给定一个表示的文本，提供该文本的英文翻译。除了翻译本身之外，您必须在输出中提供任何解释。您必须释义而不是逐字翻译，并保留所有的原始含义。"
+    def create_chat_prompt(sys_msg, question):
+        user_prompt = f"{question}"
+        return [
+            {"role": "system", "content": sys_msg},
+            {"role": "user", "content": user_prompt}
+        ]
+
+    subjects = []
+
+    registry_yaml = {}
+
+    subject_path = os.path.join(registry_path, "data", data_type)
+    os.makedirs(subject_path, exist_ok=True)
+
+    fs_list = os.listdir(data_path)
+    for file in fs_list:
+        if file.endswith('.json') or file.endswith('.JSON'):
+            subject = file.rsplit('.json')[0]
+            subjects.append(subject)
+            with open(os.path.join(data_path,file),mode='r',encoding='utf=-8') as f:
+                lines = f.readlines()
+
+            D = []
+            for line in lines:
+                jd = json.loads(line)
+                if not jd:
+                    continue
+                D.append({
+                    "input": create_chat_prompt(sys_msg,jd["src"]),
+                    "ideal": jd["dst"] if isinstance(jd["dst"],list) else [jd['dst']]
+                })
+            samples_path = os.path.join(subject_path, "samples.jsonl")
+            test_df = pd.DataFrame(D)
+            test_df[["input", "ideal"]].to_json(samples_path, lines=True, orient="records",force_ascii=False)
+
+            eval_id = f"translate_{data_type}_{subject}"
+
+            registry_yaml[eval_id] = {
+                "id": f"{eval_id}.test.v1",
+                "metrics": ["accuracy"]
+            }
+            d = {
+                "class": "aigc_evals.elsuite.translate:Translate",
+                "args": {
+                    "samples_jsonl": samples_path,
+                }
+            }
+            registry_yaml[f"{eval_id}.test.v1"] = d
+
+
+    with open(os.path.join(registry_path, "evals", data_type + ".yaml"), "w") as f:
         yaml.dump(registry_yaml, f)
 
     return subjects
