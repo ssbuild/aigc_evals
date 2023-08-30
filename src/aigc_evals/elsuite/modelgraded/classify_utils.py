@@ -1,6 +1,6 @@
 import logging
 import string
-from typing import Any, Callable, Iterable, Optional, Union, List
+from typing import Any, Callable, Iterable, Optional, Union, List, Dict
 
 from aigc_evals import CompletionFn
 from aigc_evals.elsuite.modelgraded.base import ModelGradedSpec
@@ -56,7 +56,7 @@ def classify(
     eval_type: Optional[str] = None,
     n: Optional[int] = None,
     match_fn: str = "starts_or_endswith",
-) -> str:
+) :
     completion_kwargs = completion_kwargs or {}
     format_kwargs = format_kwargs or {}
 

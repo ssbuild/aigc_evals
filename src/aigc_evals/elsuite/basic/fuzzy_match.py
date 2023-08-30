@@ -1,3 +1,5 @@
+from typing import List
+
 import numpy as np
 
 import aigc_evals
@@ -33,7 +35,6 @@ class FuzzyMatch(aigc_evals.Eval):
 
         result = self.completion_fn(
             prompt=prompt,
-            temperature=0.0,  # Q: why are these hardcoded?
             max_tokens=self.max_tokens,
         )
         sampled = result.get_completions()[0]

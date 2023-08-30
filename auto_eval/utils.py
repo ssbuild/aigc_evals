@@ -5,7 +5,7 @@ import os
 import pandas as pd
 import yaml
 
-def build_env():
+def env_setting():
     # 限制并发数目
     os.environ['EVALS_THREADS'] = "2"
     os.environ['OPENAI_API_KEY'] = "EMPTY"
@@ -15,11 +15,11 @@ def get_registry_path():
     # 注册路径，不建议更改
     return os.path.join(os.path.dirname(__file__), "../registry")
 
-def build_ceval_data(data_path,registry_path):
+def build_ceval_data(data_path,registry_path,few_shot=5):
     choices = ["A", "B", "C", "D"]
-    sys_msg = "以下是中国关于{}考试的单项选择题，请选出其中的正确答案。"
+    sys_msg = "以下是中国关于{}考试的单项选择题，请选出其中的正确答案。\n\n"
     def create_chat_prompt(sys_msg, question, answers, subject):
-        user_prompt = f"{question}\n" + "\n".join([f"{choice}. {answer}" for choice, answer in zip(choices, answers)]) + "\nanswer:"
+        user_prompt = f"{question}\n" + "\n".join([f"{choice}. {answer}" for choice, answer in zip(choices, answers)]) + "\n答案："
         return [
             {"role": "system", "content": sys_msg.format(subject)},
             {"role": "user", "content": user_prompt}
@@ -36,9 +36,6 @@ def build_ceval_data(data_path,registry_path):
             {"role": "system", "content": correct_answer},
         ]
 
-
-
-
     subjects = sorted([f.split("_test.csv")[0] for f in os.listdir(os.path.join(data_path, "test")) if "_test.csv" in f])
     print(subjects)
 
@@ -51,10 +48,11 @@ def build_ceval_data(data_path,registry_path):
         #id,question,A,B,C,D,answer,explanation
         # Create few-shot prompts
 
-        dev_df = pd.read_csv(os.path.join(data_path, "dev", subject + "_dev.csv"),header=0, names=("id","question", "A", "B", "C", "D", "answer","explanation"))
-        dev_df["sample"] = dev_df.apply(lambda x: create_chat_example(x["question"], x[["A", "B", "C", "D"]], x["answer"]), axis=1)
-        few_shot_path = os.path.join(subject_path, "few_shot.jsonl")
-        dev_df[["sample"]].to_json(few_shot_path, lines=True, orient="records",force_ascii=False)
+        if few_shot > 0:
+            dev_df = pd.read_csv(os.path.join(data_path, "dev", subject + "_dev.csv"),header=0, names=("id","question", "A", "B", "C", "D", "answer","explanation"))
+            dev_df["sample"] = dev_df.apply(lambda x: create_chat_example(x["question"], x[["A", "B", "C", "D"]], x["answer"]), axis=1)
+            few_shot_path = os.path.join(subject_path, "few_shot.jsonl")
+            dev_df[["sample"]].head(few_shot).to_json(few_shot_path, lines=True, orient="records",force_ascii=False)
 
         # Create test prompts and ideal completions
         test_df = pd.read_csv(os.path.join(data_path, "val", subject + "_val.csv"),header=0, names=("id","question", "A", "B", "C", "D", "answer"))
@@ -69,25 +67,30 @@ def build_ceval_data(data_path,registry_path):
             "id": f"{eval_id}.test.v1",
             "metrics": ["accuracy"]
         }
-        registry_yaml[f"{eval_id}.test.v1"] = {
+
+        d = {
             "class": "aigc_evals.elsuite.basic.match:Match",
             "args": {
                 "samples_jsonl": samples_path,
-                "few_shot_jsonl": few_shot_path,
+                # "few_shot_jsonl": few_shot_path,
                 "num_few_shot": 4,
             }
         }
+        if few_shot > 0:
+            d["args"]["few_shot_jsonl"] = few_shot_path
+        registry_yaml[f"{eval_id}.test.v1"] = d
 
     with open(os.path.join(registry_path, "evals", "ceval.yaml"), "w") as f:
         yaml.dump(registry_yaml, f)
 
+    return subjects
 
 
-def build_cmmlu_data(data_path,registry_path):
+def build_cmmlu_data(data_path,registry_path,few_shot=True):
     choices = ["A", "B", "C", "D"]
-    sys_msg = "以下是中国关于{}考试的单项选择题，请选出其中的正确答案。"
+    sys_msg = "以下是中国关于{}考试的单项选择题，请选出其中的正确答案。\n\n"
     def create_chat_prompt(sys_msg, question, answers, subject):
-        user_prompt = f"{question}\n" + "\n".join([f"{choice}. {answer}" for choice, answer in zip(choices, answers)]) + "\nAnswer:"
+        user_prompt = f"{question}\n" + "\n".join([f"{choice}. {answer}" for choice, answer in zip(choices, answers)]) + "\n答案："
         return [
             {"role": "system", "content": sys_msg.format(subject)},
             {"role": "user", "content": user_prompt}
@@ -110,7 +113,6 @@ def build_cmmlu_data(data_path,registry_path):
 
 
     subjects = sorted([f.split(".csv")[0] for f in os.listdir(os.path.join(data_path, "test")) if ".csv" in f])
-
     print(subjects)
     registry_yaml = {}
 
@@ -119,10 +121,11 @@ def build_cmmlu_data(data_path,registry_path):
         os.makedirs(subject_path, exist_ok=True)
 
         # Create few-shot prompts
-        dev_df = pd.read_csv(os.path.join(data_path, "dev", subject + ".csv"),header=0, names=("Question", "A", "B", "C", "D", "Answer"))
-        dev_df["sample"] = dev_df.apply(lambda x: create_chat_example(x["Question"], x[["A", "B", "C", "D"]], x["Answer"]), axis=1)
-        few_shot_path = os.path.join(subject_path, "few_shot.jsonl")
-        dev_df[["sample"]].to_json(few_shot_path, lines=True, orient="records",force_ascii=False)
+        if few_shot>0:
+            dev_df = pd.read_csv(os.path.join(data_path, "dev", subject + ".csv"),header=0, names=("Question", "A", "B", "C", "D", "Answer"))
+            dev_df["sample"] = dev_df.apply(lambda x: create_chat_example(x["Question"], x[["A", "B", "C", "D"]], x["Answer"]), axis=1)
+            few_shot_path = os.path.join(subject_path, "few_shot.jsonl")
+            dev_df[["sample"]].head(few_shot).to_json(few_shot_path, lines=True, orient="records",force_ascii=False)
 
         # Create test prompts and ideal completions
         test_df = pd.read_csv(os.path.join(data_path, "test", subject + ".csv"), header=0, names=("Question", "A", "B", "C", "D", "Answer"))
@@ -137,22 +140,26 @@ def build_cmmlu_data(data_path,registry_path):
             "id": f"{eval_id}.test.v1",
             "metrics": ["accuracy"]
         }
-        registry_yaml[f"{eval_id}.test.v1"] = {
+        d = {
             "class": "aigc_evals.elsuite.basic.match:Match",
             "args": {
                 "samples_jsonl": samples_path,
-                "few_shot_jsonl": few_shot_path,
+                # "few_shot_jsonl": few_shot_path,
                 "num_few_shot": 4,
             }
         }
+        if few_shot>0:
+            d["args"]["few_shot_jsonl"] = few_shot_path
+        registry_yaml[f"{eval_id}.test.v1"] = d
 
     with open(os.path.join(registry_path, "evals", "cmmlu.yaml"), "w") as f:
         yaml.dump(registry_yaml, f)
 
+    return subjects
 
 
 
-def build_mmlu_data(data_path,registry_path):
+def build_mmlu_data(data_path,registry_path,few_shot=True):
     choices = ["A", "B", "C", "D"]
     sys_msg = "The following are multiple choice questions (with answers) about {}."
     def create_chat_prompt(sys_msg, question, answers, subject):
@@ -171,14 +178,13 @@ def build_mmlu_data(data_path,registry_path):
             # {"role": "system", "content": user_prompt, "name": "example_user"},
             # {"role": "system", "content": correct_answer, "name": "example_assistant"},
 
-            {"role": "user", "content": user_prompt, "name": "example_user"},
-            {"role": "system", "content": correct_answer, "name": "example_assistant"},
+            {"role": "user", "content": user_prompt},
+            {"role": "system", "content": correct_answer},
         ]
 
 
-
-
     subjects = sorted([f.split("_test.csv")[0] for f in os.listdir(os.path.join(data_path, "test")) if "_test.csv" in f])
+    print(subjects)
 
     registry_yaml = {}
 
@@ -186,11 +192,12 @@ def build_mmlu_data(data_path,registry_path):
         subject_path = os.path.join(registry_path, "data", "mmlu", subject)
         os.makedirs(subject_path, exist_ok=True)
 
-        # Create few-shot prompts
-        dev_df = pd.read_csv(os.path.join(data_path, "dev", subject + "_dev.csv"), names=("Question", "A", "B", "C", "D", "Answer"))
-        dev_df["sample"] = dev_df.apply(lambda x: create_chat_example(x["Question"], x[["A", "B", "C", "D"]], x["Answer"]), axis=1)
-        few_shot_path = os.path.join(subject_path, "few_shot.jsonl")
-        dev_df[["sample"]].to_json(few_shot_path, lines=True, orient="records")
+        if few_shot >0:
+            # Create few-shot prompts
+            dev_df = pd.read_csv(os.path.join(data_path, "dev", subject + "_dev.csv"), names=("Question", "A", "B", "C", "D", "Answer"))
+            dev_df["sample"] = dev_df.apply(lambda x: create_chat_example(x["Question"], x[["A", "B", "C", "D"]], x["Answer"]), axis=1)
+            few_shot_path = os.path.join(subject_path, "few_shot.jsonl")
+            dev_df[["sample"]].head(few_shot).to_json(few_shot_path, lines=True, orient="records")
 
         # Create test prompts and ideal completions
         test_df = pd.read_csv(os.path.join(data_path, "test", subject + "_test.csv"), names=("Question", "A", "B", "C", "D", "Answer"))
@@ -205,14 +212,19 @@ def build_mmlu_data(data_path,registry_path):
             "id": f"{eval_id}.test.v1",
             "metrics": ["accuracy"]
         }
-        registry_yaml[f"{eval_id}.test.v1"] = {
+        d = {
             "class": "aigc_evals.elsuite.basic.match:Match",
             "args": {
                 "samples_jsonl": samples_path,
-                "few_shot_jsonl": few_shot_path,
+                # "few_shot_jsonl": few_shot_path,
                 "num_few_shot": 4,
             }
         }
+        if few_shot > 0:
+            d["args"]["few_shot_jsonl"] = few_shot_path
+        registry_yaml[f"{eval_id}.test.v1"] = d
 
     with open(os.path.join(registry_path, "evals", "mmlu.yaml"), "w") as f:
         yaml.dump(registry_yaml, f)
+
+    return subjects
