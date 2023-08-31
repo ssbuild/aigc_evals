@@ -11,6 +11,8 @@ def env_setting():
     os.environ['EVALS_THREADS'] = "2"
     os.environ['OPENAI_API_KEY'] = "EMPTY"
     os.environ['OPENAI_API_BASE'] = "http://192.168.2.180:8081/v1"
+
+
     os.environ['PYTHONPATH'] = os.path.abspath(os.path.dirname(__file__))
 
     registry_path = get_registry_path()
