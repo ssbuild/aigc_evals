@@ -10,8 +10,7 @@ def env_setting():
     # 限制并发数目
     os.environ['EVALS_THREADS'] = "2"
     os.environ['OPENAI_API_KEY'] = "EMPTY"
-    # os.environ['OPENAI_API_BASE'] = "http://192.168.2.180:8081/v1"
-    os.environ['OPENAI_API_BASE'] = "http://106.12.147.243:8088/v1"
+    os.environ['OPENAI_API_BASE'] = "http://192.168.2.180:8081/v1"
     os.environ['PYTHONPATH'] = os.path.abspath(os.path.dirname(__file__))
 
     registry_path = get_registry_path()
