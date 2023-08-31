@@ -28,7 +28,7 @@ def get_registry_path():
     # 注册路径，不建议更改
     return os.path.join(os.path.dirname(__file__), "../registry")
 
-def build_ceval_data(data_path,registry_path,few_shot=5):
+def build_ceval_data(data_path,registry_path,data_type = "ceval",few_shot=5):
     choices = ["A", "B", "C", "D"]
     sys_msg = "以下是中国关于{}考试的单项选择题，请选出其中的正确答案。\n\n"
     def create_chat_prompt(sys_msg, question, answers, subject):
@@ -55,7 +55,7 @@ def build_ceval_data(data_path,registry_path,few_shot=5):
     registry_yaml = {}
 
     for subject in subjects:
-        subject_path = os.path.join(registry_path, "data", "ceval", subject)
+        subject_path = os.path.join(registry_path, "data", data_type, subject)
         os.makedirs(subject_path, exist_ok=True)
 
         #id,question,A,B,C,D,answer,explanation
@@ -74,7 +74,7 @@ def build_ceval_data(data_path,registry_path,few_shot=5):
         samples_path = os.path.join(subject_path, "samples.jsonl")
         test_df[["input", "ideal"]].to_json(samples_path, lines=True, orient="records",force_ascii=False)
 
-        eval_id = f"match_ceval_{subject}"
+        eval_id = f"match_{data_type}_{subject}"
 
         registry_yaml[eval_id] = {
             "id": f"{eval_id}.test.v1",
@@ -93,13 +93,13 @@ def build_ceval_data(data_path,registry_path,few_shot=5):
             d["args"]["few_shot_jsonl"] = few_shot_path
         registry_yaml[f"{eval_id}.test.v1"] = d
 
-    with open(os.path.join(registry_path, "evals", "ceval.yaml"), "w") as f:
+    with open(os.path.join(registry_path, "evals", data_type + ".yaml"), "w") as f:
         yaml.dump(registry_yaml, f)
 
     return subjects
 
 
-def build_cmmlu_data(data_path,registry_path,few_shot=True):
+def build_cmmlu_data(data_path,registry_path,data_type = "cmmlu",few_shot=True):
     choices = ["A", "B", "C", "D"]
     sys_msg = "以下是中国关于{}考试的单项选择题，请选出其中的正确答案。\n\n"
     def create_chat_prompt(sys_msg, question, answers, subject):
@@ -130,7 +130,7 @@ def build_cmmlu_data(data_path,registry_path,few_shot=True):
     registry_yaml = {}
 
     for subject in subjects:
-        subject_path = os.path.join(registry_path, "data", "cmmlu", subject)
+        subject_path = os.path.join(registry_path, "data", data_type, subject)
         os.makedirs(subject_path, exist_ok=True)
 
         # Create few-shot prompts
@@ -147,7 +147,7 @@ def build_cmmlu_data(data_path,registry_path,few_shot=True):
         samples_path = os.path.join(subject_path, "samples.jsonl")
         test_df[["input", "ideal"]].to_json(samples_path, lines=True, orient="records",force_ascii=False)
 
-        eval_id = f"match_cmmlu_{subject}"
+        eval_id = f"match_{data_type}_{subject}"
 
         registry_yaml[eval_id] = {
             "id": f"{eval_id}.test.v1",
@@ -165,15 +165,14 @@ def build_cmmlu_data(data_path,registry_path,few_shot=True):
             d["args"]["few_shot_jsonl"] = few_shot_path
         registry_yaml[f"{eval_id}.test.v1"] = d
 
-    with open(os.path.join(registry_path, "evals", "cmmlu.yaml"), "w") as f:
+    with open(os.path.join(registry_path, "evals", data_type + ".yaml"), "w") as f:
         yaml.dump(registry_yaml, f)
 
     return subjects
 
 
 
-def build_mmlu_data(data_path,registry_path,few_shot=True):
-    data_type = "mmlu"
+def build_mmlu_data(data_path,registry_path,data_type = "mmlu",few_shot=True):
     choices = ["A", "B", "C", "D"]
     sys_msg = "The following are multiple choice questions (with answers) about {}."
     def create_chat_prompt(sys_msg, question, answers, subject):
@@ -220,7 +219,7 @@ def build_mmlu_data(data_path,registry_path,few_shot=True):
         samples_path = os.path.join(subject_path, "samples.jsonl")
         test_df[["input", "ideal"]].to_json(samples_path, lines=True, orient="records")
 
-        eval_id = f"translate_{subject}"
+        eval_id = f"match_{data_type}_{subject}"
 
         registry_yaml[eval_id] = {
             "id": f"{eval_id}.test.v1",
@@ -248,8 +247,7 @@ def build_mmlu_data(data_path,registry_path,few_shot=True):
 
 
 
-def build_translate_data(data_path,registry_path):
-    data_type = "zh-en"
+def build_translate_data(data_path,registry_path,data_type="zh-en"):
     sys_msg = "给定一个表示的文本，提供该文本的英文翻译。除了翻译本身之外，您必须在输出中提供任何解释。您必须释义而不是逐字翻译，并保留所有的原始含义。"
     def create_chat_prompt(sys_msg, question):
         user_prompt = f"{question}"
