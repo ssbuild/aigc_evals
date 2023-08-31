@@ -44,7 +44,7 @@ def build_ceval_data(data_path,registry_path,data_type = "ceval",few_shot=5):
         """
         Form few-shot prompts in the recommended format: https://github.com/openai/openai-python/blob/main/chatml.md#few-shot-prompting
         """
-        user_prompt = f"{question}\n" + "\n".join([f"{choice}. {answer}" for choice, answer in zip(choices, answers)]) + "\nanswer:"
+        user_prompt = f"{question}\n" + "\n".join([f"{choice}. {answer}" for choice, answer in zip(choices, answers)]) + "\n答案："
         return [
 
             {"role": "user", "content": user_prompt},
