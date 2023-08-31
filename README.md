@@ -49,24 +49,24 @@ langchain/chat_model/chatglm2-6b-int4:
 
 ## 一键评估
 ```commandline
-cd examples
+cd auto_eval
 python ceval.py
 ```
 
 ```commandline
-cd examples
+cd auto_eval
 python cmmlu.py
 ```
 
 ```commandline
 wget https://people.eecs.berkeley.edu/~hendrycks/data.tar
 下载mmlu数据集
-cd examples
+cd auto_eval
 python mmlu.py
 ```
 
 ```commandline
-cd examples
+cd auto_eval
 python translate_zh_en.py
 ```
 
