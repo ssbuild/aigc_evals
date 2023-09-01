@@ -6,29 +6,6 @@ import os
 import pandas as pd
 import yaml
 
-def env_setting():
-    # 限制并发数目
-    os.environ['EVALS_THREADS'] = "2"
-    os.environ['OPENAI_API_KEY'] = "EMPTY"
-    os.environ['OPENAI_API_BASE'] = "http://192.168.2.180:8081/v1"
-
-
-    os.environ['PYTHONPATH'] = os.path.abspath(os.path.dirname(__file__))
-
-    registry_path = get_registry_path()
-    p = os.path.join(registry_path,'data')
-    os.makedirs(p,exist_ok=True)
-    p = os.path.join(registry_path, 'evals')
-    os.makedirs(p,exist_ok=True)
-    os.makedirs(get_output_path(), exist_ok=True)
-
-def get_output_path():
-    output_path = os.path.join(os.path.dirname(__file__), '../outputs')
-    return output_path
-
-def get_registry_path():
-    # 注册路径，不建议更改
-    return os.path.join(os.path.dirname(__file__), "../registry")
 
 def build_ceval_data(data_path,registry_path,data_type = "ceval",few_shot=5):
     choices = ["A", "B", "C", "D"]
