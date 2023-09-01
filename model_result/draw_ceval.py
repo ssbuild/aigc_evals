@@ -34,27 +34,37 @@ with open("ceval/xverse-13b-chat-int4/metric.json",mode="r",encoding="utf-8") as
 with open("ceval/moss-moon-003-sft-int4/metric.json",mode="r",encoding="utf-8") as f:
     moss =  get_data(json.loads(f.read()))
 
+with open("ceval/internlm-chat-7b-int4/metric.json",mode="r",encoding="utf-8") as f:
+    internlm =  get_data(json.loads(f.read()))
+
 import matplotlib.pyplot as plt   #导入包
 fig = plt.figure()              #创建空图
 x_label = list(baichuan.keys())     #x轴的坐标
+
 y_label = list(baichuan.values())     #y轴坐标
 plt.plot(x_label,y_label,color = 'r',linewidth=1.0,linestyle='dashed',label="baichuan-13b")  #构建折线图，可以设置线宽，颜色属性
 
-x_label = list(chatglm2.keys())     #x轴的坐标
 y_label = list(chatglm2.values())     #y轴坐标
 plt.plot(x_label,y_label,color = 'g',linewidth=1.0,linestyle='solid',label="chatglm2-6b")  #构建折线图，可以设置线宽，颜色属性
 
-x_label = list(qwen.keys())     #x轴的坐标
+
 y_label = list(qwen.values())     #y轴坐标
 plt.plot(x_label,y_label,color = 'b',linewidth=1.0,linestyle='dotted',label="qweb-7b")  #构建折线图，可以设置线宽，颜色属性
 
-x_label = list(xverse.keys())     #x轴的坐标
+
 y_label = list(xverse.values())     #y轴坐标
 plt.plot(x_label,y_label,color = 'black',linewidth=1.0,linestyle='dashdot',label="xverse-13b")  #构建折线图，可以设置线宽，颜色属性
 
-x_label = list(moss.keys())     #x轴的坐标
+
 y_label = list(moss.values())     #y轴坐标
 plt.plot(x_label,y_label,color = 'yellow',linewidth=1.0,linestyle='dashdot',label="moss-16b")  #构建折线图，可以设置线宽，颜色属性
+
+
+
+y_label = list(internlm.values())     #y轴坐标
+plt.plot(x_label,y_label,color = 'grey',linewidth=1.0,linestyle='dashdot',label="internlm-7b")  #构建折线图，可以设置线宽，颜色属性
+
+
 
 plt.title("ceval")                 #设置标题，这里只能显示英文，中文显示乱码
 plt.ylabel("acc")            #设置y轴名称
