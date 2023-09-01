@@ -72,6 +72,12 @@ cd auto_eval
 python translate_zh_en.py
 ```
 
+
+## ceval 评测结果
+
+![ceval](assets/imgs/1.png)
+
+
 ## exec_aigc_evals 使用帮助
 
 ```text
