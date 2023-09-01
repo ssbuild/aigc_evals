@@ -38,9 +38,11 @@ langchain/chat_model/chatglm2-6b-int4:
       model_name: chatglm2-6b-int4
       model_kwargs: # langchain 未明确实现的参数
         adapter_model: default
+        top_k: 1
       max_retries: 10
-      top_p: 0.7
-      temperature: 0.95
+      request_timeout: 200
+      top_p: 1.0
+      temperature: 1.0
       max_tokens: 2000
 ```
 
