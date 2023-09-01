@@ -3,7 +3,7 @@
 import os
 import sys
 sys.path.append(os.path.dirname(__file__))
-import pandas as pd
+from tqdm import tqdm
 from data_utils import build_cmmlu_data
 from config import env_setting, get_registry_path, get_output_path, MODEL, FORCE_EVAL
 from mymetrics import compute_match_metric
@@ -11,7 +11,8 @@ from mymetrics import compute_match_metric
 
 def do_eval(subjects,output_path,data_type):
     # 评估主题
-    for subject in subjects:
+    for subject in tqdm(subjects):
+        print(subject)
         log_path = os.path.join(output_path,data_type)
         os.makedirs(log_path,exist_ok=True)
         log_file = os.path.join(log_path, subject + '.log')
