@@ -31,7 +31,7 @@ def compute_match_metric(subjects,output_path,output_path_metric,data_type,model
                 acc_num += 1
         acc_all[subject] = acc_num / total_num if total_num >0 else 0
 
-    model_output_dir = os.path.join(output_path_metric, model.rsplit('/')[-1])
+    model_output_dir = os.path.join(output_path_metric,data_type, model.rsplit('/')[-1])
     os.makedirs(model_output_dir,exist_ok=True)
     print(acc_all)
     with open(os.path.join(model_output_dir,'metric.json'),mode='w',encoding='utf-8') as f:
@@ -60,7 +60,7 @@ def compute_bleu_metric(subjects,output_path,output_path_metric,data_type,model)
 
         acc_all[subject] = bleu / total_num if total_num >0 else 0
 
-    model_output_dir = os.path.join(output_path_metric, model.rsplit('/')[-1])
+    model_output_dir = os.path.join(output_path_metric,data_type, model.rsplit('/')[-1])
     os.makedirs(model_output_dir, exist_ok=True)
     print(acc_all)
     with open(os.path.join(model_output_dir,'metric.json'),mode='w',encoding='utf-8') as f:
