@@ -11,7 +11,7 @@ sys.path.append(os.path.dirname(__file__))
 from tqdm import tqdm
 from auto_eval.mymetrics import compute_match_metric
 from data_utils import build_mmlu_data
-from config import env_setting, get_registry_path, get_output_path, MODEL, FORCE_EVAL
+from config import env_setting, get_registry_path, get_output_path, MODEL, FORCE_EVAL, get_output_path_metric
 
 
 def do_eval(subjects,output_path,data_type):
@@ -45,6 +45,7 @@ if __name__ == '__main__':
 
     registry_path = get_registry_path()
     output_path = get_output_path()
+    output_path_metric = get_output_path_metric()
     data_path = r'F:\nlpdata_2023\openai\evals\data'
 
     data_type = "mmlu"
@@ -52,5 +53,5 @@ if __name__ == '__main__':
     subjects = build_mmlu_data(data_path, registry_path, data_type=data_type, few_shot=5)
 
     do_eval(subjects,output_path,data_type)
-    compute_match_metric(subjects,output_path,data_type,MODEL)
+    compute_match_metric(subjects,output_path,output_path_metric,data_type,MODEL)
 

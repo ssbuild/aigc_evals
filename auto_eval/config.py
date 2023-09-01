@@ -31,10 +31,17 @@ def env_setting():
     os.makedirs(p,exist_ok=True)
     os.makedirs(get_output_path(), exist_ok=True)
 
-def get_output_path():
-    output_path = os.path.join(os.path.dirname(__file__), '../outputs')
-    return output_path
+
 
 def get_registry_path():
     # 注册路径，不建议更改
     return os.path.join(os.path.dirname(__file__), "../registry")
+
+
+def get_output_path():
+    output_path = os.path.join(os.path.dirname(__file__), '../outputs')
+    return output_path
+
+def get_output_path_metric():
+    output_path = os.path.join(os.path.dirname(__file__), '../model_result')
+    return output_path

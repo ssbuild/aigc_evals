@@ -6,7 +6,7 @@ import sys
 sys.path.append(os.path.dirname(__file__))
 from tqdm import tqdm
 from data_utils import build_ceval_data
-from config import env_setting, get_registry_path, get_output_path, MODEL,FORCE_EVAL
+from config import env_setting, get_registry_path, get_output_path, MODEL, FORCE_EVAL, get_output_path_metric
 from mymetrics import compute_match_metric
 
 
@@ -41,6 +41,7 @@ if __name__ == '__main__':
 
     registry_path = get_registry_path()
     output_path = get_output_path()
+    output_path_metric = get_output_path_metric()
     # 数据路径
     data_path = r'../assets/ceval_data'
 
@@ -49,4 +50,4 @@ if __name__ == '__main__':
     subjects = build_ceval_data(data_path, registry_path, data_type=data_type, few_shot=5)
 
     do_eval(subjects,output_path,data_type)
-    compute_match_metric(subjects,output_path,data_type,MODEL)
+    compute_match_metric(subjects,output_path,output_path_metric,data_type,MODEL)
