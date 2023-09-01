@@ -11,6 +11,7 @@ OPENAI_API_BASE = "http://192.168.2.180:8081/v1"
 # MODEL = "langchain/chat_model/qwen-7b-chat-int4"
 # MODEL = "langchain/chat_model/baichuan-13b-chat-int4"
 # MODEL = "langchain/chat_model/xverse-13b-chat-int4"
+# MODEL = "langchain/chat_model/moss-moon-003-sft-int4"
 MODEL = "langchain/chat_model/chatglm2-6b-int4"
 
 FORCE_EVAL = False # 评估结果存在，是否重新评估
