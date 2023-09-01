@@ -50,7 +50,6 @@ if __name__ == '__main__':
     data_type = "mmlu"
     # 构建数据
     subjects = build_mmlu_data(data_path, registry_path, data_type=data_type, few_shot=5)
-    model = "langchain/chat_model/chatglm2-6b-int4"
 
     do_eval(subjects,output_path,data_type)
     compute_match_metric(subjects,output_path,data_type)
