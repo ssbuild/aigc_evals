@@ -20,7 +20,7 @@ pip install -e .
 ## 修改环境变量
 
 ```commandline
-auto_eval/utils.py env_setting
+auto_eval/config.py
 设置openai url等参数
 
 ```
