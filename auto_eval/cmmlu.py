@@ -13,7 +13,7 @@ def do_eval(subjects,output_path,data_type):
     # 评估主题
     for subject in tqdm(subjects):
         print(subject)
-        log_path = os.path.join(output_path,data_type)
+        log_path = os.path.join(output_path,data_type,MODEL.rsplit('/')[-1])
         os.makedirs(log_path,exist_ok=True)
         log_file = os.path.join(log_path, subject + '.log')
         record_path = os.path.join(log_path, subject + '.event')
@@ -46,5 +46,5 @@ if __name__ == '__main__':
     subjects = build_cmmlu_data(data_path, registry_path, data_type=data_type, few_shot=5)
 
     do_eval(subjects,output_path,data_type)
-    compute_match_metric(subjects,output_path,data_type)
+    compute_match_metric(subjects,output_path,data_type,MODEL)
 

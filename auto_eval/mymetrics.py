@@ -6,10 +6,10 @@ import os
 import pandas as pd
 
 
-def compute_match_metric(subjects,output_path,data_type):
+def compute_match_metric(subjects,output_path,data_type,model):
     acc_all = {}
     for subject in subjects:
-        log_path = os.path.join(output_path, data_type)
+        log_path = os.path.join(output_path,data_type,model.rsplit('/')[-1])
         record_path = os.path.join(log_path, subject + '.event')
         if not os.path.exists(record_path):
             continue
@@ -37,10 +37,10 @@ def compute_match_metric(subjects,output_path,data_type):
     return acc_all
 
 
-def compute_bleu_metric(subjects,output_path,data_type):
+def compute_bleu_metric(subjects,output_path,data_type,model):
     acc_all = {}
     for subject in subjects:
-        log_path = os.path.join(output_path, data_type)
+        log_path = os.path.join(output_path,data_type,model.rsplit('/')[-1])
         record_path = os.path.join(log_path, subject + '.event')
         if not os.path.exists(record_path):
             continue
@@ -61,3 +61,5 @@ def compute_bleu_metric(subjects,output_path,data_type):
     print(acc_all)
     with open(os.path.join(output_path,'metric.json'),mode='w',encoding='utf-8') as f:
         f.write(json.dumps(acc_all,ensure_ascii=False,indent=2))
+
+    return acc_all
