@@ -13,14 +13,15 @@ def extract_answer(gen_ans):
     if len(m) > 0:
         return m[-1]
     answer_patterns = [
-        r'([ABCD])是正确的',
-        r'选项([ABCD])正确',
-        r'答案为([ABCD])',
-        r'答案是([ABCD])',
-        r'答案([ABCD])',
-        r'选择([ABCD])',
-        r'答案：([ABCD])',
-        r'选择答案([ABCD])'
+        r'([ABCD])\s*是正确的',
+        r'选项\s*([ABCD])正确',
+        r'答案为\s*([ABCD])',
+        r'答案是\s*([ABCD])',
+        r'答案\s*([ABCD])',
+        r'选择\s*([ABCD])',
+        r'答案：\s*([ABCD])',
+        r'选择答案\s*([ABCD])',
+        r'正确答案为\s*([ABCD])',
     ]
     # RE extraction
     for answer_pattern in answer_patterns:
@@ -116,3 +117,9 @@ class ChoiceMatch(Match):
             sampled=sampled,
             expected=sample["ideal"],
         )
+
+if __name__ =='__main__':
+    gen_ans = "根据中国《建筑设计防火规范》（GB50016-2014）的规定，两座多层建筑，其防火间距可以按规定减少 25% 的条件是相邻两面外墙均为不燃性墙体，且无外露的可燃性屋檐，每面外墙上无防火保护的门、窗、洞口不正对开设，同时门、窗、洞口面积之和各不大于该外墙面积的 6%。因此，正确答案为C. 6%。\n</s>"
+    d = extract_answer(gen_ans=gen_ans)
+
+    print(d)
