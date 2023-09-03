@@ -6,12 +6,12 @@
 
 import os
 import sys
-sys.path.append(os.path.dirname(__file__))
+sys.path.insert(0,os.path.join(os.path.dirname(__file__),'..'))
 
 from tqdm import tqdm
 from auto_eval.mymetrics import compute_match_metric
-from data_utils import build_mmlu_data
-from config import env_setting, get_registry_path, get_output_path, MODEL, FORCE_EVAL, get_output_path_metric
+from auto_eval.data_utils import build_mmlu_data
+from auto_eval.config import env_setting, get_registry_path, get_output_path, MODEL, FORCE_EVAL, get_output_path_metric
 
 
 def do_eval(subjects,output_path,data_type):

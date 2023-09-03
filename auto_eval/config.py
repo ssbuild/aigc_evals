@@ -32,7 +32,7 @@ def env_setting():
         os.environ['OPENAI_API_BASE'] = OPENAI_API_BASE
 
 
-    os.environ['PYTHONPATH'] = os.path.abspath(os.path.dirname(__file__))
+    os.environ['PYTHONPATH'] = os.path.join(os.path.abspath(os.path.dirname(__file__)),'..')
 
     registry_path = get_registry_path()
     p = os.path.join(registry_path,'data')
@@ -53,5 +53,5 @@ def get_output_path():
     return output_path
 
 def get_output_path_metric():
-    output_path = os.path.join(os.path.dirname(__file__), '../model_result')
+    output_path = os.path.join(os.path.dirname(__file__), '../outputs/model_result')
     return output_path

@@ -61,7 +61,7 @@ def build_ceval_data(data_path,registry_path,data_type = "ceval",few_shot=5):
         }
 
         d = {
-            "class": "custom_match.choice_match:ChoiceMatch",
+            "class": "auto_eval.custom_match.choice_match:ChoiceMatch",
             "args": {
                 "samples_jsonl": samples_path,
                 # "few_shot_jsonl": few_shot_path,
@@ -133,7 +133,7 @@ def build_cmmlu_data(data_path,registry_path,data_type = "cmmlu",few_shot=True):
             "metrics": ["accuracy"]
         }
         d = {
-            "class": "custom_match.choice_match:ChoiceMatch",
+            "class": "auto_eval.custom_match.choice_match:ChoiceMatch",
             "args": {
                 "samples_jsonl": samples_path,
                 # "few_shot_jsonl": few_shot_path,
@@ -205,7 +205,7 @@ def build_mmlu_data(data_path,registry_path,data_type = "mmlu",few_shot=True):
             "metrics": ["accuracy"]
         }
         d = {
-            "class": "custom_match.choice_match:ChoiceMatch",
+            "class": "auto_eval.custom_match.choice_match:ChoiceMatch",
             "args": {
                 "samples_jsonl": samples_path,
             }

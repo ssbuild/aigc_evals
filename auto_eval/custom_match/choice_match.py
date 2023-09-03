@@ -22,6 +22,7 @@ def extract_answer(gen_ans):
         r'答案：\s*([ABCD])',
         r'选择答案\s*([ABCD])',
         r'正确答案为\s*([ABCD])',
+        r'正确答案应该是\s*([ABCD])',
     ]
     # RE extraction
     for answer_pattern in answer_patterns:
