@@ -5,7 +5,7 @@
 
 
 ## 当前支持评估数据集
-目前支持 cmmlu , ceval,  mmlu 和 翻译数据集评估
+目前支持 cmmlu , ceval,  mmlu , 翻译数据集 和 结构化抽取 评估
 
 
 ## 安装
@@ -22,6 +22,11 @@ pip install -e .
 ```commandline
 auto_eval/config.py
 设置openai url等参数
+
+或者
+export OPENAI_API_KEY="your key"
+export OPENAI_API_BASE="http://192.168.2.180:8081/v1"
+
 
 ```
 
@@ -72,6 +77,10 @@ cd auto_eval
 python run_translate_zh_en.py
 ```
 
+```commandline
+cd auto_eval
+python run_struct.py
+```
 
 ## ceval 评测结果
 
