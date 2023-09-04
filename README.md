@@ -75,7 +75,11 @@ python translate_zh_en.py
 
 ## ceval 评测结果
 
-![ceval](assets/imgs/2.png)
+![ceval](outputs/model_result/img.jpg)
+![ceval](outputs/model_result/img_0.jpg)
+![ceval](outputs/model_result/img_1.jpg)
+![ceval](outputs/model_result/img_2.jpg)
+![ceval](outputs/model_result/img_3.jpg)
 
 
 ## exec_aigc_evals 使用帮助

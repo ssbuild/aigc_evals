@@ -7,6 +7,9 @@
 /registry/evals
 /src/aigc_evals.egg-info
 /auto_eval/__pycache__
-/outputs
 /auto_eval/custom_match/__pycache__
 /src
+/outputs/ceval
+/outputs/mmlu
+/outputs/cmmlu
+/outputs/zh-en
