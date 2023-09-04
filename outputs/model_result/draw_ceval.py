@@ -54,7 +54,7 @@ plt.xlabel("category")            #设置x轴名称
 
 plt.legend()
 
-plt.savefig(f"./img.jpg")
+plt.savefig(f"../../assets/imgs/img.jpg")
 
 import matplotlib.pyplot as plt
 plt.tick_params(axis='x', labelsize=8)
@@ -80,7 +80,7 @@ for idx in range(len(metric)):
     fig.suptitle(list(metric.keys())[idx] + ' 5 shot')
     fig.supxlabel("model")
     fig.supylabel("acc")
-    fig.savefig(f"./img_{idx}.jpg", bbox_inches='tight')
+    fig.savefig(f"../../assets/imgs/img_{idx}.jpg", bbox_inches='tight')
 
 
 
