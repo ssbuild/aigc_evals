@@ -282,3 +282,65 @@ def build_translate_data(data_path,registry_path,data_type="zh-en"):
         yaml.dump(registry_yaml, f)
 
     return subjects
+
+
+
+
+
+def build_struct_data(data_path,registry_path,data_type="struct"):
+
+    def create_chat_prompt(question):
+        user_prompt = f"{question}"
+        return [
+
+            {"role": "user", "content": user_prompt}
+        ]
+
+    subjects = []
+
+    registry_yaml = {}
+
+    subject_path = os.path.join(registry_path, "data", data_type)
+    os.makedirs(subject_path, exist_ok=True)
+
+    fs_list = os.listdir(data_path)
+    for file in fs_list:
+        if file.endswith('.json') or file.endswith('.JSON'):
+            subject = file.rsplit('.json')[0]
+            subjects.append(subject)
+            with open(os.path.join(data_path,file),mode='r',encoding='utf=-8') as f:
+                lines = f.readlines()
+
+            D = []
+            for line in lines:
+                jd = json.loads(line)
+                if not jd:
+                    continue
+                D.append({
+                    "id": jd.get("id",None),
+                    "input": create_chat_prompt(jd["prompt"]),
+                    "ideal": jd["response"]
+                })
+            samples_path = os.path.join(subject_path, "samples.jsonl")
+            test_df = pd.DataFrame(D)
+            test_df[["id", "input", "ideal"]].to_json(samples_path, lines=True, orient="records",force_ascii=False)
+
+            eval_id = f"translate_{data_type}_{subject}"
+
+            registry_yaml[eval_id] = {
+                "id": f"{eval_id}.test.v1",
+                "metrics": ["f1"]
+            }
+            d = {
+                "class": "aigc_evals.custom_match.struct_match:StructMatch",
+                "args": {
+                    "samples_jsonl": samples_path,
+                }
+            }
+            registry_yaml[f"{eval_id}.test.v1"] = d
+
+
+    with open(os.path.join(registry_path, "evals", data_type + ".yaml"), "w") as f:
+        yaml.dump(registry_yaml, f)
+
+    return subjects

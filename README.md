@@ -52,24 +52,24 @@ langchain/chat_model/chatglm2-6b-int4:
 ## 一键评估
 ```commandline
 cd auto_eval
-python ceval.py
+python run_ceval.py
 ```
 
 ```commandline
 cd auto_eval
-python cmmlu.py
+python run_cmmlu.py
 ```
 
 ```commandline
 wget https://people.eecs.berkeley.edu/~hendrycks/data.tar
 下载mmlu数据集
 cd auto_eval
-python mmlu.py
+python run_mmlu.py
 ```
 
 ```commandline
 cd auto_eval
-python translate_zh_en.py
+python run_translate_zh_en.py
 ```
 
 
