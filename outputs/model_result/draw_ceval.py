@@ -77,7 +77,7 @@ for idx in range(len(metric)):
         axs.bar(k, y_label,width=0.2)
 
 
-    fig.suptitle(list(metric.keys())[idx] + '5 shot')
+    fig.suptitle(list(metric.keys())[idx] + ' 5 shot')
     fig.supxlabel("model")
     fig.supylabel("acc")
     fig.savefig(f"./img_{idx}.jpg", bbox_inches='tight')
