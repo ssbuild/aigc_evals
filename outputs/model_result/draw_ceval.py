@@ -47,9 +47,9 @@ for k,v in data_map.items():
 
 
 
-plt.title("five shot ceval")                 #设置标题，这里只能显示英文，中文显示乱码
+plt.title("ceval 5 shot")                 #设置标题，这里只能显示英文，中文显示乱码
 plt.ylabel("acc")            #设置y轴名称
-plt.xlabel("ceval category")            #设置x轴名称
+plt.xlabel("category")            #设置x轴名称
 
 
 plt.legend()
@@ -77,8 +77,9 @@ for idx in range(len(metric)):
         axs.bar(k, y_label,width=0.2)
 
 
-    fig.suptitle(list(metric.keys())[idx])
-
+    fig.suptitle(list(metric.keys())[idx] + '5 shot')
+    fig.supxlabel("model")
+    fig.supylabel("acc")
     fig.savefig(f"./img_{idx}.jpg", bbox_inches='tight')
 
 
