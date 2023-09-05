@@ -319,20 +319,20 @@ def build_struct_data(data_path,registry_path,data_type="struct"):
                 D.append({
                     "id": jd.get("id",None),
                     "input": create_chat_prompt(jd["prompt"]),
-                    "ideal": jd["response"]
+                    "ideal": jd["response"] if isinstance(jd["response"],dict) else json.loads(jd["response"])
                 })
             samples_path = os.path.join(subject_path, "samples.jsonl")
             test_df = pd.DataFrame(D)
             test_df[["id", "input", "ideal"]].to_json(samples_path, lines=True, orient="records",force_ascii=False)
 
-            eval_id = f"translate_{data_type}_{subject}"
+            eval_id = f"struct_{data_type}_{subject}"
 
             registry_yaml[eval_id] = {
                 "id": f"{eval_id}.test.v1",
                 "metrics": ["f1"]
             }
             d = {
-                "class": "aigc_evals.custom_match.struct_match:StructMatch",
+                "class": "auto_eval.custom_match.struct_match:StructMatch",
                 "args": {
                     "samples_jsonl": samples_path,
                 }
