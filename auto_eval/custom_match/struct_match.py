@@ -35,16 +35,24 @@ class StructMatch(aigc_evals.Eval):
         """
         R,T = [],[]
         for k,v in sample.items():
-            if isinstance(v,dict):
-                R.extend(list(v.values()))
+            RESULT = R
+            if isinstance(v, dict):
+                RESULT.extend([k + _ for _ in list(v.values()) if _])
+            elif isinstance(v, list):
+                RESULT.extend([k + value for _ in v for value in list(_.values()) if value])
             else:
-                R.append(v)
+                if v:
+                    RESULT.append(v)
 
         for k, v in expect.items():
+            RESULT = T
             if isinstance(v, dict):
-                T.extend(list(v.values()))
+                RESULT.extend([k + _ for _ in list(v.values()) if _])
+            elif isinstance(v, list):
+                RESULT.extend([k + value for _ in v for value in list(_.values()) if value])
             else:
-                T.append(v)
+                if v:
+                    RESULT.append(v)
 
         R = set([tuple(i) for i in T])
         T = set([tuple(i) for i in T])
