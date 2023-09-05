@@ -54,7 +54,7 @@ class StructMatch(aigc_evals.Eval):
                 if v:
                     RESULT.append(v)
 
-        R = set([tuple(i) for i in T])
+        R = set([tuple(i) for i in R])
         T = set([tuple(i) for i in T])
         tp = len(R & T)
         fp = len(R) - tp
@@ -79,7 +79,7 @@ class StructMatch(aigc_evals.Eval):
         sampled = result.get_completions()[0]
 
         try:
-            jd = json.loads(sampled)
+            jd = json.loads(sampled.strip())
 
         except:
             jd = {}
