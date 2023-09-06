@@ -95,7 +95,7 @@ class StructMatch(aigc_evals.Eval):
             "fp": fp,
             "fn": fn,
         }
-        result["expected"] = sample["ideal"]
+        result["expected"] = json.dumps(sample["ideal"],ensure_ascii=False)
         aigc_evals.record.record_sampling(prompt, sampled, index=sample.get("id",None))
         aigc_evals.record.record_metrics(**result)
 
