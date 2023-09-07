@@ -39,7 +39,10 @@ class StructMatch(aigc_evals.Eval):
             if isinstance(v, dict):
                 RESULT.extend([k + _ for _ in list(v.values()) if _])
             elif isinstance(v, list):
-                RESULT.extend([k + value for _ in v for value in list(_.values()) if value])
+                for _ in v:
+                    if not isinstance(_,dict):
+                        continue
+                    RESULT.extend([k + value for value in list(_.values()) if value])
             else:
                 if v:
                     RESULT.append(v)
@@ -89,7 +92,7 @@ class StructMatch(aigc_evals.Eval):
 
         result = {
             "index" : sample.get("id",None),
-            "prompt": prompt,
+            # "prompt": prompt,
             "sampled": sampled,
             "tp": tp,
             "fp": fp,
