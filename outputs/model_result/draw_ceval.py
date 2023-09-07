@@ -30,13 +30,15 @@ for file in files:
 
 
 import matplotlib.pyplot as plt   #导入包
-fig = plt.figure()              #创建空图
+plt.figure(figsize=(18, 6.5))
+plt.rcParams["font.sans-serif"] = ['SimHei']
+plt.rcParams["axes.unicode_minus"] = False
 
 colors = [
-    'r','g','b','black','yellow','grey', 'orange','silver'
+    'r','g','b','black','yellow','grey', 'orange','silver','purple','brown'
 ]
 styles = [
-    'dashed','solid','dotted','dashdot','dashdot','dashdot','dashdot','dashdot',
+    'dashed','solid','dotted','dashdot','dashdot','dashdot','dashdot','dashdot','dashdot',
 ]
 idx = -1
 for k,v in data_map.items():
@@ -60,14 +62,13 @@ import matplotlib.pyplot as plt
 plt.tick_params(axis='x', labelsize=8)
 
 
-plt.rcParams["font.sans-serif"] = ['SimHei']
-plt.rcParams["axes.unicode_minus"] = False
+
 
 metric = list(data_map.values())[0]
 fig: plt.Figure
 axs: plt.axes
 for idx in range(len(metric)):
-    fig , axs = plt.subplots(figsize=(12, 4))
+    fig , axs = plt.subplots(figsize=(18, 4))
     # axs.tick_params(axis='x', labelrotation=-80, gridOn=True)
     axs.tick_params(axis='x', gridOn=True)
 
