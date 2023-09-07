@@ -55,5 +55,5 @@ def get_output_path():
     return output_path
 
 def get_output_path_metric():
-    output_path = os.path.join(os.path.dirname(__file__), 'outputs/model_result')
+    output_path = os.path.join(os.path.dirname(__file__), 'model_result')
     return output_path

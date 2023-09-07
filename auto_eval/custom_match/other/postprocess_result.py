@@ -5,7 +5,7 @@
 import json
 import os
 import sys
-sys.path.append(os.path.join(os.path.dirname(__file__),'../..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '../../..'))
 import pandas as pd
 from tqdm import tqdm
 from auto_eval.config import env_setting, get_registry_path, get_output_path, get_output_path_metric, MODEL
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     output_path = get_output_path()
     output_path_metric = get_output_path_metric()
     # 数据路径
-    data_path = r'../../assets/ceval_data'
+    data_path = r'../../../assets/ceval_data'
 
     data_type = "ceval"
 
