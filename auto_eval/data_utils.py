@@ -226,12 +226,10 @@ def build_mmlu_data(data_path,registry_path,data_type = "mmlu",few_shot=True):
 
 
 
-def build_translate_data(data_path,registry_path,data_type="zh-en"):
-    sys_msg = "给定一个表示的文本，提供该文本的英文翻译。除了翻译本身之外，您必须在输出中提供任何解释。您必须释义而不是逐字翻译，并保留所有的原始含义。"
-    def create_chat_prompt(sys_msg, question):
+def build_bleu_data(data_path, registry_path, data_type="bleu"):
+    def create_chat_prompt(question):
         user_prompt = f"{question}"
         return [
-            {"role": "system", "content": sys_msg},
             {"role": "user", "content": user_prompt}
         ]
 
@@ -256,8 +254,8 @@ def build_translate_data(data_path,registry_path,data_type="zh-en"):
                 if not jd:
                     continue
                 D.append({
-                    "input": create_chat_prompt(sys_msg,jd["src"]),
-                    "ideal": jd["dst"] if isinstance(jd["dst"],list) else [jd['dst']]
+                    "input": create_chat_prompt(jd["prompt"]),
+                    "ideal": jd["refs"] if isinstance(jd["refs"],list) else [jd['refs']]
                 })
             samples_path = os.path.join(subject_path, "samples.jsonl")
             test_df = pd.DataFrame(D)
@@ -270,7 +268,7 @@ def build_translate_data(data_path,registry_path,data_type="zh-en"):
                 "metrics": ["accuracy"]
             }
             d = {
-                "class": "aigc_evals.elsuite.translate:Translate",
+                "class": "auto_eval.custom_match.bleu_match:BleuMatch",
                 "args": {
                     "samples_jsonl": samples_path,
                 }
@@ -284,6 +282,62 @@ def build_translate_data(data_path,registry_path,data_type="zh-en"):
     return subjects
 
 
+
+
+def build_rouge_data(data_path, registry_path, data_type="rouge"):
+    def create_chat_prompt(question):
+        user_prompt = f"{question}"
+        return [
+            {"role": "user", "content": user_prompt}
+        ]
+
+    subjects = []
+
+    registry_yaml = {}
+
+    subject_path = os.path.join(registry_path, "data", data_type)
+    os.makedirs(subject_path, exist_ok=True)
+
+    fs_list = os.listdir(data_path)
+    for file in fs_list:
+        if file.endswith('.json') or file.endswith('.JSON'):
+            subject = file.rsplit('.json')[0]
+            subjects.append(subject)
+            with open(os.path.join(data_path,file),mode='r',encoding='utf=-8') as f:
+                lines = f.readlines()
+
+            D = []
+            for line in lines:
+                jd = json.loads(line)
+                if not jd:
+                    continue
+                D.append({
+                    "input": create_chat_prompt(jd["prompt"]),
+                    "ideal": jd["refs"] if isinstance(jd["refs"],list) else [jd['refs']]
+                })
+            samples_path = os.path.join(subject_path, "samples.jsonl")
+            test_df = pd.DataFrame(D)
+            test_df[["input", "ideal"]].to_json(samples_path, lines=True, orient="records",force_ascii=False)
+
+            eval_id = f"translate_{data_type}_{subject}"
+
+            registry_yaml[eval_id] = {
+                "id": f"{eval_id}.test.v1",
+                "metrics": ["accuracy"]
+            }
+            d = {
+                "class": "auto_eval.custom_match.rouge_match:RougeMatch",
+                "args": {
+                    "samples_jsonl": samples_path,
+                }
+            }
+            registry_yaml[f"{eval_id}.test.v1"] = d
+
+
+    with open(os.path.join(registry_path, "evals", data_type + ".yaml"), "w") as f:
+        yaml.dump(registry_yaml, f)
+
+    return subjects
 
 
 

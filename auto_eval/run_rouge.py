@@ -8,8 +8,8 @@ import sys
 sys.path.insert(0,os.path.join(os.path.dirname(__file__),'..'))
 
 from tqdm import tqdm
-from auto_eval.mymetrics import compute_bleu_metric
-from auto_eval.data_utils import build_translate_data
+from auto_eval.mymetrics import compute_rouge_metric
+from auto_eval.data_utils import build_rouge_data
 from auto_eval.config import env_setting, get_registry_path, get_output_path, MODEL, FORCE_EVAL, get_output_path_metric
 
 
@@ -43,11 +43,11 @@ if __name__ == '__main__':
     registry_path = get_registry_path()
     output_path = get_output_path()
     output_path_metric = get_output_path_metric()
-    data_path = r'../assets/zh-en'
+    data_path = r'../assets/rouge_data'
 
-    data_type = "zh-en"
+    data_type = "rouge"
     # 构建数据
-    subjects = build_translate_data(data_path, registry_path, data_type=data_type)
+    subjects = build_rouge_data(data_path, registry_path, data_type=data_type)
     do_eval(subjects,output_path,data_type)
-    compute_bleu_metric(subjects,output_path,output_path_metric,data_type,MODEL)
+    compute_rouge_metric(subjects,output_path,output_path_metric,data_type,MODEL)
 

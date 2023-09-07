@@ -74,7 +74,12 @@ python run_mmlu.py
 
 ```commandline
 cd auto_eval
-python run_translate_zh_en.py
+python run_bleu.py
+```
+
+```commandline
+cd auto_eval
+python run_rouge.py
 ```
 
 ```commandline

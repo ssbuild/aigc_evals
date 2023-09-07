@@ -68,6 +68,47 @@ def compute_bleu_metric(subjects,output_path,output_path_metric,data_type,model)
     return acc_all
 
 
+def compute_rouge_metric(subjects,output_path,output_path_metric,data_type,model):
+    acc_all = {}
+    for subject in subjects:
+        log_path = os.path.join(output_path,data_type,model.rsplit('/')[-1])
+        record_path = os.path.join(log_path, subject + '.event')
+        if not os.path.exists(record_path):
+            continue
+        with open(record_path, "r") as f:
+            events_df = pd.read_json(f, lines=True)
+
+        # {"run_id": "2308310700296J5KV3PJ", "event_id": 58, "sample_id": "translate_zh-en_samples.test.1", "type": "metrics", "data": {"sacrebleu_sentence_score": 1.958224832501124}, "created_by": "", "created_at": "2023-08-31 07:03:03.500952+00:00"}
+
+
+        total_num = 0
+        rouge = {
+            'rouge-1': {'r': 0., 'p': 0., 'f': 0.},
+            'rouge-2': {'r': 0., 'p': 0., 'f': 0.},
+            'rouge-l': {'r': 0., 'p': 0., 'f': 0.}
+        }
+        for i, r in pd.json_normalize(events_df[events_df.type == "metrics"].data).iterrows():
+            total_num += 1
+            for k in rouge:
+                v = rouge[k]
+                for sub_k in v:
+                    v[sub_k] += r[k][sub_k]
+
+        if total_num > 0:
+            for k,v in rouge.items():
+                for sub_k in v:
+                    v[sub_k] /= total_num
+
+        acc_all[subject] = rouge
+
+    model_output_dir = os.path.join(output_path_metric,data_type, model.rsplit('/')[-1])
+    os.makedirs(model_output_dir, exist_ok=True)
+    print(acc_all)
+    with open(os.path.join(model_output_dir,'metric.json'),mode='w',encoding='utf-8') as f:
+        f.write(json.dumps(acc_all,ensure_ascii=False,indent=2))
+    return acc_all
+
+
 def compute_struct_metric(subjects,output_path,output_path_metric,data_type,model):
     acc_all = {}
     for subject in subjects:
