@@ -85,6 +85,7 @@ python run_struct.py
 ## ceval 评测结果
 
 ![ceval](assets/imgs/img.jpg)
+![ceval](assets/imgs/img_avg.jpg)
 ![ceval](assets/imgs/img_0.jpg)
 ![ceval](assets/imgs/img_1.jpg)
 ![ceval](assets/imgs/img_2.jpg)

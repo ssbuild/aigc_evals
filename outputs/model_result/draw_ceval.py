@@ -30,7 +30,7 @@ for file in files:
 
 
 import matplotlib.pyplot as plt   #导入包
-plt.figure(figsize=(18, 6.5))
+plt.figure(figsize=(18, 12))
 plt.rcParams["font.sans-serif"] = ['SimHei']
 plt.rcParams["axes.unicode_minus"] = False
 
@@ -85,3 +85,13 @@ for idx in range(len(metric)):
 
 
 
+# avg
+avg_map = {k: np.average(list(v.values())) for k,v in data_map.items()}
+fig, axs = plt.subplots(figsize=(18, 4))
+# axs.tick_params(axis='x', labelrotation=-80, gridOn=True)
+axs.tick_params(axis='x', gridOn=True)
+axs.bar(avg_map.keys(), avg_map.values(),width=0.2)
+fig.suptitle(' 5 shot avg')
+fig.supxlabel("model")
+fig.supylabel("acc")
+fig.savefig(f"../../assets/imgs/img_avg.jpg", bbox_inches='tight')
