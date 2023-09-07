@@ -16,7 +16,7 @@ from langchain.chat_models import ChatOpenAI
 
 
 from aigc_evals.prompt.base import CompletionPrompt, is_chat_prompt, OpenAICreateChatPrompt
-from aigc_evals.record import record_sampling
+# from aigc_evals.record import record_sampling
 
 
 class CompletionResult(ABC):
@@ -69,7 +69,7 @@ class LangChainLLMCompletionFn(CompletionFn):
     def __call__(self, prompt, **kwargs) -> LangChainLLMCompletionResult:
         prompt = CompletionPrompt(prompt).to_formatted_prompt()
         response = self.llm(prompt)
-        record_sampling(prompt=prompt, sampled=response)
+        # record_sampling(prompt=prompt, sampled=response)
         return LangChainLLMCompletionResult(response)
 
 
@@ -111,5 +111,5 @@ class LangChainChatModelCompletionFn(CompletionFn):
         else:
             messages = [HumanMessage(content=prompt)]
         response = self.llm(messages).content
-        record_sampling(prompt=prompt, sampled=response)
+        # record_sampling(prompt=prompt, sampled=response)
         return LangChainLLMCompletionResult(response)

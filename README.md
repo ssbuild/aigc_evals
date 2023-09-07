@@ -4,8 +4,6 @@
 部署开源模型移步至[aigc_serving](https://github.com/ssbuild/aigc_serving) 
 
 
-## 当前支持评估数据集
-目前支持 cmmlu , ceval,  mmlu 数据集评估
 
 
 ## 安装
@@ -20,7 +18,7 @@ pip install -e .
 ## 修改环境变量
 
 ```commandline
-auto_eval/utils.py
+auto_eval/config.py
 设置openai url等参数
 def env_setting():
     # 限制并发数目
@@ -52,23 +50,7 @@ langchain/chat_model/chatglm2-6b-int4:
 修改替换 chatglm2-6b-int4 成自己的开放模型，chat_model_kwargs 为 langchain ChatOpenAI 参数
 
 
-## 一键评估
-```commandline
-cd examples
-python ceval
-```
 
-```commandline
-cd examples
-python cmmlu
-```
-
-```commandline
-wget https://people.eecs.berkeley.edu/~hendrycks/data.tar
-下载mmlu数据集
-cd examples
-python mmlu
-```
 
 ## exec_aigc_evals 使用帮助
 

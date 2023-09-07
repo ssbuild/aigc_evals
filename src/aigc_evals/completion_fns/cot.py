@@ -1,9 +1,11 @@
 """
 Extending Completion Functions with Chain-of-Thought
 """
+from typing import List
+
 from aigc_evals.api import CompletionFn, CompletionResult
 from aigc_evals.prompt.base import ChatCompletionPrompt
-from aigc_evals.record import record_sampling
+# from aigc_evals.record import record_sampling
 from aigc_evals.registry import Registry
 
 DEFAULT_COT_TEMPLATE = "\nBefore answering, reason in a step-by-step manner as to get the right answer, then conclude with the answer."
@@ -52,7 +54,7 @@ class ChainOfThoughtCompletionFn(CompletionFn):
 
         cot_prompt = prompt + [{"role": "assistant", "content": self.cot_template}]
         answer = self.cot_completion_fn_instance(prompt=cot_prompt, **kwargs).get_completions()[0]
-        record_sampling(prompt=cot_prompt, sampled=answer)
+        # record_sampling(prompt=cot_prompt, sampled=answer)
 
         extraction_prompt = cot_prompt + [
             {"role": "assistant", "content": answer},
@@ -61,6 +63,6 @@ class ChainOfThoughtCompletionFn(CompletionFn):
         extracted_answer = self.extract_completion_fn_instance(
             prompt=extraction_prompt, **kwargs
         ).get_completions()[0]
-        record_sampling(prompt=extraction_prompt, sampled=extracted_answer)
+        # record_sampling(prompt=extraction_prompt, sampled=extracted_answer)
 
         return ChainOfThoughtCompletionResult(extracted_answer)

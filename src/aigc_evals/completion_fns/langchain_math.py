@@ -7,7 +7,7 @@ from aigc_evals.api import CompletionResult
 from langchain import OpenAI, LLMMathChain
 
 from aigc_evals.prompt.base import CompletionPrompt
-from aigc_evals.record import record_sampling
+# from aigc_evals.record import record_sampling
 
 
 class LangChainCompletionResult(CompletionResult):
@@ -29,5 +29,5 @@ class LangChainMathChainCompletionFn(Completion):
         response = self.llm_math.run(prompt)
         # The LangChain response comes with `Answer: ` ahead of this, let's strip it out
         response = response.strip("Answer:").strip()
-        record_sampling(prompt=prompt, sampled=response)
+        # record_sampling(prompt=prompt, sampled=response)
         return LangChainCompletionResult(response)

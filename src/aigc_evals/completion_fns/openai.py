@@ -9,7 +9,7 @@ from aigc_evals.prompt.base import (
     OpenAICreatePrompt,
     Prompt,
 )
-from aigc_evals.record import record_sampling
+# from aigc_evals.record import record_sampling
 from aigc_evals.utils.api_utils import (
     openai_chat_completion_create_retrying,
     openai_completion_create_retrying,
@@ -88,7 +88,7 @@ class OpenAICompletionFn(CompletionFn):
             **{**kwargs, **self.extra_options},
         )
         result = OpenAICompletionResult(raw_data=result, prompt=openai_create_prompt)
-        record_sampling(prompt=result.prompt, sampled=result.get_completions())
+        # record_sampling(prompt=result.prompt, sampled=result.get_completions())
         return result
 
 
@@ -135,5 +135,5 @@ class OpenAIChatCompletionFn(CompletionFnSpec):
             **{**kwargs, **self.extra_options},
         )
         result = OpenAIChatCompletionResult(raw_data=result, prompt=openai_create_prompt)
-        record_sampling(prompt=result.prompt, sampled=result.get_completions())
+        # record_sampling(prompt=result.prompt, sampled=result.get_completions())
         return result

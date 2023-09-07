@@ -10,7 +10,7 @@ import pandas as pd
 
 from aigc_evals.api import CompletionFn, CompletionResult
 from aigc_evals.prompt.base import ChatCompletionPrompt, CompletionPrompt
-from aigc_evals.record import record_sampling
+# from aigc_evals.record import record_sampling
 from aigc_evals.registry import Registry
 
 
@@ -109,5 +109,5 @@ class RetrievalCompletionFn(CompletionFn):
         retrieval_prompt = [{"role": "system", "content": self.retrieval_template + topk}] + prompt
 
         answer = self.completion_fn_instance(prompt=retrieval_prompt, **kwargs).get_completions()[0]
-        record_sampling(prompt=retrieval_prompt, sampled=answer)
+        # record_sampling(prompt=retrieval_prompt, sampled=answer)
         return RetrievalCompletionResult(answer)
