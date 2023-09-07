@@ -26,7 +26,7 @@ files = os.listdir("ceval")
 files = sorted(files)
 for file in files:
     with open(os.path.join('ceval',file,'metric.json'),mode='r',encoding='utf-8') as f:
-        data_map[file.replace('-int4','').replace('-chat','')] = get_data(json.loads(f.read()))
+        data_map[file.replace('-int4','')] = get_data(json.loads(f.read()))
 
 
 import matplotlib.pyplot as plt   #导入包
