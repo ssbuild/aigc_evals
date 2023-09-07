@@ -2,6 +2,8 @@
 # @Author  : ssbuild
 # @Time    : 2023/9/7 16:09
 from typing import Any, List
+
+from aigc_evals.record import record_event, record_metrics, record_sampling
 from sacrebleu.metrics.bleu import BLEU
 import aigc_evals
 import aigc_evals.metrics
@@ -57,24 +59,23 @@ class BleuMatch(aigc_evals.Eval):
 
 
         score = self.bleu.sentence_score(sampled, expected).score
-        aigc_evals.record.record_metrics(sacrebleu_sentence_score=score)
+        record_metrics(sacrebleu_sentence_score=score)
 
         match = score > self.threshold
 
-        if score is not None:
-            aigc_evals.record.record_match(
-                match, expected=expected, sampled=sampled, sacrebleu_sentence_score=score
-            )
+        record_sampling(
+            prompt=prompt, sampled=sampled , expected=expected,correct=match, sacrebleu_sentence_score=score
+        )
         return match
 
     def run(self, recorder):
         samples = self.get_samples()
         self.eval_all_samples(recorder, samples)
-        events = recorder.get_events("match")
+        events = recorder.get_events("sampling")
 
         sampled = list(map(lambda e: e.data["sampled"], events))
         expected = list(map(lambda e: e.data["expected"], events))
-        sacrebleu_score = BLEU().corpus_score(sampled, [expected]).score
+        sacrebleu_score = BLEU().corpus_score(sampled, expected).score
 
         return {
             "accuracy": aigc_evals.metrics.get_accuracy(events),

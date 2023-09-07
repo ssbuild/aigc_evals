@@ -323,7 +323,7 @@ def build_rouge_data(data_path, registry_path, data_type="rouge"):
 
             registry_yaml[eval_id] = {
                 "id": f"{eval_id}.test.v1",
-                "metrics": ["accuracy"]
+                "metrics": ["rouge"]
             }
             d = {
                 "class": "auto_eval.custom_match.rouge_match:RougeMatch",

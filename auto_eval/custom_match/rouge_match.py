@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 # @Author  : ssbuild
 # @Time    : 2023/9/7 16:34
+import json
 from typing import Any, List
+
+from aigc_evals.record import record_event, record_metrics, record_sampling
 from sacrebleu.metrics.bleu import BLEU
 import aigc_evals
 import aigc_evals.metrics
@@ -56,9 +59,14 @@ class RougeMatch(aigc_evals.Eval):
         sampled = result.get_completions()[0]
 
 
-        score = self.rouge.get_scores([sampled], [expected[0]])[0]
-        aigc_evals.record.record_metrics(**score, index=sample.get("id",None))
-        aigc_evals.record.record_sampling(prompt, sampled,expected=expected[0], index=sample.get("id",None))
+        rouge = self.rouge.get_scores([sampled], [expected[0]])[0]
+
+
+        record_metrics(rouge=json.dumps(rouge,ensure_ascii=True), index=sample.get("id",None))
+
+        record_sampling(
+            prompt=prompt, sampled=sampled,expected=expected[0], index=sample.get("id",None)
+        )
 
 
 
@@ -66,15 +74,13 @@ class RougeMatch(aigc_evals.Eval):
     def run(self, recorder):
         samples = self.get_samples()
         self.eval_all_samples(recorder, samples)
-        events = recorder.get_events("match")
+        events = recorder.get_events("sampling")
 
         sampled = list(map(lambda e: e.data["sampled"], events))
         expected = list(map(lambda e: e.data["expected"], events))
 
-
         rouge = self.rouge.get_scores(sampled, expected,avg=True)
 
         return {
-            "accuracy": aigc_evals.metrics.get_accuracy(events),
-            "sacrebleu_score": rouge,
+            "rouge": rouge,
         }
