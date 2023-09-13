@@ -51,7 +51,7 @@ class StructMatch(aigc_evals.Eval):
                     RESULT.extend([k + '_' +  value for value in list(_.values()) if value])
             else:
                 if v:
-                    RESULT.append(v)
+                    RESULT.append(k + '_' + v)
 
         for k, v in expect.items():
             RESULT = T
@@ -64,7 +64,7 @@ class StructMatch(aigc_evals.Eval):
                     RESULT.extend([k + '_' + value for value in list(_.values()) if value])
             else:
                 if v:
-                    RESULT.append(v)
+                    RESULT.append(k + '_' + v)
 
         R = set([Element(i) for i in R])
         T = set([Element(i) for i in T])
