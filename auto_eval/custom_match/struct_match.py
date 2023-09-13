@@ -26,12 +26,22 @@ class StructMatch(aigc_evals.Eval):
         samples_jsonl: str,
         *args,
         max_tokens: int = 500,
+        label_file=None,
         **kwargs,
     ):
         super().__init__(completion_fns, *args, **kwargs)
         assert len(completion_fns) == 1, "Match only supports one completion fn"
         self.max_tokens = max_tokens
         self.samples_jsonl = samples_jsonl
+
+        if label_file is not None:
+            with open(label_file,mode='r',encoding='utf-8') as f:
+                labels = f.readlines()
+            labels = [l.replace('\r\n','').replace('\n','') for l in labels if l]
+            labels = [l for l in labels if l]
+            self.labels = list(sorted(labels))
+        else:
+            self.labels = None
 
     def _evaluate(self,
                   sample: Dict,
@@ -97,15 +107,24 @@ class StructMatch(aigc_evals.Eval):
             jd = {}
             pass
 
-        tp, fp, fn = self._evaluate(sample=jd, expect=sample["ideal"])
+        metric = {}
+        tp_all, fp_all, fn_all = 0,0,0
+        if self.labels:
+            tp_all, fp_all, fn_all = self._evaluate(sample=jd, expect=sample["ideal"])
+        else:
+            for label in self.labels:
+                tp, fp, fn = self._evaluate(sample=jd.get(label,{}), expect=sample["ideal"].get(label,{}))
+                metric[label] = (tp, fp, fn)
+                tp_all += tp
+                fp_all += fp
+                fn_all += fn
 
         result = {
             "index" : sample.get("id",None),
             # "prompt": prompt,
             "sampled": sampled,
-            "tp": tp,
-            "fp": fp,
-            "fn": fn,
+            "metric_all": json.dumps((tp_all, fp_all, fn_all),ensure_ascii=False),
+            "metric": json.dumps(metric,ensure_ascii=False)
         }
         result["expected"] = json.dumps(sample["ideal"],ensure_ascii=False)
         aigc_evals.record.record_sampling(prompt, sampled, index=sample.get("id",None))
@@ -115,13 +134,44 @@ class StructMatch(aigc_evals.Eval):
         samples = self.get_samples()
         self.eval_all_samples(recorder, samples)
         events = recorder.get_events("metrics")
-        tp = sum(int(event.data["tp"]) for event in events)
-        fp = sum(int(event.data["fp"]) for event in events)
-        fn = sum(int(event.data["fn"]) for event in events)
+        tp = sum(int(json.loads(event.data["metric_all"])[0]) for event in events)
+        fp = sum(int(json.loads(event.data["metric_all"])[1]) for event in events)
+        fn = sum(int(json.loads(event.data["metric_all"])[2]) for event in events)
         precision,recall = tp / (tp + fp + 1e-10),tp / (tp + fn + 1e-10)
         f1 = 2*(precision*recall)/(precision+recall +1e-10)
-        return {
+
+        metric_avg = {
             "precision": precision,
             "recall": recall,
             "f1": f1,
+        }
+
+        if self.labels is not None:
+            result = {k: [0, 0, 0] for k in self.labels}
+            metric = {k: {
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+            } for k in self.labels}
+
+            events = recorder.get_events("metrics")
+            for event in events:
+                for k,(tp,fp,fn) in json.loads(event.data["metric"]).items():
+                    result[k][0] += tp
+                    result[k][1] += fp
+                    result[k][2] += fn
+
+            for k in metric:
+                tp,fp,fn = result[k][0],result[k][1],result[k][2]
+                precision, recall = tp / (tp + fp + 1e-10), tp / (tp + fn + 1e-10)
+                f1 = 2 * (precision * recall) / (precision + recall + 1e-10)
+                metric[k]["precision"] = precision
+                metric[k]["recall"] = recall
+                metric[k]["f1"] = f1
+        else:
+            metric = None
+
+        return {
+            "metric_avg" : metric_avg,
+            "metric": metric
         }

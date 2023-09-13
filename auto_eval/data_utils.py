@@ -3,6 +3,8 @@
 # @Time    : 2023/8/30 12:39
 import json
 import os
+from typing import Optional
+
 import pandas as pd
 import yaml
 
@@ -358,6 +360,13 @@ def build_struct_data(data_path,registry_path,data_type="struct"):
     os.makedirs(subject_path, exist_ok=True)
 
     fs_list = os.listdir(data_path)
+
+    label_file = os.path.join(data_path,'labels.txt')
+    labels = None
+    if os.path.exists(label_file):
+        with open(label_file,mode='r',encoding='utf-8') as f:
+            labels = f.read()
+
     for file in fs_list:
         if file.endswith('.json') or file.endswith('.JSON'):
             subject = file.rsplit('.json')[0]
@@ -379,6 +388,11 @@ def build_struct_data(data_path,registry_path,data_type="struct"):
             test_df = pd.DataFrame(D)
             test_df[["id", "input", "ideal"]].to_json(samples_path, lines=True, orient="records",force_ascii=False)
 
+            label_file = None
+            if labels is not None:
+                label_file = os.path.join(subject_path, "labels.txt")
+                with open(label_file,mode='w',encoding='utf-8',newline='\n') as f:
+                    f.write(labels)
             eval_id = f"struct_{data_type}_{subject}"
 
             registry_yaml[eval_id] = {
@@ -389,6 +403,7 @@ def build_struct_data(data_path,registry_path,data_type="struct"):
                 "class": "auto_eval.custom_match.struct_match:StructMatch",
                 "args": {
                     "samples_jsonl": samples_path,
+                    "label_file": label_file
                 }
             }
             registry_yaml[f"{eval_id}.test.v1"] = d

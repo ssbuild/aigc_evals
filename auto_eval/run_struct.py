@@ -42,7 +42,7 @@ if __name__ == '__main__':
     registry_path = get_registry_path()
     output_path = get_output_path()
     output_path_metric = get_output_path_metric()
-    data_path = r'../assets/struct'
+    data_path = r'../assets/struct_data'
 
     data_type = "struct"
     # 构建数据
