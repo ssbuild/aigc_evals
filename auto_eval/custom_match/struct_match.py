@@ -12,6 +12,12 @@ from aigc_evals.prompt.base import is_chat_prompt
 from aigc_evals.record import record_match
 
 
+class Element(object):
+    def __init__(self,value: str):
+        self.key,self.value  = value.split('_',1)
+
+    def __eq__(self, other):
+        return self.key == other.key and self.value == other.value
 
 class StructMatch(aigc_evals.Eval):
     def __init__(
@@ -42,7 +48,7 @@ class StructMatch(aigc_evals.Eval):
                 for _ in v:
                     if not isinstance(_,dict):
                         continue
-                    RESULT.extend([k + value for value in list(_.values()) if value])
+                    RESULT.extend([k + '_' +  value for value in list(_.values()) if value])
             else:
                 if v:
                     RESULT.append(v)
@@ -55,13 +61,13 @@ class StructMatch(aigc_evals.Eval):
                 for _ in v:
                     if not isinstance(_, dict):
                         continue
-                    RESULT.extend([k + value for value in list(_.values()) if value])
+                    RESULT.extend([k + '_' + value for value in list(_.values()) if value])
             else:
                 if v:
                     RESULT.append(v)
 
-        R = set([tuple(i) for i in R])
-        T = set([tuple(i) for i in T])
+        R = set([Element(i) for i in R])
+        T = set([Element(i) for i in T])
         tp = len(R & T)
         fp = len(R) - tp
         fn = len(T) - tp
