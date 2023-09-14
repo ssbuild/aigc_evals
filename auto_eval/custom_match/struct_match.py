@@ -109,7 +109,7 @@ class StructMatch(aigc_evals.Eval):
 
         metric = {}
         tp_all, fp_all, fn_all = 0,0,0
-        if self.labels:
+        if not self.labels:
             tp_all, fp_all, fn_all = self._evaluate(sample=jd, expect=sample["ideal"])
         else:
             for label in self.labels:
