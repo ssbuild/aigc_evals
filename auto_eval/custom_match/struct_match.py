@@ -81,7 +81,6 @@ class StructMatch(aigc_evals.Eval):
         tp = len(R & T)
         fp = len(R) - tp
         fn = len(T) - tp
-
         return tp, fp, fn
 
     def eval_sample(self, sample: Any, *_):
@@ -102,7 +101,6 @@ class StructMatch(aigc_evals.Eval):
 
         try:
             jd = json.loads(sampled.strip())
-
         except:
             jd = {}
             pass
@@ -112,8 +110,13 @@ class StructMatch(aigc_evals.Eval):
         if not self.labels:
             tp_all, fp_all, fn_all = self._evaluate(sample=jd, expect=sample["ideal"])
         else:
+            #按标签评估每类
             for label in self.labels:
-                tp, fp, fn = self._evaluate(sample=jd.get(label,{}), expect=sample["ideal"].get(label,{}))
+                a = jd.get(label,None)
+                b = sample["ideal"].get(label,None)
+                a = {label: a} if a else {}
+                b = {label: b} if b else {}
+                tp, fp, fn = self._evaluate(sample=a, expect=b)
                 metric[label] = (tp, fp, fn)
                 tp_all += tp
                 fp_all += fp
