@@ -16,6 +16,8 @@ class Element(object):
     def __init__(self,value: str):
         self.key,self.value  = value.split('_',1)
 
+    def __hash__(self):
+        return hash('_'.join([self.key, self.value]))
     def __eq__(self, other):
         return self.key == other.key and self.value == other.value
 
