@@ -25,7 +25,6 @@ def build_ceval_data(data_path,registry_path,data_type = "ceval",few_shot=5):
         """
         user_prompt = f"{question}\n" + "\n".join([f"{choice}. {answer}" for choice, answer in zip(choices, answers)]) + "\n答案："
         return [
-
             {"role": "user", "content": user_prompt},
             {"role": "system", "content": correct_answer},
         ]
@@ -236,46 +235,43 @@ def build_bleu_data(data_path, registry_path, data_type="bleu"):
         ]
 
     subjects = []
-
     registry_yaml = {}
 
-    subject_path = os.path.join(registry_path, "data", data_type)
-    os.makedirs(subject_path, exist_ok=True)
-
-    fs_list = os.listdir(data_path)
-    for file in fs_list:
-        if file.endswith('.json') or file.endswith('.JSON'):
-            subject = file.rsplit('.json')[0]
-            subjects.append(subject)
-            with open(os.path.join(data_path,file),mode='r',encoding='utf=-8') as f:
-                lines = f.readlines()
-
-            D = []
+    for subject in os.listdir(data_path):
+        D = []
+        file_item = os.listdir(os.path.join(data_path, subject))
+        for file in file_item:
+            if file.lower().endswith('.json'):
+                with open(os.path.join(data_path, subject,file), mode='r', encoding='utf=-8') as f:
+                    lines = f.readlines()
             for line in lines:
                 jd = json.loads(line)
                 if not jd:
                     continue
                 D.append({
                     "input": create_chat_prompt(jd["prompt"]),
-                    "ideal": jd["refs"] if isinstance(jd["refs"],list) else [jd['refs']]
+                    "ideal": jd["refs"] if isinstance(jd["refs"], list) else [jd['refs']]
                 })
-            samples_path = os.path.join(subject_path, "samples.jsonl")
-            test_df = pd.DataFrame(D)
-            test_df[["input", "ideal"]].to_json(samples_path, lines=True, orient="records",force_ascii=False)
+        subjects.append(subject)
+        subject_path = os.path.join(registry_path, "data", data_type, subject)
+        os.makedirs(subject_path, exist_ok=True)
+        samples_path = os.path.join(subject_path, "samples.jsonl")
+        test_df = pd.DataFrame(D)
+        test_df[["input", "ideal"]].to_json(samples_path, lines=True, orient="records",force_ascii=False)
 
-            eval_id = f"translate_{data_type}_{subject}"
+        eval_id = f"translate_{data_type}_{subject}"
 
-            registry_yaml[eval_id] = {
-                "id": f"{eval_id}.test.v1",
-                "metrics": ["accuracy"]
+        registry_yaml[eval_id] = {
+            "id": f"{eval_id}.test.v1",
+            "metrics": ["accuracy"]
+        }
+        d = {
+            "class": "auto_eval.custom_match.bleu_match:BleuMatch",
+            "args": {
+                "samples_jsonl": samples_path,
             }
-            d = {
-                "class": "auto_eval.custom_match.bleu_match:BleuMatch",
-                "args": {
-                    "samples_jsonl": samples_path,
-                }
-            }
-            registry_yaml[f"{eval_id}.test.v1"] = d
+        }
+        registry_yaml[f"{eval_id}.test.v1"] = d
 
 
     with open(os.path.join(registry_path, "evals", data_type + ".yaml"), "w") as f:
@@ -294,21 +290,15 @@ def build_rouge_data(data_path, registry_path, data_type="rouge"):
         ]
 
     subjects = []
-
     registry_yaml = {}
 
-    subject_path = os.path.join(registry_path, "data", data_type)
-    os.makedirs(subject_path, exist_ok=True)
-
-    fs_list = os.listdir(data_path)
-    for file in fs_list:
-        if file.endswith('.json') or file.endswith('.JSON'):
-            subject = file.rsplit('.json')[0]
-            subjects.append(subject)
-            with open(os.path.join(data_path,file),mode='r',encoding='utf=-8') as f:
-                lines = f.readlines()
-
-            D = []
+    for subject in os.listdir(data_path):
+        D = []
+        file_item = os.listdir(os.path.join(data_path, subject))
+        for file in file_item:
+            if file.lower().endswith('.json'):
+                with open(os.path.join(data_path, subject,file), mode='r', encoding='utf=-8') as f:
+                    lines = f.readlines()
             for line in lines:
                 jd = json.loads(line)
                 if not jd:
@@ -317,23 +307,26 @@ def build_rouge_data(data_path, registry_path, data_type="rouge"):
                     "input": create_chat_prompt(jd["prompt"]),
                     "ideal": jd["refs"] if isinstance(jd["refs"],list) else [jd['refs']]
                 })
-            samples_path = os.path.join(subject_path, "samples.jsonl")
-            test_df = pd.DataFrame(D)
-            test_df[["input", "ideal"]].to_json(samples_path, lines=True, orient="records",force_ascii=False)
+        subjects.append(subject)
+        subject_path = os.path.join(registry_path, "data", data_type, subject)
+        os.makedirs(subject_path, exist_ok=True)
+        samples_path = os.path.join(subject_path, "samples.jsonl")
+        test_df = pd.DataFrame(D)
+        test_df[["input", "ideal"]].to_json(samples_path, lines=True, orient="records",force_ascii=False)
 
-            eval_id = f"translate_{data_type}_{subject}"
+        eval_id = f"translate_{data_type}_{subject}"
 
-            registry_yaml[eval_id] = {
-                "id": f"{eval_id}.test.v1",
-                "metrics": ["rouge"]
+        registry_yaml[eval_id] = {
+            "id": f"{eval_id}.test.v1",
+            "metrics": ["rouge"]
+        }
+        d = {
+            "class": "auto_eval.custom_match.rouge_match:RougeMatch",
+            "args": {
+                "samples_jsonl": samples_path,
             }
-            d = {
-                "class": "auto_eval.custom_match.rouge_match:RougeMatch",
-                "args": {
-                    "samples_jsonl": samples_path,
-                }
-            }
-            registry_yaml[f"{eval_id}.test.v1"] = d
+        }
+        registry_yaml[f"{eval_id}.test.v1"] = d
 
 
     with open(os.path.join(registry_path, "evals", data_type + ".yaml"), "w") as f:
@@ -353,60 +346,61 @@ def build_struct_data(data_path,registry_path,data_type="struct"):
         ]
 
     subjects = []
-
     registry_yaml = {}
 
-    subject_path = os.path.join(registry_path, "data", data_type)
-    os.makedirs(subject_path, exist_ok=True)
+    for subject in os.listdir(data_path):
+        label_file = os.path.join(data_path, subject, 'labels.txt')
+        labels = None
+        if os.path.exists(label_file):
+            with open(label_file, mode='r', encoding='utf-8') as f:
+                labels = f.read()
 
-    fs_list = os.listdir(data_path)
+        D = []
+        file_item = os.listdir(os.path.join(data_path, subject))
+        for file in file_item:
+            if file.lower().endswith('.json'):
+                with open(os.path.join(data_path, subject,file),mode='r',encoding='utf=-8') as f:
+                    lines = f.readlines()
+                for line in lines:
+                    jd = json.loads(line)
+                    if not jd:
+                        continue
+                    D.append({
+                        "id": jd.get("id",None),
+                        "input": create_chat_prompt(jd["prompt"]),
+                        "ideal": jd["response"] if isinstance(jd["response"],dict) else json.loads(jd["response"])
+                    })
 
-    label_file = os.path.join(data_path,'labels.txt')
-    labels = None
-    if os.path.exists(label_file):
-        with open(label_file,mode='r',encoding='utf-8') as f:
-            labels = f.read()
+        if not D:
+            continue
 
-    for file in fs_list:
-        if file.endswith('.json') or file.endswith('.JSON'):
-            subject = file.rsplit('.json')[0]
-            subjects.append(subject)
-            with open(os.path.join(data_path,file),mode='r',encoding='utf=-8') as f:
-                lines = f.readlines()
+        subjects.append(subject)
+        subject_path = os.path.join(registry_path, "data", data_type,subject)
+        os.makedirs(subject_path, exist_ok=True)
 
-            D = []
-            for line in lines:
-                jd = json.loads(line)
-                if not jd:
-                    continue
-                D.append({
-                    "id": jd.get("id",None),
-                    "input": create_chat_prompt(jd["prompt"]),
-                    "ideal": jd["response"] if isinstance(jd["response"],dict) else json.loads(jd["response"])
-                })
-            samples_path = os.path.join(subject_path, "samples.jsonl")
-            test_df = pd.DataFrame(D)
-            test_df[["id", "input", "ideal"]].to_json(samples_path, lines=True, orient="records",force_ascii=False)
+        samples_path = os.path.join(subject_path, "samples.jsonl")
+        test_df = pd.DataFrame(D)
+        test_df[["id", "input", "ideal"]].to_json(samples_path, lines=True, orient="records",force_ascii=False)
 
-            label_file = None
-            if labels is not None:
-                label_file = os.path.join(subject_path, "labels.txt")
-                with open(label_file,mode='w',encoding='utf-8',newline='\n') as f:
-                    f.write(labels)
-            eval_id = f"struct_{data_type}_{subject}"
+        label_file = None
+        if labels is not None:
+            label_file = os.path.join(subject_path, "labels.txt")
+            with open(label_file,mode='w',encoding='utf-8',newline='\n') as f:
+                f.write(labels)
+        eval_id = f"struct_{data_type}_{subject}"
 
-            registry_yaml[eval_id] = {
-                "id": f"{eval_id}.test.v1",
-                "metrics": ["f1"]
+        registry_yaml[eval_id] = {
+            "id": f"{eval_id}.test.v1",
+            "metrics": ["f1"]
+        }
+        d = {
+            "class": "auto_eval.custom_match.struct_match:StructMatch",
+            "args": {
+                "samples_jsonl": samples_path,
+                "label_file": label_file
             }
-            d = {
-                "class": "auto_eval.custom_match.struct_match:StructMatch",
-                "args": {
-                    "samples_jsonl": samples_path,
-                    "label_file": label_file
-                }
-            }
-            registry_yaml[f"{eval_id}.test.v1"] = d
+        }
+        registry_yaml[f"{eval_id}.test.v1"] = d
 
 
     with open(os.path.join(registry_path, "evals", data_type + ".yaml"), "w") as f:
