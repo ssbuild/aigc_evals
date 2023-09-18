@@ -240,7 +240,7 @@ def build_bleu_data(data_path, registry_path, data_type="bleu"):
     for subject in os.listdir(data_path):
         D = []
         file_item = os.listdir(os.path.join(data_path, subject))
-        for file in file_item:
+        for file in list(sorted(file_item)):
             if file.lower().endswith('.json'):
                 with open(os.path.join(data_path, subject,file), mode='r', encoding='utf=-8') as f:
                     lines = f.readlines()
@@ -295,7 +295,7 @@ def build_rouge_data(data_path, registry_path, data_type="rouge"):
     for subject in os.listdir(data_path):
         D = []
         file_item = os.listdir(os.path.join(data_path, subject))
-        for file in file_item:
+        for file in list(sorted(file_item)):
             if file.lower().endswith('.json'):
                 with open(os.path.join(data_path, subject,file), mode='r', encoding='utf=-8') as f:
                     lines = f.readlines()
@@ -357,7 +357,7 @@ def build_struct_data(data_path,registry_path,data_type="struct"):
 
         D = []
         file_item = os.listdir(os.path.join(data_path, subject))
-        for file in file_item:
+        for file in list(sorted(file_item)):
             if file.lower().endswith('.json'):
                 with open(os.path.join(data_path, subject,file),mode='r',encoding='utf=-8') as f:
                     lines = f.readlines()
