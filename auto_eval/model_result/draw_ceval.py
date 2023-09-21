@@ -35,7 +35,7 @@ plt.rcParams["font.sans-serif"] = ['SimHei']
 plt.rcParams["axes.unicode_minus"] = False
 
 colors = [
-    'r','g','b','black','yellow','grey', 'orange','silver','purple','brown','cameo','bisque'
+    'r','g','b','black','yellow','grey', 'orange','silver','purple','brown','beige','golden'
 ]
 styles = [
     'dashed','solid','dotted','dashdot','dashdot','solid','solid','dashdot','solid','solid','solid',

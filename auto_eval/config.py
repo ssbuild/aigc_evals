@@ -17,6 +17,7 @@ OPENAI_API_BASE = "http://192.168.2.180:8081/v1"
 # MODEL = "langchain/chat_model/baichuan2-7b-chat-int4"
 # MODEL = "langchain/chat_model/baichuan2-13b-chat-int4"
 # MODEL = "langchain/chat_model/tigerbot-70b-chat"
+MODEL = "langchain/chat_model/internlm-chat-20b"
 MODEL = "langchain/chat_model/chatglm2-6b-int4"
 
 
