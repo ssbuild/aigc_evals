@@ -38,7 +38,7 @@ colors = [
     'r','g','b','black','yellow','grey', 'orange','silver','purple','brown','beige','salmon','pink','pulm'
 ]
 styles = [
-    'dashed','solid','dotted','dashdot','dashdot','solid','solid','dashdot','solid','solid','solid','dashed',
+    'dashed','solid','dotted','dashdot','dashdot','solid','solid','dashdot','solid','solid','solid','dashed','dashed',
 ]
 idx = -1
 for k,v in data_map.items():
