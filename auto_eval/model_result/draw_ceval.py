@@ -35,10 +35,10 @@ plt.rcParams["font.sans-serif"] = ['SimHei']
 plt.rcParams["axes.unicode_minus"] = False
 
 colors = [
-    'r','g','b','black','yellow','grey', 'orange','silver','purple','brown','beige','golden'
+    'r','g','b','black','yellow','grey', 'orange','silver','purple','brown','beige','salmon','pink','pulm'
 ]
 styles = [
-    'dashed','solid','dotted','dashdot','dashdot','solid','solid','dashdot','solid','solid','solid',
+    'dashed','solid','dotted','dashdot','dashdot','solid','solid','dashdot','solid','solid','solid','dashed',
 ]
 idx = -1
 for k,v in data_map.items():
