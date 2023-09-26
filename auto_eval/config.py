@@ -3,9 +3,7 @@
 # @Time    : 2023/9/1 9:23
 import os
 
-EVALS_THREADS = 2 # 根据服务的并发设置， 避免读取超时
-OPENAI_API_KEY = "EMPTY"
-OPENAI_API_BASE = "http://192.168.2.180:8081/v1"
+
 
 
 # MODEL = "langchain/chat_model/qwen-7b-chat-int4"
@@ -17,11 +15,16 @@ OPENAI_API_BASE = "http://192.168.2.180:8081/v1"
 # MODEL = "langchain/chat_model/baichuan2-7b-chat-int4"
 # MODEL = "langchain/chat_model/baichuan2-13b-chat-int4"
 # MODEL = "langchain/chat_model/tigerbot-70b-chat"
-MODEL = "langchain/chat_model/internlm-chat-20b"
+# MODEL = "langchain/chat_model/internlm-chat-20b"
+# MODEL = "langchain/chat_model/qwen-7b-chat"
+# MODEL = "langchain/chat_model/qwen-14b-chat"
 MODEL = "langchain/chat_model/chatglm2-6b-int4"
 
 
 
+EVALS_THREADS = 2 # 根据服务的并发设置， 避免读取超时
+OPENAI_API_KEY = "EMPTY"
+OPENAI_API_BASE = "http://192.168.2.180:8081/v1"
 FORCE_EVAL = False # 评估结果存在，是否重新评估
 
 def env_setting():
@@ -34,6 +37,7 @@ def env_setting():
 
     if os.environ.get("OPENAI_API_BASE",None) is None:
         os.environ['OPENAI_API_BASE'] = OPENAI_API_BASE
+
 
 
     os.environ['PYTHONPATH'] = os.path.join(os.path.abspath(os.path.dirname(__file__)),'..')
