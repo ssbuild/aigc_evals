@@ -49,6 +49,7 @@ for k,v in data_map.items():
 
 
 
+
 plt.title("ceval 5 shot")                 #设置标题，这里只能显示英文，中文显示乱码
 plt.ylabel("acc")            #设置y轴名称
 plt.xlabel("category")            #设置x轴名称
@@ -58,6 +59,8 @@ plt.legend()
 
 plt.savefig(f"../../assets/imgs/img.jpg")
 
+plt.close()
+
 import matplotlib.pyplot as plt
 plt.tick_params(axis='x', labelsize=8)
 
@@ -65,33 +68,38 @@ plt.tick_params(axis='x', labelsize=8)
 
 
 metric = list(data_map.values())[0]
-fig: plt.Figure
-axs: plt.axes
 for idx in range(len(metric)):
-    fig , axs = plt.subplots(figsize=(24, 4))
+    plt.figure(figsize=(24, 9), dpi=80)
     # axs.tick_params(axis='x', labelrotation=-80, gridOn=True)
-    axs.tick_params(axis='x', gridOn=True)
+    # axs.tick_params(axis='x', gridOn=True)
 
-    for k,v in data_map.items():
+    for i,(k,v) in enumerate(data_map.items()):
         x_label = list(v.keys())[idx]  # x轴的坐标
         y_label = list(v.values())[idx]
-        axs.bar(k, y_label,width=0.2)
+        plt.bar(k, y_label,width=0.2)
+        plt.text(i, y_label, "{:0.1f}".format(y_label * 100), weight="bold", ha="center", va="bottom")
 
 
-    fig.suptitle(list(metric.keys())[idx] + ' 5 shot')
-    fig.supxlabel("model")
-    fig.supylabel("acc")
-    fig.savefig(f"../../assets/imgs/img_{idx}.jpg", bbox_inches='tight')
+    plt.title(list(metric.keys())[idx] + ' 5 shot')
+    plt.xlabel("model")
+    plt.ylabel("acc")
+    plt.savefig(f"../../assets/imgs/img_{idx}.jpg", bbox_inches='tight')
 
-
+plt.close()
 
 # avg
 avg_map = {k: np.average(list(v.values())) for k,v in data_map.items()}
-fig, axs = plt.subplots(figsize=(24, 4))
-# axs.tick_params(axis='x', labelrotation=-80, gridOn=True)
-axs.tick_params(axis='x', gridOn=True)
-axs.bar(avg_map.keys(), avg_map.values(),width=0.2)
-fig.suptitle(' 5 shot avg')
-fig.supxlabel("model")
-fig.supylabel("acc")
-fig.savefig(f"../../assets/imgs/img_avg.jpg", bbox_inches='tight')
+plt.rcParams["font.sans-serif"] = ["SimHei"]
+plt.figure(figsize=(24, 9), dpi=80)
+
+for k,v in zip(avg_map.keys(), avg_map.values()):
+    plt.bar(k, v,width=0.2)
+
+for i,pos in enumerate(list(avg_map.values())):
+    plt.text(i, pos, "{:0.1f}".format(pos * 100), weight="bold",  ha="center", va="bottom")
+
+plt.title('5 shot avg')
+plt.xlabel("model")
+plt.ylabel("acc")
+
+plt.savefig(f"../../assets/imgs/img_avg.jpg", bbox_inches='tight')
