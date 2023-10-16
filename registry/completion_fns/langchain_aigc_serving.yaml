@@ -1,3 +1,18 @@
+langchain/chat_model/ChatYuan-large-v2:
+  class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
+  args:
+    llm: ChatOpenAI
+    chat_model_kwargs:
+      model_name: ChatYuan-large-v2
+      model_kwargs: # langchain 未明确实现参数
+        adapter_model: default
+        top_k: 1
+      max_retries: 10
+      request_timeout: 600
+      top_p: 1.0
+      temperature: 1.0
+      max_tokens: 2000
+
 langchain/chat_model/qwen-14b-chat:
   class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
   args:

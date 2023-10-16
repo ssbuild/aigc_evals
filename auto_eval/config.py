@@ -18,6 +18,7 @@ import os
 # MODEL = "langchain/chat_model/internlm-chat-20b"
 # MODEL = "langchain/chat_model/qwen-7b-chat"
 # MODEL = "langchain/chat_model/qwen-14b-chat"
+# MODEL = "langchain/chat_model/ChatYuan-large-v2"
 MODEL = "langchain/chat_model/chatglm2-6b-int4"
 
 

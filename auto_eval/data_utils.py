@@ -29,7 +29,7 @@ def build_ceval_data(data_path,registry_path,data_type = "ceval",few_shot=5):
             {"role": "system", "content": correct_answer},
         ]
 
-    subjects = sorted([f.split("_test.csv")[0] for f in os.listdir(os.path.join(data_path, "test")) if "_test.csv" in f])
+    subjects = sorted([f.split("_val.csv")[0] for f in os.listdir(os.path.join(data_path, "val")) if "_val.csv" in f])
     print(subjects)
 
     registry_yaml = {}
@@ -66,7 +66,7 @@ def build_ceval_data(data_path,registry_path,data_type = "ceval",few_shot=5):
             "args": {
                 "samples_jsonl": samples_path,
                 # "few_shot_jsonl": few_shot_path,
-                "num_few_shot": 4,
+                "num_few_shot": 4 if few_shot > 0 else 0,
             }
         }
         if few_shot > 0:
