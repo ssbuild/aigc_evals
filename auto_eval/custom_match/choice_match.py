@@ -69,19 +69,20 @@ def choice_record_and_match(
     if options is None:
         options = expected
 
-    picked = extract_answer(sampled)
+    picked = None
+    for option in options:
+        if not sampled.startswith(option):
+            continue
+        if (
+            separator is not None
+            and len(sampled) > len(option)
+            and not separator(sampled[len(option)])
+        ):
+            continue
+        picked = option
+        break
     if picked is None:
-        for option in options:
-            if not sampled.startswith(option):
-                continue
-            if (
-                separator is not None
-                and len(sampled) > len(option)
-                and not separator(sampled[len(option)])
-            ):
-                continue
-            picked = option
-            break
+        picked = extract_answer(sampled)
     match = picked in expected
     record_sampling(prompt,sampled)
     record_match(match, expected=expected, picked=picked,options=options)
