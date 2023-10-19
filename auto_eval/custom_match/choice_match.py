@@ -57,12 +57,14 @@ def choice_record_and_match(
     Returns:
         The matched option or None if no match found.
     """
+
     if isinstance(expected, tuple):
         expected = list(expected)
+    elif isinstance(expected, str) and expected.startswith('[') and expected.endswith(']'):
+        expected = eval(expected)
     elif not isinstance(expected, list):
         expected = [expected]
-    elif isinstance(expected,str) and expected.startswith('[') and expected.endswith(']'):
-        expected = eval(expected)
+
 
     if options is None:
         options = expected
@@ -80,16 +82,7 @@ def choice_record_and_match(
                 continue
             picked = option
             break
-
-    result = {
-        "prompt": prompt,
-        "sampled": sampled,
-        "options": options,
-        "picked": picked,
-    }
     match = picked in expected
-    result["expected"] = expected
-    result["match"] = match
     record_sampling(prompt,sampled)
     record_match(match, expected=expected, picked=picked,options=options)
     return picked
@@ -116,8 +109,6 @@ class ChoiceMatch(Match):
             prompt=prompt,
         )
         sampled = result.get_completions()[0]
-
-        print(type(sample["ideal"]),sample["ideal"],sampled)
         return choice_record_and_match(
             prompt=prompt,
             sampled=sampled,
