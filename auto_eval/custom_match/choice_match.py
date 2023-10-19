@@ -5,7 +5,7 @@ import re
 from typing import Any, Union, List, Tuple, Callable, Optional
 from aigc_evals.elsuite.basic.match import Match
 from aigc_evals.prompt.base import is_chat_prompt
-from aigc_evals.record import record_match
+from aigc_evals.record import record_match, record_sampling
 
 
 def extract_answer(gen_ans):
@@ -61,23 +61,26 @@ def choice_record_and_match(
         expected = list(expected)
     elif not isinstance(expected, list):
         expected = [expected]
+    elif isinstance(expected,str) and expected.startswith('[') and expected.endswith(']'):
+        expected = eval(expected)
+
     if options is None:
         options = expected
 
-    picked = None
-    for option in options:
-        if not sampled.startswith(option):
-            continue
-        if (
-            separator is not None
-            and len(sampled) > len(option)
-            and not separator(sampled[len(option)])
-        ):
-            continue
-        picked = option
-        break
+    picked = extract_answer(sampled)
     if picked is None:
-        picked = extract_answer(sampled)
+        for option in options:
+            if not sampled.startswith(option):
+                continue
+            if (
+                separator is not None
+                and len(sampled) > len(option)
+                and not separator(sampled[len(option)])
+            ):
+                continue
+            picked = option
+            break
+
     result = {
         "prompt": prompt,
         "sampled": sampled,
@@ -87,7 +90,8 @@ def choice_record_and_match(
     match = picked in expected
     result["expected"] = expected
     result["match"] = match
-    record_match(match, expected=expected, picked=picked, sampled=sampled, options=options)
+    record_sampling(prompt,sampled)
+    record_match(match, expected=expected, picked=picked,options=options)
     return picked
 
 
@@ -113,6 +117,7 @@ class ChoiceMatch(Match):
         )
         sampled = result.get_completions()[0]
 
+        print(type(sample["ideal"]),sample["ideal"],sampled)
         return choice_record_and_match(
             prompt=prompt,
             sampled=sampled,
