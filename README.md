@@ -112,7 +112,7 @@ python run_struct.py
 
                    
                  
-![ceval](assets/imgs/img_avg_top6.jpg)
+![ceval](assets/imgs/img_avg_top5.jpg)
 ![ceval](assets/imgs/img.jpg)
 ![ceval](assets/imgs/img_avg.jpg)
 ![ceval](assets/imgs/img_0.jpg)

@@ -61,7 +61,7 @@ df = df.merge(avg,right_index=True,left_index=True)
 
 df = df.sort_values(by=["avg"],ascending=False)
 print(df)
-df = df.head(6)
+df = df.head(5)
 del df["avg"]
 labels = list(df.keys())
 # 使用ggplot的绘图风格
@@ -90,7 +90,7 @@ for i,d in enumerate(df.iterrows()):
     # 绘制折线图
     ax.plot(angles, values, 'o-', linewidth=1,label=label)
     # 填充颜色
-    ax.fill(angles, values, alpha=0.25)
+    # ax.fill(angles, values, alpha=0.25)
 
     # 添加每个特征的标签
     ax.set_thetagrids(angles[:-1] * 180/np.pi, labels)
@@ -102,5 +102,7 @@ for i,d in enumerate(df.iterrows()):
     plt.legend(loc="center", fontsize=9,bbox_to_anchor=(0.9,0.9), ncol=1)
 
 plt.title('ceval five shot avg for top5',loc="center")
+
+# plt.show()
 # 显示图形
-plt.savefig(f"../../assets/imgs/img_avg_top6.jpg", bbox_inches='tight')
+plt.savefig(f"../../assets/imgs/img_avg_top5.jpg", bbox_inches='tight')
