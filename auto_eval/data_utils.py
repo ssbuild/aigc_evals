@@ -26,7 +26,7 @@ def build_ceval_data(data_path,registry_path,data_type = "ceval",few_shot=5):
         user_prompt = f"{question}\n" + "\n".join([f"{choice}. {answer}" for choice, answer in zip(choices, answers)]) + "\n答案："
         return [
             {"role": "user", "content": user_prompt},
-            {"role": "system", "content": correct_answer},
+            {"role": "assistant", "content": correct_answer},
         ]
 
     subjects = sorted([f.split("_val.csv")[0] for f in os.listdir(os.path.join(data_path, "val")) if "_val.csv" in f])
@@ -99,7 +99,7 @@ def build_cmmlu_data(data_path,registry_path,data_type = "cmmlu",few_shot=True):
             # {"role": "system", "content": correct_answer, "name": "example_assistant"},
 
             {"role": "user", "content": user_prompt},
-            {"role": "system", "content": correct_answer},
+            {"role": "assistant", "content": correct_answer},
         ]
 
 
@@ -172,7 +172,7 @@ def build_mmlu_data(data_path,registry_path,data_type = "mmlu",few_shot=True):
             # {"role": "system", "content": correct_answer, "name": "example_assistant"},
 
             {"role": "user", "content": user_prompt},
-            {"role": "system", "content": correct_answer},
+            {"role": "assistant", "content": correct_answer},
         ]
 
 
