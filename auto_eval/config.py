@@ -16,14 +16,22 @@ import os
 # MODEL = "langchain/chat_model/baichuan2-13b-chat-int4"
 # MODEL = "langchain/chat_model/tigerbot-70b-chat"
 # MODEL = "langchain/chat_model/internlm-chat-20b"
-# MODEL = "langchain/chat_model/qwen-7b-chat"
-# MODEL = "langchain/chat_model/qwen-14b-chat"
 # MODEL = "langchain/chat_model/ChatYuan-large-v2"
 # MODEL = "langchain/chat_model/chatglm2-6b-int4"
 # MODEL = "langchain/chat_model/chatglm3-6b"
 # MODEL = "langchain/chat_model/CausalLM-14B"
-MODEL = "langchain/chat_model/Yi-34B-Chat"
-
+# MODEL = "langchain/chat_model/Yi-34B-Chat"
+# MODEL = "langchain/chat_model/Baichuan2-13B-Chat"
+# MODEL = "langchain/chat_model/Baichuan2-7B-Chat"
+# MODEL = "langchain/chat_model/Baichuan-13B-Chat"
+# MODEL = "langchain/chat_model/chatglm2-6b"
+# MODEL = "langchain/chat_model/XVERSE-13B-Chat"
+# MODEL = "langchain/chat_model/internlm-chat-7b"
+# MODEL = "langchain/chat_model/internlm-chat-20b"
+# MODEL = "langchain/chat_model/chatglm3-6b"
+# MODEL = "langchain/chat_model/Qwen-14B-Chat"
+MODEL = "langchain/chat_model/Qwen-1_8B-Chat"
+MODEL = "langchain/chat_model/Qwen-72B-Chat"
 
 
 EVALS_THREADS = 2 # 根据服务的并发设置， 避免读取超时
