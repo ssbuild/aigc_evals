@@ -1,3 +1,122 @@
+langchain/chat_model/Qwen-72B-Chat:
+  class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
+  args:
+    llm: ChatOpenAI
+    chat_model_kwargs:
+      model_name: Qwen-72B-Chat
+      model_kwargs: # langchain 未明确实现参数
+        adapter_model: default
+        top_k: 1
+        frequency_penalty: 1.02
+      max_retries: 10
+      request_timeout: 600
+      top_p: 1.0
+      temperature: 0
+      max_tokens: 2000
+
+langchain/chat_model/Qwen-1_8B-Chat:
+  class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
+  args:
+    llm: ChatOpenAI
+    chat_model_kwargs:
+      model_name: Qwen-1_8B-Chat
+      model_kwargs: # langchain 未明确实现参数
+        adapter_model: default
+        top_k: 1
+        frequency_penalty: 1.02
+      max_retries: 10
+      request_timeout: 600
+      top_p: 1.0
+      temperature: 0
+      max_tokens: 2000
+
+langchain/chat_model/Qwen-14B-Chat:
+  class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
+  args:
+    llm: ChatOpenAI
+    chat_model_kwargs:
+      model_name: Qwen-14B-Chat
+      model_kwargs: # langchain 未明确实现参数
+        adapter_model: default
+        top_k: 1
+        frequency_penalty: 1.02
+      max_retries: 10
+      request_timeout: 600
+      top_p: 1.0
+      temperature: 0
+      max_tokens: 2000
+
+
+langchain/chat_model/XVERSE-13B-Chat:
+  class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
+  args:
+    llm: ChatOpenAI
+    chat_model_kwargs:
+      model_name: XVERSE-13B-Chat
+      model_kwargs: # langchain 未明确实现参数
+        adapter_model: default
+        top_k: 1
+        frequency_penalty: 1.02
+      max_retries: 10
+      request_timeout: 600
+      top_p: 1.0
+      temperature: 0
+      max_tokens: 2000
+
+
+
+langchain/chat_model/Baichuan-13B-Chat:
+  class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
+  args:
+    llm: ChatOpenAI
+    chat_model_kwargs:
+      model_name: Baichuan-13B-Chat
+      model_kwargs: # langchain 未明确实现参数
+        adapter_model: default
+        top_k: 1
+        frequency_penalty: 1.02
+      max_retries: 10
+      request_timeout: 600
+      top_p: 1.0
+      temperature: 0
+      max_tokens: 2000
+
+
+langchain/chat_model/Baichuan2-7B-Chat:
+  class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
+  args:
+    llm: ChatOpenAI
+    chat_model_kwargs:
+      model_name: Baichuan2-7B-Chat
+      model_kwargs: # langchain 未明确实现参数
+        adapter_model: default
+        top_k: 1
+        frequency_penalty: 1.02
+      max_retries: 10
+      request_timeout: 600
+      top_p: 1.0
+      temperature: 0
+      max_tokens: 2000
+
+
+
+langchain/chat_model/Baichuan2-13B-Chat:
+  class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
+  args:
+    llm: ChatOpenAI
+    chat_model_kwargs:
+      model_name: Baichuan2-13B-Chat
+      model_kwargs: # langchain 未明确实现参数
+        adapter_model: default
+        top_k: 1
+        frequency_penalty: 1.02
+      max_retries: 10
+      request_timeout: 600
+      top_p: 1.0
+      temperature: 0
+      max_tokens: 2000
+
+
 langchain/chat_model/Yi-34B-Chat:
   class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
   args:
@@ -62,37 +181,9 @@ langchain/chat_model/ChatYuan-large-v2:
       temperature: 0
       max_tokens: 2000
 
-langchain/chat_model/qwen-14b-chat:
-  class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
-  args:
-    llm: ChatOpenAI
-    chat_model_kwargs:
-      model_name: qwen-14b-chat
-      model_kwargs: # langchain 未明确实现参数
-        adapter_model: default
-        top_k: 1
-        frequency_penalty: 1.02
-      max_retries: 10
-      request_timeout: 600
-      top_p: 1.0
-      temperature: 0
-      max_tokens: 2000
 
-langchain/chat_model/qwen-7b-chat:
-  class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
-  args:
-    llm: ChatOpenAI
-    chat_model_kwargs:
-      model_name: qwen-7b-chat
-      model_kwargs: # langchain 未明确实现参数
-        adapter_model: default
-        top_k: 1
-        frequency_penalty: 1.02
-      max_retries: 10
-      request_timeout: 600
-      top_p: 1.0
-      temperature: 0
-      max_tokens: 2000
+
+
 
 langchain/chat_model/internlm-chat-20b:
   class: aigc_evals.completion_fns.langchain_llm:LangChainChatModelCompletionFn
